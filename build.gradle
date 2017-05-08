@@ -1,0 +1,46 @@
+buildscript {
+    ext.kotlin_version = '1.1.2-3'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: "kotlin"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+apply plugin: 'application'
+
+dependencies {
+    compile 'no.tornado:tornadofx:1.7.1'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+mainClassName = 'com.doubleu.kotlintrader.KotlinTraderApp'
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.doubleu.kotlintrader.KotlinTraderApp'
+        )
+    }
+    from(configurations.compile.collect { entry -> zipTree(entry) }) {
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/*.SF'
+        exclude 'META-INF/*.DSA'
+        exclude 'META-INF/*.RSA'
+    }
+}

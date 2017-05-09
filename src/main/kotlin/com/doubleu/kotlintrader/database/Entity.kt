@@ -5,14 +5,14 @@ package com.doubleu.kotlintrader.database
  */
 abstract class Entity {
 
-	init {
-		registerId(id)
-	}
+    init {
+        registerId(id)
+    }
 
-	abstract val id: Int
+    abstract val id: Int
 
-	protected fun registerId(id: Int) {
-		// TODO: Use INSERT if not present
-	}
+    protected fun registerId(id: Int) {
+        // TODO: Use INSERT if not present
+    }
 
 }

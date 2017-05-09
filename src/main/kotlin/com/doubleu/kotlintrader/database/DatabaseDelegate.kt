@@ -5,16 +5,14 @@ import kotlin.reflect.KProperty
 /**
  * Delegates the model properties to the database
  */
-class DatabaseDelegate<T> {
+class DatabaseDelegate<V> {
 
-    @Suppress("UNCHECKED_CAST")
-    operator fun getValue(entity: Entity, property: KProperty<*>): T? {
-        return Database.getProperty(entity, property as KProperty<T>)
+    operator fun getValue(entity: Entity, property: KProperty<*>): V? {
+        return Database.getProperty(entity, property as KProperty<V>)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    operator fun setValue(entity: Entity, property: KProperty<*>, value: T?) {
-        Database.setProperty(entity, property as KProperty<T>, value)
+    operator fun setValue(entity: Entity, property: KProperty<*>, value: V?) {
+        Database.setProperty(entity, property as KProperty<V>, value)
     }
 
 }

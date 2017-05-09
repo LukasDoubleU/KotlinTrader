@@ -20,16 +20,14 @@ object DBHelper {
         }
     }
 
-    fun getTableName(entity: Entity): String {
-        return getTableName(entity::class)
-    }
+    fun <T : Entity> getTableName(entity: T) = getTableName(entity::class)
 
-    fun <T : Entity> getTableName(clazz: KClass<T>): String {
-        return clazz.simpleName!!.toLowerCase()
-    }
+    inline fun <reified T : Entity> getTableName() = getTableName(T::class)
+
+    fun <T : Entity> getTableName(clazz: KClass<T>) = clazz.simpleName!!.toLowerCase()
 
     fun getWhere(entity: Entity): String {
-        // Treat RefEntitys differently (2 ids)
+        // Treat RefEntities differently (2 ids)
         return if (entity is RefEntity) getRefWhere(entity) else "WHERE id = ${entity.id}"
     }
 

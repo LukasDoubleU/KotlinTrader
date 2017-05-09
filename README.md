@@ -1,6 +1,6 @@
 # KotlinTrader
 Eine Version der "MMBBS_Trader" Projektarbeit, mit dem Anspruch einige der Probleme "richtig" zu lösen.
-Es wird bewusst in Teilen von der Aufgabenstellung abewichen und manche Arbeit wird sich von Frameworks abgenommen lassen.
+Es wird bewusst in Teilen von der Aufgabenstellung abgewichen und manche Arbeit wird sich von Frameworks abgenommen lassen.
 Auf ein SQL-Framework wird jedoch zum Wohle der Kernaufgabe verzichtet.
 
 # Umsetzung

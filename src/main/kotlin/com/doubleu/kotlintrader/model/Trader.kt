@@ -2,32 +2,21 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.DatabaseDelegate
 import com.doubleu.kotlintrader.database.Entity
+import com.doubleu.kotlintrader.util.MD5
 import tornadofx.*
-import java.security.MessageDigest
 
-
-private val encrypter = MessageDigest.getInstance("MD5")!!
-fun encrypt(s: String) = toHexString(encrypter.digest(s.toByteArray())!!)
-fun toHexString(bytes: ByteArray): String {
-    val hexString = StringBuilder()
-    for (byte in bytes) {
-        val hex = Integer.toHexString(0xFF and byte.toInt())
-        if (hex.length == 1) {
-            hexString.append('0')
-        }
-        hexString.append(hex)
-    }
-    return hexString.toString()
-}
 
 class Trader(override val id: Int) : Entity() {
 
     var name by DatabaseDelegate<String>()
-    val nameProperty = property(name)
+    val nameProperty = name.toProperty()
     var pass by DatabaseDelegate<String>()
+    val passProperty = pass.toProperty()
     var geld by DatabaseDelegate<Double>()
+    val geldProperty = geld.toProperty()
     var master by DatabaseDelegate<Boolean>()
+    val masterProperty = master.toProperty()
 
-    fun checkPw(s: String) = encrypt(s) == pass
+    fun checkPw(s: String) = MD5.encrypt(s) == pass
 
 }

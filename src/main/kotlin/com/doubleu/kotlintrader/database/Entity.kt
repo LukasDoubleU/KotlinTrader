@@ -1,4 +1,4 @@
-package com.doubleu.trader
+package com.doubleu.kotlintrader.database
 
 /**
  * A simple Database Entity. ID Column is required

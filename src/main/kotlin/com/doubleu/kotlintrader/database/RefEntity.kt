@@ -1,6 +1,4 @@
-package com.doubleu.trader.database
-
-import com.doubleu.trader.Entity
+package com.doubleu.kotlintrader.database
 
 /**
  * Database Entity with 2 ID Columns

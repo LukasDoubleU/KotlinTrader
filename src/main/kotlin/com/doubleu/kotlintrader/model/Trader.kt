@@ -1,11 +1,13 @@
-package com.doubleu.trader
+package com.doubleu.kotlintrader.model
 
+import com.doubleu.kotlintrader.database.DatabaseDelegate
+import com.doubleu.kotlintrader.database.Entity
 import tornadofx.*
 import java.security.MessageDigest
 
 
 private val encrypter = MessageDigest.getInstance("MD5")!!
-fun encrypt(s: String)= toHexString(encrypter.digest(s.toByteArray())!!)
+fun encrypt(s: String) = toHexString(encrypter.digest(s.toByteArray())!!)
 fun toHexString(bytes: ByteArray): String {
     val hexString = StringBuilder()
     for (byte in bytes) {

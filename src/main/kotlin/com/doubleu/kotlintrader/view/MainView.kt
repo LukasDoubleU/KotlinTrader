@@ -1,9 +1,6 @@
-package com.doubleu.trader.database
+package com.doubleu.kotlintrader.view
 
-import com.doubleu.kotlintrader.view.AngeboteView
-import com.doubleu.kotlintrader.view.MasterView
-import com.doubleu.kotlintrader.view.TradeView
-import com.doubleu.trader.view.LoginView
+import com.doubleu.kotlintrader.database.Database
 import tornadofx.*
 
 class MainView : View("Kotlin Trader") {

@@ -1,6 +1,6 @@
-package com.doubleu.trader
+package com.doubleu.kotlintrader
 
-import com.doubleu.trader.database.MainView
+import com.doubleu.kotlintrader.view.MainView
 import tornadofx.*
 
 class KotlinTraderApp : App(MainView::class)

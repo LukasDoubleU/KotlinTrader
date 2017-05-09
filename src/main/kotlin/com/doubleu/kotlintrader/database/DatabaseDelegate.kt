@@ -1,6 +1,5 @@
-package com.doubleu.trader
+package com.doubleu.kotlintrader.database
 
-import com.doubleu.trader.database.Database
 import kotlin.reflect.KProperty
 
 /**
@@ -8,8 +7,14 @@ import kotlin.reflect.KProperty
  */
 class DatabaseDelegate<T> {
 
-	operator fun getValue(entity: Entity, property: KProperty<*>) = Database.getProperty<T>(entity, property.name)
+    @Suppress("UNCHECKED_CAST")
+    operator fun getValue(entity: Entity, property: KProperty<*>): T? {
+        return Database.getProperty(entity, property as KProperty<T>)
+    }
 
-	operator fun setValue(entity: Entity, property: KProperty<*>, value: T?) = Database.setProperty<T>(entity, property.name, value)
+    @Suppress("UNCHECKED_CAST")
+    operator fun setValue(entity: Entity, property: KProperty<*>, value: T?) {
+        Database.setProperty(entity, property as KProperty<T>, value)
+    }
 
 }

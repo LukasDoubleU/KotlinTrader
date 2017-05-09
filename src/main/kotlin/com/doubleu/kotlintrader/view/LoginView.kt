@@ -1,9 +1,9 @@
-package com.doubleu.trader.view
+package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.database.Database
+import com.doubleu.kotlintrader.model.Trader
 import com.doubleu.kotlintrader.util.FxDialogs
 import com.doubleu.kotlintrader.util.Session
-import com.doubleu.trader.Trader
-import com.doubleu.trader.database.Database
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.Node
 import javafx.scene.control.TableView

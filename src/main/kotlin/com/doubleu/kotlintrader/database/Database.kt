@@ -1,7 +1,5 @@
-package com.doubleu.trader.database
+package com.doubleu.kotlintrader.database
 
-import com.doubleu.trader.DBHelper
-import com.doubleu.trader.Entity
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
@@ -18,7 +16,7 @@ import kotlin.reflect.full.primaryConstructor
  */
 object Database {
 
-    public val connectedProperty = SimpleBooleanProperty(false)
+    val connectedProperty = SimpleBooleanProperty(false)
 
     var connection: Connection? = null
 
@@ -27,16 +25,25 @@ object Database {
         connectedProperty.set(true)
     }
 
-    fun <T> setProperty(entity: Entity, property: String, value: T?) {
+    fun <T> setProperty(entity: Entity, property: KProperty<T>, value: T?) {
         val sql = "UPDATE ${DBHelper.getTableName(entity)} SET $property = $value ${DBHelper.getWhere(entity)}"
         execute(sql)
     }
 
-    fun <T> getProperty(entity: Entity, property: String): T {
-        val sql = "SELECT $property FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
+    @Suppress("UNCHECKED_CAST")
+    fun <T> getProperty(entity: Entity, property: KProperty<T>): T? {
+        val sql = "SELECT ${property.name} FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
         val rs = execute(sql)
+        val value = rs.getObject(property.name)
+        // Treat Boolean differently: They may be displayed as numeric in DB
+//        if(property.returnType == Boolean::class
+//                && value is Number){
+//            // Type insurance granted by checking property.returnType
+//            // (T is Boolean in this case)
+//            return (value == 0) as T
+//        }
         rs.next()
-        return rs.getObject(property) as T // TODO Error Handling
+        return value as T
     }
 
     fun <T : Entity> findAll(clazz: KClass<T>): ObservableList<T> {
@@ -52,14 +59,13 @@ object Database {
 
     fun <T : Entity, V> findBy(clazz: KClass<T>, property: KProperty<V>, value: V?): T? {
         // TODO implement properly ;)
-        return findAll(clazz).filter { property.call(it)!!.equals(value) }.firstOrNull()
+        return findAll(clazz).filter { property.call(it)!! == value }.firstOrNull()
     }
 
     private fun execute(sql: String): ResultSet {
         return connection?.let {
-            var state = connection!!.createStatement()
-            var rs = state.executeQuery(sql)
-            return rs
+            val statement = connection!!.createStatement()
+            return statement.executeQuery(sql)
         } ?: throw RuntimeException("No database connection")
     }
 

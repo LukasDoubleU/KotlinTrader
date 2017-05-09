@@ -1,8 +1,8 @@
 package com.doubleu.kotlintrader.util
 
-import com.doubleu.trader.Trader
-import com.doubleu.trader.database.Database
-import com.doubleu.trader.database.MainView
+import com.doubleu.kotlintrader.database.Database
+import com.doubleu.kotlintrader.model.Trader
+import com.doubleu.kotlintrader.view.MainView
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*

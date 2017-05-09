@@ -1,9 +1,8 @@
-package com.doubleu.trader
+package com.doubleu.kotlintrader.database
 
-import com.doubleu.trader.database.RefEntity
-import com.doubleu.trader.model.Fahrt
-import com.doubleu.trader.model.Ort_has_Ware
-import com.doubleu.trader.model.Schiff_has_Ware
+import com.doubleu.kotlintrader.model.Fahrt
+import com.doubleu.kotlintrader.model.Ort_has_Ware
+import com.doubleu.kotlintrader.model.Schiff_has_Ware
 import java.lang.RuntimeException
 import kotlin.reflect.KClass
 
@@ -12,31 +11,31 @@ import kotlin.reflect.KClass
  */
 object DBHelper {
 
-	fun getIdColumnName(refEntity: RefEntity): Array<String> {
-		return when {
-			refEntity is Fahrt -> arrayOf("id_von", "id_nach")
-			refEntity is Ort_has_Ware -> arrayOf("ware_id", "ort_id")
-			refEntity is Schiff_has_Ware -> arrayOf("ware_id", "schiff_id")
-			else -> throw RuntimeException("Unknown entity $refEntity")
-		}
-	}
+    fun getIdColumnName(refEntity: RefEntity): Array<String> {
+        return when {
+            refEntity is Fahrt -> arrayOf("id_von", "id_nach")
+            refEntity is Ort_has_Ware -> arrayOf("ware_id", "ort_id")
+            refEntity is Schiff_has_Ware -> arrayOf("ware_id", "schiff_id")
+            else -> throw RuntimeException("Unknown entity $refEntity")
+        }
+    }
 
-	fun getTableName(entity: Entity): String {
-		return getTableName(entity::class)
-	}
+    fun getTableName(entity: Entity): String {
+        return getTableName(entity::class)
+    }
 
-	fun <T : Entity> getTableName(clazz: KClass<T>): String {
+    fun <T : Entity> getTableName(clazz: KClass<T>): String {
         return clazz.simpleName!!.toLowerCase()
     }
 
-	fun getWhere(entity: Entity): String {
-		// Treat RefEntitys differently (2 ids)
-		return if (entity is RefEntity) getRefWhere(entity) else "WHERE id = ${entity.id}"
-	}
+    fun getWhere(entity: Entity): String {
+        // Treat RefEntitys differently (2 ids)
+        return if (entity is RefEntity) getRefWhere(entity) else "WHERE id = ${entity.id}"
+    }
 
-	private fun getRefWhere(refEntity: RefEntity): String {
-		val ids = getIdColumnName(refEntity)
-		return "WHERE ${ids[0]} = ${refEntity.id} AND ${ids[1]} = ${refEntity.id2}"
-	}
+    private fun getRefWhere(refEntity: RefEntity): String {
+        val ids = getIdColumnName(refEntity)
+        return "WHERE ${ids[0]} = ${refEntity.id} AND ${ids[1]} = ${refEntity.id2}"
+    }
 
 }

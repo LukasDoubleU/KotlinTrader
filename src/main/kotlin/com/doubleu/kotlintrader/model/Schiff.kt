@@ -1,7 +1,7 @@
-package com.doubleu.trader.model
+package com.doubleu.kotlintrader.model
 
-import com.doubleu.trader.DatabaseDelegate
-import com.doubleu.trader.Entity
+import com.doubleu.kotlintrader.database.DatabaseDelegate
+import com.doubleu.kotlintrader.database.Entity
 
 class Schiff(override val id: Int) : Entity() {
 

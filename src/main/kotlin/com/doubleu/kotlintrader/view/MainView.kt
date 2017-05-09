@@ -1,6 +1,7 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.database.Database
+import com.doubleu.kotlintrader.util.Session
 import tornadofx.*
 
 class MainView : View("Kotlin Trader") {
@@ -11,6 +12,7 @@ class MainView : View("Kotlin Trader") {
     val masterView: MasterView by inject()
 
     override val root = tabpane {
+        Session.stage = primaryStage
         setMinSize(600.0, 400.0)
 
         tab(loginView) {
@@ -28,7 +30,7 @@ class MainView : View("Kotlin Trader") {
         }
 
         tab(masterView) {
-            disableProperty().bind(Database.connectedProperty.not())
+            disableProperty().bind(Database.connectedProperty.not().and(Session.isMaster).not())
             isClosable = false
         }
 

@@ -1,21 +1,20 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
-import com.doubleu.kotlintrader.util.FxDialogs
-import com.doubleu.kotlintrader.util.Session
 import javafx.beans.property.SimpleStringProperty
-import javafx.scene.Node
 import javafx.scene.control.TableView
 import tornadofx.*
 
 /**
  * View mit den Login-Funktionen
  *
- * TODO: Create LoginController
  * TODO: Sexy GUI
  */
 class LoginView : View("Login") {
+
+    val controller: LoginController by inject()
 
     val ipProperty = SimpleStringProperty("localhost")
     val dbProperty = SimpleStringProperty("mmbbs_trader")
@@ -23,16 +22,13 @@ class LoginView : View("Login") {
     val nameProperty = SimpleStringProperty("otto")
     val pwProperty = SimpleStringProperty("otto")
 
-    val masterProperty = SimpleStringProperty("nero")
+    val masterNameProperty = SimpleStringProperty()
 
-    lateinit var databaseBox: Node
-    lateinit var loginBox: Node
-    lateinit var masterBox: Node
     lateinit var userTable: TableView<Trader>
 
     override val root = hbox {
         vbox {
-            databaseBox = vbox {
+            vbox {
                 hbox {
                     vbox {
                         label("Server IP")
@@ -44,43 +40,27 @@ class LoginView : View("Login") {
                     }
                 }
                 button("Connect") {
-                    setOnMouseClicked {
-                        Database.connect(ipProperty.get(), dbProperty.get())
-                        userTable.items = Database.findAll(Trader::class)
-                    }
+                    action { controller.connect() }
                 }
+                disableWhen { Database.connectedProperty }
             }
-            databaseBox.disableWhen { Database.connectedProperty }
-            loginBox = vbox {
+            vbox {
                 label("Name")
                 textfield(nameProperty)
                 label("Passwort")
                 textfield(pwProperty)
                 button("Login") {
-                    setOnMouseClicked {
-                        val name = nameProperty.get()
-                        val user = Database.findBy(Trader::class, Trader::name, name)
-                        if(user==null){
-                            FxDialogs.showError("User $name not found")
-                            return@setOnMouseClicked
-                        }
-                        if (!user.checkPw(pwProperty.get())) {
-                            FxDialogs.showError("Falsches Passwort")
-                        } else {
-                            FxDialogs.showInformation("Logged in")
-                            Session.userProperty.set(user)
-                        }
-                    }
+                    action { controller.login() }
                 }
+                disableWhen { Database.connectedProperty.not() }
             }
-            loginBox.disableWhen { Database.connectedProperty.not() }
-            masterBox = hbox {
+            hbox {
                 button("Master") {
-                    // TODO
+                    action { controller.master() }
                 }
-                textfield(masterProperty)
+                textfield(masterNameProperty)
+                disableWhen { Database.connectedProperty.not() }
             }
-            masterBox.disableWhen { Database.connectedProperty.not() }
         }
 
         vbox {
@@ -88,6 +68,8 @@ class LoginView : View("Login") {
                 column("ID", Trader::id)
                 column("Name", Trader::name)
                 column("Geld", Trader::geld)
+                column("Master", Trader::master)
+                isEditable = true
             }
         }
         autosize()

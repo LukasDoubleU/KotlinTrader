@@ -8,8 +8,8 @@ import kotlin.reflect.KProperty
  */
 class DatabaseDelegate<T> {
 
-	operator fun getValue(entity: Entity, property: KProperty<*>) = Database.get<T>(entity, property.name)
+	operator fun getValue(entity: Entity, property: KProperty<*>) = Database.getProperty<T>(entity, property.name)
 
-	operator fun setValue(entity: Entity, property: KProperty<*>, value: T?) = Database.set<T>(entity, property.name, value)
+	operator fun setValue(entity: Entity, property: KProperty<*>, value: T?) = Database.setProperty<T>(entity, property.name, value)
 
 }

@@ -1,7 +1,7 @@
 package com.doubleu.trader.model
 
-import com.doubleu.trader.Entity
 import com.doubleu.trader.DatabaseDelegate
+import com.doubleu.trader.Entity
 
 class Ort(override val id: Int) : Entity() {
 

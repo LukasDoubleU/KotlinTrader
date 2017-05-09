@@ -1,11 +1,11 @@
 package com.doubleu.trader
 
 import com.doubleu.trader.database.RefEntity
-import kotlin.reflect.KClass
 import com.doubleu.trader.model.Fahrt
-import java.lang.RuntimeException
 import com.doubleu.trader.model.Ort_has_Ware
 import com.doubleu.trader.model.Schiff_has_Ware
+import java.lang.RuntimeException
+import kotlin.reflect.KClass
 
 /**
  * Helper methods for database interaction
@@ -22,8 +22,12 @@ object DBHelper {
 	}
 
 	fun getTableName(entity: Entity): String {
-		return entity.javaClass.simpleName.toLowerCase();
+		return getTableName(entity::class)
 	}
+
+	fun <T : Entity> getTableName(clazz: KClass<T>): String {
+        return clazz.simpleName!!.toLowerCase()
+    }
 
 	fun getWhere(entity: Entity): String {
 		// Treat RefEntitys differently (2 ids)

@@ -1,8 +1,8 @@
 package com.doubleu.trader.model
 
-import com.doubleu.trader.database.RefEntity
-import tornadofx.property
 import com.doubleu.trader.DatabaseDelegate
+import com.doubleu.trader.database.RefEntity
+import tornadofx.*
 
 class Ort_has_Ware(override val id: Int, override val id2: Int) : RefEntity() {
 

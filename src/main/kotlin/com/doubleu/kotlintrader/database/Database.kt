@@ -1,6 +1,9 @@
 package com.doubleu.kotlintrader.database
 
+import com.doubleu.kotlintrader.extensions.clazz
 import com.doubleu.kotlintrader.extensions.isBoolean
+import com.doubleu.kotlintrader.extensions.isEntity
+import com.doubleu.kotlintrader.extensions.isRefEntity
 import com.doubleu.kotlintrader.util.FxDialogs
 import javafx.beans.property.SimpleBooleanProperty
 import java.lang.RuntimeException
@@ -21,7 +24,9 @@ object Database {
     var connection: Connection? = null
 
     fun connect(host: String, database: String, user: String = "root", pw: String = "") {
-        connection = DriverManager.getConnection("jdbc:mysql://$host/$database?user=$user&password=$pw&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
+        val url = "jdbc:mysql://$host/$database?user=$user&password=$pw" +
+                "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+        connection = DriverManager.getConnection(url)
         connectedProperty.set(true)
     }
 
@@ -45,12 +50,15 @@ object Database {
         rs.next()
         val value = rs.getObject(property.name)
         // Treat Boolean differently: They may be displayed as numeric or string
-        if (property.isBoolean() && (value is Number || value is String)) {
+        return if (property.isBoolean() && (value is Number || value is String)) {
             // Type insurance granted by checking property.returnType
             // (V is Boolean in this case)
-            return (value.toString() != "0") as V
-        }
-        return value as V
+            (value.toString() != "0") as V
+        } else if (property.isRefEntity() && value is Number) {
+            throw TODO("RefEntity's can not yet be referenced")
+        } else if (property.isEntity() && value is Number) {
+            property.clazz().primaryConstructor?.call(value) as V
+        } else value as V
     }
 
     inline fun <reified T : Entity> findAll(): List<T> {

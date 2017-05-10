@@ -23,7 +23,7 @@ class TradeView : View("Trade") {
 
     val hafenTable = tableview<Ort_has_Ware> {
         column("ID", Ort_has_Ware::ware_id)
-        column("Name", Ort_has_Ware::ortName)
+//        column("Name", Ort_has_Ware::ortName)
         column("Preis", Ort_has_Ware::preis)
         column("Menge", Ort_has_Ware::menge)
     }

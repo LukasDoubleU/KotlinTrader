@@ -11,32 +11,55 @@ class LoginController : Controller() {
 
     val view: LoginView by inject()
 
+    /**
+     * Creates a database connection with the provided data
+     */
     fun connect() {
         with(view) {
             Database.connect(ipProperty.get(), dbProperty.get())
-            userTable.items = Database.findAll<Trader>().observable()
-            masterNameProperty.bindBidirectional(Session.masterUserProperty.select { it.nameProperty })
+            refreshUsers()
+            Session.masterUserProperty.set(Database.findFirstBy(Trader::master, true))
+            masterNameProperty.set(Session.masterUserProperty.get()?.name)
         }
     }
 
+    // TODO Users should be stored in Session
+    fun refreshUsers() = with(view) { userTable.items = Database.findAll<Trader>().observable() }
+
+    /**
+     * Login, verifies password, gives notification
+     */
     fun login() {
         with(view) {
             val name = nameProperty.get()
-            val user = Database.findBy(Trader::name, name) ?: return
+            val user = Database.findFirstBy(Trader::name, name) ?: return
             if (!user.checkPw(pwProperty.get())) {
                 FxDialogs.showError("Falsches Passwort")
             } else {
-                FxDialogs.showInformation("Logged in")
+                FxDialogs.showInformation("Logged in as $name")
                 Session.userProperty.set(user)
             }
         }
     }
 
+    /**
+     * Attempts to assign a new master
+     */
     fun master() {
         with(view) {
-            val master = Database.findBy(Trader::name, masterNameProperty.get())
-            master?.master = true
-            Session.masterUserProperty.set(master)
+            val name = masterNameProperty.get()
+            Database.findFirstBy(Trader::name, name)?.let {
+                // check if there are any other masters
+                Database.findAllBy(Trader::master, true).forEach {
+                    // they shall no longer be masters
+                    it.master = false
+                }
+                // declare the new master
+                it.master = true
+                Session.masterUserProperty.set(it)
+                FxDialogs.showInformation("$name was declared the new master")
+                refreshUsers()
+            }
         }
     }
 

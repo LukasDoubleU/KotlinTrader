@@ -15,6 +15,7 @@ import tornadofx.*
 class LoginView : View("Login") {
 
     val controller: LoginController by inject()
+    val connected = Database.connectedProperty
 
     val ipProperty = SimpleStringProperty("localhost")
     val dbProperty = SimpleStringProperty("mmbbs_trader")
@@ -28,22 +29,34 @@ class LoginView : View("Login") {
 
     override val root = hbox {
         vbox {
+            // Datenbankverbindung Felder
+            spacer { }
             vbox {
                 hbox {
                     vbox {
                         label("Server IP")
                         textfield(ipProperty)
+                        disableWhen { connected }
                     }
                     vbox {
                         label("Datenbank")
                         textfield(dbProperty)
+                        disableWhen { connected }
                     }
                 }
-                button("Connect") {
-                    action { controller.connect() }
+                buttonbar {
+                    button("Connect") {
+                        action { controller.connect() }
+                        disableWhen { connected }
+                    }
+                    button("Disconnect") {
+                        action { Database.disconnect() }
+                        enableWhen { connected }
+                    }
                 }
-                disableWhen { Database.connectedProperty }
             }
+            spacer { }
+            // Login Felder
             vbox {
                 label("Name")
                 textfield(nameProperty)
@@ -52,27 +65,28 @@ class LoginView : View("Login") {
                 button("Login") {
                     action { controller.login() }
                 }
-                disableWhen { Database.connectedProperty.not() }
+                disableWhen { connected.not() }
             }
+            spacer { }
+            // Master Felder
             hbox {
+                textfield(masterNameProperty)
                 button("Master") {
                     action { controller.master() }
                 }
-                textfield(masterNameProperty)
-                disableWhen { Database.connectedProperty.not() }
+                disableWhen { connected.not() }
             }
+            spacer { }
         }
-
+        // Trader Tabelle
         vbox {
             userTable = tableview {
                 column("ID", Trader::id)
                 column("Name", Trader::name)
                 column("Geld", Trader::geld)
                 column("Master", Trader::master)
-                isEditable = true
             }
         }
-        autosize()
     }
 
 }

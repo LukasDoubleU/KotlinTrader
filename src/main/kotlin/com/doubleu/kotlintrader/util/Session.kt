@@ -13,7 +13,7 @@ object Session {
     val masterUserProperty = SimpleObjectProperty<Trader?>()
 
     init {
-        // Wenn sich der angemeldete Benutzer ändert
+        // when the logged in user changes
         userProperty.onChange {
             val title = userProperty.get()?.let {
                 "Kotlin Trader - Logged in as ${it.name}"

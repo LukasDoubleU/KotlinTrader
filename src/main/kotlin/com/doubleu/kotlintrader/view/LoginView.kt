@@ -4,7 +4,6 @@ import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
 import javafx.beans.property.SimpleStringProperty
-import javafx.scene.control.TableView
 import tornadofx.*
 
 /**
@@ -25,7 +24,12 @@ class LoginView : View("Login") {
 
     val masterNameProperty = SimpleStringProperty()
 
-    lateinit var userTable: TableView<Trader>
+    val userTable = tableview<Trader> {
+        column("ID", Trader::id)
+        column("Name", Trader::name)
+        column("Geld", Trader::geld)
+        column("Master", Trader::master)
+    }
 
     override val root = hbox {
         vbox {
@@ -80,12 +84,7 @@ class LoginView : View("Login") {
         }
         // Trader Tabelle
         vbox {
-            userTable = tableview {
-                column("ID", Trader::id)
-                column("Name", Trader::name)
-                column("Geld", Trader::geld)
-                column("Master", Trader::master)
-            }
+            userTable
         }
     }
 

@@ -1,10 +1,13 @@
 package com.doubleu.kotlintrader.database
 
-import com.doubleu.kotlintrader.model.Fahrt
-import com.doubleu.kotlintrader.model.Ort_has_Ware
-import com.doubleu.kotlintrader.model.Schiff_has_Ware
+import com.doubleu.kotlintrader.extensions.isBoolean
+import com.doubleu.kotlintrader.extensions.toInt
+import com.doubleu.kotlintrader.extensions.toSQLString
+import com.doubleu.kotlintrader.extensions.valueOf
+import com.doubleu.kotlintrader.model.*
 import java.lang.RuntimeException
 import kotlin.reflect.KClass
+import kotlin.reflect.KProperty
 
 /**
  * Helper methods for database interaction
@@ -12,10 +15,10 @@ import kotlin.reflect.KClass
 object DBHelper {
 
     fun getIdColumnName(refEntity: RefEntity): Array<String> {
-        return when {
-            refEntity is Fahrt -> arrayOf("id_von", "id_nach")
-            refEntity is Ort_has_Ware -> arrayOf("ware_id", "ort_id")
-            refEntity is Schiff_has_Ware -> arrayOf("ware_id", "schiff_id")
+        return when (refEntity) {
+            is Fahrt -> arrayOf("id_von", "id_nach")
+            is Ort_has_Ware -> arrayOf("ware_id", "ort_id")
+            is Schiff_has_Ware -> arrayOf("ware_id", "schiff_id")
             else -> throw RuntimeException("Unknown entity $refEntity")
         }
     }
@@ -34,6 +37,16 @@ object DBHelper {
     private fun getRefWhere(refEntity: RefEntity): String {
         val ids = getIdColumnName(refEntity)
         return "WHERE ${ids[0]} = ${refEntity.id} AND ${ids[1]} = ${refEntity.id2}"
+    }
+
+    fun <V> parseValue(property: KProperty<V>, value: V?): String {
+        return if (property.isBoolean()) {
+            when (property) {
+                Schiff::blocked -> (value as Boolean).toInt().toString()
+                Trader::master -> (value as Boolean).toSQLString()
+                else -> value.valueOf()
+            }
+        } else value.valueOf()
     }
 
 }

@@ -7,8 +7,14 @@ class Schiff(override val id: Int) : Entity() {
     var ort_id: Int? by delegate(this::ort_id)
     val ort_idProperty = property(this::ort_id)
 
+    var ort: Ort? by mutableReference(this::ort, this::ort_id)
+    val ortProperty = property(this::ort)
+
     var trader_id: Int? by delegate(this::trader_id)
     val trader_idProperty = property(this::trader_id)
+
+    var trader: Trader? by mutableReference(this::trader, this::trader_id)
+    val traderProperty = property(this::trader)
 
     var name: String? by delegate(this::name)
     val nameProperty = property(this::name)

@@ -10,4 +10,6 @@ class Ort(override val id: Int) : Entity() {
     var kapazitaet: Double? by delegate(this::kapazitaet)
     val kapazitaetProperty = property(this::kapazitaet)
 
+    override fun toString() = name ?: "null"
+
 }

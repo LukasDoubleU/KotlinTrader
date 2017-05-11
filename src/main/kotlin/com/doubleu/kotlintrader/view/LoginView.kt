@@ -4,6 +4,7 @@ import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
 import javafx.beans.property.SimpleStringProperty
+import javafx.scene.control.TableView
 import tornadofx.*
 
 /**
@@ -13,7 +14,7 @@ import tornadofx.*
  */
 class LoginView : View("Login") {
 
-    val controller: LoginController by inject()
+    val controller by inject<LoginController>()
     val connected = Database.connectedProperty
 
     val ipProperty = SimpleStringProperty("localhost")
@@ -24,17 +25,11 @@ class LoginView : View("Login") {
 
     val masterNameProperty = SimpleStringProperty()
 
-    val userTable = tableview<Trader> {
-        column("ID", Trader::id)
-        column("Name", Trader::name)
-        column("Geld", Trader::geld)
-        column("Master", Trader::master)
-    }
+    lateinit var userTable: TableView<Trader>
 
     override val root = hbox {
         vbox {
             // Datenbankverbindung Felder
-            spacer { }
             vbox {
                 hbox {
                     vbox {
@@ -59,7 +54,6 @@ class LoginView : View("Login") {
                     }
                 }
             }
-            spacer { }
             // Login Felder
             vbox {
                 label("Name")
@@ -71,7 +65,6 @@ class LoginView : View("Login") {
                 }
                 disableWhen { connected.not() }
             }
-            spacer { }
             // Master Felder
             hbox {
                 textfield(masterNameProperty)
@@ -80,11 +73,15 @@ class LoginView : View("Login") {
                 }
                 disableWhen { connected.not() }
             }
-            spacer { }
         }
         // Trader Tabelle
         vbox {
-            userTable
+            userTable = tableview<Trader> {
+                column("ID", Trader::id)
+                column("Name", Trader::name)
+                column("Geld", Trader::geld)
+                column("Master", Trader::master)
+            }
         }
     }
 

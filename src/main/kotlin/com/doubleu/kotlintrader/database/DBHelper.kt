@@ -5,7 +5,6 @@ import com.doubleu.kotlintrader.extensions.toInt
 import com.doubleu.kotlintrader.extensions.toSQLString
 import com.doubleu.kotlintrader.extensions.valueOf
 import com.doubleu.kotlintrader.model.*
-import java.lang.RuntimeException
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
@@ -14,19 +13,20 @@ import kotlin.reflect.KProperty
  */
 object DBHelper {
 
-    fun getIdColumnName(refEntity: RefEntity): Array<String> {
-        return when (refEntity) {
-            is Fahrt -> arrayOf("id_von", "id_nach")
-            is Ort_has_Ware -> arrayOf("ware_id", "ort_id")
-            is Schiff_has_Ware -> arrayOf("ware_id", "schiff_id")
-            else -> throw RuntimeException("Unknown entity $refEntity")
+    fun getIdColumnNames(entity: Entity) = getIdColumnNames(entity::class)
+    inline fun <reified T : Entity> getIdColumnNames() = getIdColumnNames(T::class)
+    fun <T : Entity> getIdColumnNames(entityClass: KClass<T>): Array<String> {
+        return when (entityClass) {
+            Fahrt::class -> arrayOf("id_von", "id_nach")
+            Ort_has_Ware::class -> arrayOf("ware_id", "ort_id")
+            Schiff_has_Ware::class -> arrayOf("ware_id", "schiff_id")
+            else -> arrayOf("id")
         }
     }
 
+
     fun <T : Entity> getTableName(entity: T) = getTableName(entity::class)
-
     inline fun <reified T : Entity> getTableName() = getTableName(T::class)
-
     fun <T : Entity> getTableName(clazz: KClass<T>) = clazz.simpleName!!.toLowerCase()
 
     fun getWhere(entity: Entity): String {
@@ -35,7 +35,7 @@ object DBHelper {
     }
 
     private fun getRefWhere(refEntity: RefEntity): String {
-        val ids = getIdColumnName(refEntity)
+        val ids = getIdColumnNames(refEntity)
         return "WHERE ${ids[0]} = ${refEntity.id} AND ${ids[1]} = ${refEntity.id2}"
     }
 

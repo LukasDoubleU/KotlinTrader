@@ -1,10 +1,9 @@
 package com.doubleu.kotlintrader.database
 
-import com.doubleu.kotlintrader.extensions.clazz
+import com.doubleu.kotlintrader.controller.DatabaseController
 import com.doubleu.kotlintrader.extensions.isBoolean
-import com.doubleu.kotlintrader.extensions.isEntity
-import com.doubleu.kotlintrader.extensions.isRefEntity
 import com.doubleu.kotlintrader.util.FxDialogs
+import com.doubleu.kotlintrader.util.Session
 import javafx.beans.property.SimpleBooleanProperty
 import java.lang.RuntimeException
 import java.sql.Connection
@@ -28,12 +27,14 @@ object Database {
                 "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
         connection = DriverManager.getConnection(url)
         connectedProperty.set(true)
+        DatabaseController.connected()
     }
 
     fun disconnect() {
         connection?.let {
             it.close()
             connectedProperty.set(false)
+            Session.logout()
         }
     }
 
@@ -54,26 +55,24 @@ object Database {
             // Type insurance granted by checking property.returnType
             // (V is Boolean in this case)
             (value.toString() != "0") as V
-        } else if (property.isRefEntity() && value is Number) {
-            throw TODO("RefEntity's can not yet be referenced")
-        } else if (property.isEntity() && value is Number) {
-            property.clazz().primaryConstructor?.call(value) as V
         } else value as V
     }
 
-    inline fun <reified T : Entity> findAll(): List<T> {
-        if (T::class is RefEntity) throw UnsupportedOperationException("Can't yet find RefEntities")
+    inline fun <reified T : Entity> findAll() = select<T>(DBHelper.getIdColumnNames<T>())
+
+    inline fun <reified T : Entity> select(columns: Array<String>): List<T> {
         val list = mutableListOf<T>()
-        val sql = "SELECT id FROM ${DBHelper.getTableName<T>()}"
+        val sql = "SELECT ${columns.joinToString(", ")} FROM ${DBHelper.getTableName<T>()}"
         val rs = query(sql)
         while (rs.next()) {
-            list += T::class.primaryConstructor!!.call(rs.getInt("id"))
+            val params = mutableListOf<Int>()
+            for (s in columns) params += rs.getInt(s)
+            list += T::class.primaryConstructor!!.call(*params.toTypedArray())
         }
         return list.toList()
     }
 
     inline fun <reified T : Entity, V> findAllBy(property: KMutableProperty1<T, V?>, value: V?): List<T> {
-        // TODO implement properly ;)
         return findAll<T>().filter { property.call(it) == value }
     }
 

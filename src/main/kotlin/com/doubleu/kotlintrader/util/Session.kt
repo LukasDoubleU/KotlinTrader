@@ -1,16 +1,19 @@
 package com.doubleu.kotlintrader.util
 
 import com.doubleu.kotlintrader.model.Trader
-import com.doubleu.kotlintrader.view.MainView
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import javafx.stage.Stage
 import tornadofx.*
 
 object Session {
 
-    val stage = find<MainView>().primaryStage
+    lateinit var stage: Stage
     val userProperty = SimpleObjectProperty<Trader?>()
+    val user = userProperty.get()
     val masterUserProperty = SimpleObjectProperty<Trader?>()
+    val loggedIn = SimpleBooleanProperty(false)
 
     init {
         // when the logged in user changes
@@ -20,6 +23,11 @@ object Session {
             } ?: "Kotlin Trader"
             stage.titleProperty().bind(SimpleStringProperty(title))
         }
+    }
+
+    fun logout() {
+        userProperty.set(null)
+        loggedIn.set(false)
     }
 
 }

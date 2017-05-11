@@ -38,6 +38,7 @@ class LoginController : Controller() {
             } else {
                 FxDialogs.showInformation("Logged in as $name")
                 Session.userProperty.set(user)
+                Session.loggedIn.set(true)
             }
         }
     }

@@ -2,7 +2,7 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.RefEntity
 
-class Schiff_has_Ware(val ware_id: Int, val schiff_id: Int) : RefEntity() {
+class Schiff_has_Ware(val ware_id: Long, val schiff_id: Long) : RefEntity() {
 
     // ID aliases
     override val id = ware_id

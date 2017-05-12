@@ -10,7 +10,7 @@ import kotlin.reflect.full.primaryConstructor
 
 class MutableReferenceDelegate<T : Entity>(
         val referencedClazz: KClass<T>,
-        val field: KMutableProperty0<Int?>)
+        val field: KMutableProperty0<Long?>)
     : DatabaseDelegate<T?>() {
 
     override val property: Property<T> = MyProperty()
@@ -18,7 +18,7 @@ class MutableReferenceDelegate<T : Entity>(
     fun getValue() = referencedClazz.primaryConstructor!!.call(field.get())
 
     fun setValue(value: T?, setProperty: Boolean) {
-        field.set(value?.id)
+        field.set(value?.id?.toLong())
         // Don't set the property explicitly
         // (false when the property delegated us here)
         if (setProperty) property.value = value

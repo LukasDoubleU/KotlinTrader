@@ -10,6 +10,6 @@ abstract class RefEntity : Entity() {
         registerId(this.id2)
     }
 
-    abstract val id2: Int
+    abstract val id2: Long
 
 }

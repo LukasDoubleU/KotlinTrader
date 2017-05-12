@@ -39,7 +39,6 @@ object Database {
         val rs = query(sql)
         rs.next()
         val value = rs.getObject(property.name)
-        // TODO check for necessity of boolean distinguishing
         // Treat Boolean differently: They may be displayed as numeric or string
         return if (property.isBoolean() && (value is Number || value is String)) {
             // Type insurance granted by checking property.returnType

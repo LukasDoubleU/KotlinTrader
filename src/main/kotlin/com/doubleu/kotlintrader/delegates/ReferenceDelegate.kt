@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.primaryConstructor
 
-class ReferenceDelegate<T : Entity>(val referencedClazz: KClass<T>, val field: KProperty<Int>) : DatabaseDelegate<T>() {
+class ReferenceDelegate<T : Entity>(val referencedClazz: KClass<T>, val field: KProperty<Long>) : DatabaseDelegate<T>() {
 
     override val property: Property<T> = MyProperty()
 

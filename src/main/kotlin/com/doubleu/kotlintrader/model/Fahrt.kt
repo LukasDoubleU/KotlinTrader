@@ -2,7 +2,7 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.RefEntity
 
-class Fahrt(val von_id: Int, val nach_id: Int) : RefEntity() {
+class Fahrt(val von_id: Long, val nach_id: Long) : RefEntity() {
 
     // ID aliases
     override val id = von_id

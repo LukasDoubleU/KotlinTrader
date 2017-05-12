@@ -4,7 +4,7 @@ import com.doubleu.kotlintrader.database.Entity
 import com.doubleu.kotlintrader.extensions.valueOf
 import com.doubleu.kotlintrader.util.MD5
 
-class Trader(override val id: Int) : Entity() {
+class Trader(override val id: Long) : Entity() {
 
     var name: String? by delegate(this::name)
     val nameProperty = property(this::name)

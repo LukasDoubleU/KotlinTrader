@@ -3,7 +3,7 @@ package com.doubleu.kotlintrader.model
 import com.doubleu.kotlintrader.database.RefEntity
 import java.math.BigDecimal
 
-class Ort_has_Ware(val ware_id: Int, val ort_id: Int) : RefEntity() {
+class Ort_has_Ware(val ware_id: Long, val ort_id: Long) : RefEntity() {
 
     // ID Aliases
     override val id = ware_id

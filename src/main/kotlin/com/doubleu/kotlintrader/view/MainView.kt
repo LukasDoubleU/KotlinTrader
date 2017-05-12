@@ -1,32 +1,25 @@
 package com.doubleu.kotlintrader.view
 
-import com.doubleu.kotlintrader.controller.AngeboteController
-import com.doubleu.kotlintrader.controller.LoginController
-import com.doubleu.kotlintrader.controller.MasterController
-import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.util.Session
 import tornadofx.*
 
 class MainView : View("Kotlin Trader") {
 
-    val loginController by inject<LoginController>()
     val loginView by inject<LoginView>()
-    val tradeController by inject<TradeController>()
     val tradeView by inject<TradeView>()
-    val angeboteController by inject<AngeboteController>()
     val angeboteView by inject<AngeboteView>()
-    val masterController by inject<MasterController>()
     val masterView by inject<MasterView>()
 
     override val root = tabpane {
         primaryStage.icons += resources.image("/favicon.png")
-        setMinSize(600.0, 400.0)
-        setMaxSize(600.0, 400.0)
+        setPrefSize(600.0, 400.0)
 
         tab(loginView) {
             isClosable = false
         }
+
+        // TODO try to bind enable-state properly
 
         tab(tradeView) {
             disableProperty().bind(Session.isLoggedIn.not())
@@ -39,7 +32,7 @@ class MainView : View("Kotlin Trader") {
         }
 
         tab(masterView) {
-            disableProperty().bind(Database.connected.not())
+            disableProperty().bind(Session.isMasterUserLoggedIn.not())
             isClosable = false
         }
     }

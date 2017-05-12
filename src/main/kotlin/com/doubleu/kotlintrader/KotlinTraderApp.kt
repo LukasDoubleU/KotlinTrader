@@ -8,6 +8,6 @@ class KotlinTraderApp : App(MainView::class) {
 
     override fun stop() {
         super.stop()
-        Database.disconnect()
+        Database.connection?.close()
     }
 }

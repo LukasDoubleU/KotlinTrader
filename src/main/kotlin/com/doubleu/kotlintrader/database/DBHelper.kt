@@ -1,12 +1,9 @@
 package com.doubleu.kotlintrader.database
 
-import com.doubleu.kotlintrader.extensions.isBoolean
-import com.doubleu.kotlintrader.extensions.toInt
-import com.doubleu.kotlintrader.extensions.toSQLString
-import com.doubleu.kotlintrader.extensions.valueOf
-import com.doubleu.kotlintrader.model.*
+import com.doubleu.kotlintrader.model.Fahrt
+import com.doubleu.kotlintrader.model.Ort_has_Ware
+import com.doubleu.kotlintrader.model.Schiff_has_Ware
 import kotlin.reflect.KClass
-import kotlin.reflect.KProperty
 
 /**
  * Helper methods for database interaction
@@ -24,7 +21,6 @@ object DBHelper {
         }
     }
 
-
     fun <T : Entity> getTableName(entity: T) = getTableName(entity::class)
     inline fun <reified T : Entity> getTableName() = getTableName(T::class)
     fun <T : Entity> getTableName(clazz: KClass<T>) = clazz.simpleName!!.toLowerCase()
@@ -37,16 +33,6 @@ object DBHelper {
     private fun getRefWhere(refEntity: RefEntity): String {
         val ids = getIdColumnNames(refEntity)
         return "WHERE ${ids[0]} = ${refEntity.id} AND ${ids[1]} = ${refEntity.id2}"
-    }
-
-    fun <V> parseValue(property: KProperty<V>, value: V?): String {
-        return if (property.isBoolean()) {
-            when (property) {
-                Schiff::blocked -> (value as Boolean).toInt().toString()
-                Trader::master -> (value as Boolean).toSQLString()
-                else -> value.valueOf()
-            }
-        } else value.valueOf()
     }
 
 }

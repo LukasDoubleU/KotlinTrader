@@ -1,6 +1,5 @@
 package com.doubleu.kotlintrader.view
 
-import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
 import com.doubleu.kotlintrader.util.Session
@@ -15,18 +14,18 @@ import tornadofx.*
  */
 class LoginView : View("Login") {
 
-    val controller by inject<LoginController>()
-    val connected = Database.connected
+    private val connected = Database.connected
+    private val loggedIn = Session.isLoggedIn
 
-    val ipProperty = SimpleStringProperty("localhost")
-    val dbProperty = SimpleStringProperty("mmbbs_trader")
+    // TODO Store the following in some local file
 
-    val nameProperty = SimpleStringProperty("otto")
-    val pwProperty = SimpleStringProperty("otto")
+    private val ipProperty = SimpleStringProperty("localhost")
+    private val dbProperty = SimpleStringProperty("mmbbs_trader")
 
-    val masterNameProperty = SimpleStringProperty()
+    private val nameProperty = SimpleStringProperty("otto")
+    private val pwProperty = SimpleStringProperty("otto")
 
-    lateinit var userTable: TableView<Trader>
+    private lateinit var userTable: TableView<Trader>
 
     override val root = hbox {
         vbox {
@@ -46,7 +45,7 @@ class LoginView : View("Login") {
                 }
                 buttonbar {
                     button("Connect") {
-                        action { controller.connect() }
+                        action { Database.connect(ipProperty.get(), dbProperty.get()) }
                         disableWhen { connected }
                     }
                     button("Disconnect") {
@@ -61,23 +60,29 @@ class LoginView : View("Login") {
                 textfield(nameProperty)
                 label("Passwort")
                 textfield(pwProperty)
-                button("Login") {
-                    action { controller.login() }
+                buttonbar {
+                    button("Login") {
+                        action { Session.login(nameProperty.get(), pwProperty.get()) }
+                        enableWhen { Database.connected.and(loggedIn.not()) }
+                    }
+                    button("Logout") {
+                        action { Session.logout() }
+                        enableWhen { loggedIn }
+                    }
                 }
-                disableWhen { Session.isLoggedIn }
             }
             // Master Felder
             hbox {
-                textfield(masterNameProperty)
-                button("Master") {
-                    action { controller.master() }
+                label("Master")
+                combobox(Session.masterUserProperty, Session.users) {
+                    enableWhen { connected }
+                    valueProperty().onChange { userTable.refresh() }
                 }
-                disableWhen { connected.not() }
             }
         }
         // Trader Tabelle
         vbox {
-            userTable = tableview<Trader> {
+            userTable = tableview(Session.users) {
                 column("ID", Trader::id)
                 column("Name", Trader::name)
                 column("Geld", Trader::geld)
@@ -85,5 +90,4 @@ class LoginView : View("Login") {
             }
         }
     }
-
 }

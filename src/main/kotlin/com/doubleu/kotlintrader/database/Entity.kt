@@ -47,8 +47,8 @@ abstract class Entity {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <V> property(property: KProperty<V>): Property<V?> = (delegateMap[property]?.property
-            ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V?>
+    fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.property
+            ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>
 
     protected fun registerId(id: Int) {
         // TODO: Use INSERT if not present, think of default values

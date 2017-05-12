@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty
 abstract class Entity {
 
     init {
-        registerId(id)
+        registerId(this.id)
     }
 
     abstract val id: Int

@@ -12,7 +12,7 @@ class Ort(override val id: Int) : Entity() {
     val kapazitaetProperty = property(this::kapazitaet)
 
     /**
-     * Overriden for meaningful representation inside the combobox of the TradeView
+     * Overridden for meaningful representation inside the combobox of the TradeView
      */
     override fun toString() = name.valueOf()
 

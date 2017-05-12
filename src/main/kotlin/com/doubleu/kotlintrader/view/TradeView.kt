@@ -23,7 +23,7 @@ class TradeView : View("Trade") {
             // Hafen Spalte
             vbox {
                 label("Hafen")
-                hafenTable = tableview<Ort_has_Ware> {
+                hafenTable = tableview(Session.ortWaren) {
                     column("ID", Ort_has_Ware::ware_id)
                     column("Name", Ort_has_Ware::wareName)
                     column("Menge", Ort_has_Ware::menge)
@@ -44,7 +44,7 @@ class TradeView : View("Trade") {
             // Schiff Spalte
             vbox {
                 label("Schiff")
-                schiffTable = tableview<Schiff_has_Ware> {
+                schiffTable = tableview(Session.schiffWaren) {
                     column("ID", Schiff_has_Ware::ware_id)
                     column("Name", Schiff_has_Ware::wareName)
                     column("Menge", Schiff_has_Ware::menge)
@@ -53,7 +53,7 @@ class TradeView : View("Trade") {
         }
         hbox {
             label("Trader")
-            textfield(Session.masterUserProperty.stringBinding { it?.name ?: "" })
+            textfield(Session.loggedInUserProperty.stringBinding { it?.name ?: "" })
             label("Geld")
             textfield(Session.loggedInUserProperty.doubleBinding { it?.geld ?: 0.0 })
         }
@@ -61,7 +61,9 @@ class TradeView : View("Trade") {
             label("Standort")
             textfield(Session.ortProperty.stringBinding { it?.name ?: "" })
             label("Reise nach")
-            combobox(Session.ortProperty, Session.orte)
+            combobox(Session.ortProperty, Session.orte) {
+                disableWhen { Session.schiffProperty.booleanBinding { it?.blocked ?: false } }
+            }
         }
     }
 }

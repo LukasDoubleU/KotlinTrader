@@ -57,9 +57,13 @@ class LoginView : View("Login") {
             // Login Felder
             vbox {
                 label("Name")
-                textfield(nameProperty)
+                textfield(nameProperty) {
+                    disableWhen { loggedIn }
+                }
                 label("Passwort")
-                textfield(pwProperty)
+                textfield(pwProperty) {
+                    disableWhen { loggedIn }
+                }
                 buttonbar {
                     button("Login") {
                         action { Session.login(nameProperty.get(), pwProperty.get()) }

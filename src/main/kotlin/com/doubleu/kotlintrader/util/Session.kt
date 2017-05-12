@@ -2,9 +2,7 @@ package com.doubleu.kotlintrader.util
 
 import com.doubleu.kotlintrader.controller.SuperController
 import com.doubleu.kotlintrader.database.Database
-import com.doubleu.kotlintrader.model.Ort
-import com.doubleu.kotlintrader.model.Schiff
-import com.doubleu.kotlintrader.model.Trader
+import com.doubleu.kotlintrader.model.*
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
@@ -17,9 +15,11 @@ object Session : SuperController() {
     val orte = mutableListOf<Ort>().observable()
     val ortProperty = SimpleObjectProperty<Ort?>()
     var ort by ortProperty
+    val ortWaren = mutableListOf<Ort_has_Ware>().observable()
 
     val schiffProperty = SimpleObjectProperty<Schiff?>()
     var schiff by schiffProperty
+    val schiffWaren = mutableListOf<Schiff_has_Ware>().observable()
 
     val loggedInUserProperty = SimpleObjectProperty<Trader?>()
     var loggedInUser by loggedInUserProperty
@@ -81,13 +81,20 @@ object Session : SuperController() {
         val userId = user.id
         schiff = Database.findFirstBy(Schiff::trader_id, userId)
         schiff?.let {
-            val ortId = it.ort_id
+            val schiff = it
+            val ortId = schiff.ort_id
             if (ortId == null) throw throw RuntimeException("Data consistency error! No ort was found for id $ortId")
             ort = findOrt(Ort::id, ortId)
+            ortWaren += Database.findAllBy(Ort_has_Ware::ort_id, ortId)
+            schiffWaren += Database.findAllBy(Schiff_has_Ware::schiff_id, schiff.id)
         } ?: throw RuntimeException("Data consistency error! No ship was found for user id $userId")
     }
 
-    fun onLogout() = updateTitle("Kotlin Trader")
+    fun onLogout() {
+        updateTitle("Kotlin Trader")
+        ortWaren.clear()
+        schiffWaren.clear()
+    }
 
     private fun updateTitle(title: String) {
         if (primaryStage.titleProperty().isBound) {

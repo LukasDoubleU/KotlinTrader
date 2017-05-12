@@ -8,8 +8,8 @@ import tornadofx.*
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
-import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
+import kotlin.reflect.KProperty1
 import kotlin.reflect.full.primaryConstructor
 
 /**
@@ -66,11 +66,11 @@ object Database {
         return list.toList()
     }
 
-    inline fun <reified T : Entity, V> findAllBy(property: KMutableProperty1<T, V?>, value: V?): List<T> {
+    inline fun <reified T : Entity, V> findAllBy(property: KProperty1<T, V?>, value: V?): List<T> {
         return findAll<T>().filter { property.get(it) == value }
     }
 
-    inline fun <reified T : Entity, V> findFirstBy(property: KMutableProperty1<T, V?>, value: V?): T? {
+    inline fun <reified T : Entity, V> findFirstBy(property: KProperty1<T, V?>, value: V?): T? {
         val retval = findAllBy(property, value).firstOrNull()
         if (retval == null) FxDialogs.showError("${T::class.simpleName} with ${property.name} '$value' was not found")
         return retval

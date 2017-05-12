@@ -1,9 +1,9 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
-import com.doubleu.kotlintrader.util.Session
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.TableView
 import tornadofx.*

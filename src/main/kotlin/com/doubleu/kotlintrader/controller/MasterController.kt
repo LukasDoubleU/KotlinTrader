@@ -1,3 +1,18 @@
 package com.doubleu.kotlintrader.controller
 
-class MasterController : SuperController()
+import tornadofx.*
+
+class MasterController : Controller() {
+
+    fun nextStep() {
+        TODO("not implemented")
+    }
+
+    fun trigEvent() {
+        TODO("not implemented")
+    }
+
+    fun resetGame() {
+        TODO("not implemented")
+    }
+}

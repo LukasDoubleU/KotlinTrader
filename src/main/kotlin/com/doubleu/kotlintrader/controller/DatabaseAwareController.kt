@@ -3,7 +3,7 @@ package com.doubleu.kotlintrader.controller
 import com.doubleu.kotlintrader.database.Database
 import tornadofx.*
 
-abstract class SuperController : Controller() {
+abstract class DatabaseAwareController : Controller() {
 
     init {
         Database.connected.onChange {

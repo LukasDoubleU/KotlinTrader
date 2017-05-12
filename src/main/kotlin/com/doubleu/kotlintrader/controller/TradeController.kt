@@ -1,6 +1,8 @@
 package com.doubleu.kotlintrader.controller
 
-class TradeController : SuperController() {
+import tornadofx.*
+
+class TradeController : Controller() {
 
     fun buy() {
         TODO("not implemented")

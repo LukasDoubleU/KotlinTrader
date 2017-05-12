@@ -1,7 +1,7 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.database.Database
-import com.doubleu.kotlintrader.util.Session
 import tornadofx.*
 
 class MainView : View("Kotlin Trader") {

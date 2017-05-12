@@ -1,7 +1,7 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.model.Ort_has_Ware
-import com.doubleu.kotlintrader.util.Session
 import tornadofx.*
 
 class AngeboteView : View("Angebote") {

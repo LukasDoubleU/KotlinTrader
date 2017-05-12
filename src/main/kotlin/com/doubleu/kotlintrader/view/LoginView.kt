@@ -1,16 +1,14 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
-import com.doubleu.kotlintrader.util.Session
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.TableView
 import tornadofx.*
 
 /**
  * View mit den Login-Funktionen
- *
- * TODO: Sexy GUI
  */
 class LoginView : View("Login") {
 

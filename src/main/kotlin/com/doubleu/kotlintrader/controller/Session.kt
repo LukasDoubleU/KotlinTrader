@@ -1,14 +1,14 @@
-package com.doubleu.kotlintrader.util
+package com.doubleu.kotlintrader.controller
 
-import com.doubleu.kotlintrader.controller.SuperController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.*
+import com.doubleu.kotlintrader.util.FxDialogs
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 import kotlin.reflect.KProperty1
 
-object Session : SuperController() {
+object Session : DatabaseAwareController() {
 
     val users = mutableListOf<Trader>().observable()
 
@@ -37,7 +37,7 @@ object Session : SuperController() {
             it?.let { it.master = true }
         }
         isLoggedIn.onChange {
-            if (it) onLogin(Session.loggedInUser!!) else onLogout()
+            if (it) onLogin(loggedInUser!!) else onLogout()
         }
     }
 

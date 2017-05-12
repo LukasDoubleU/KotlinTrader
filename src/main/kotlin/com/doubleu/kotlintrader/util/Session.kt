@@ -21,6 +21,8 @@ object Session : SuperController() {
     var schiff by schiffProperty
     val schiffWaren = mutableListOf<Schiff_has_Ware>().observable()
 
+    val angebote = mutableListOf<Ort_has_Ware>().observable()
+
     val loggedInUserProperty = SimpleObjectProperty<Trader?>()
     var loggedInUser by loggedInUserProperty
     val isLoggedIn = Bindings.isNotNull(loggedInUserProperty)!!
@@ -68,11 +70,13 @@ object Session : SuperController() {
         users += Database.findAll<Trader>()
         masterUser = users.find { it.master ?: false }
         orte += Database.findAll<Ort>()
+        angebote += Database.findAll<Ort_has_Ware>().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis }
     }
 
     override fun onDisconnect() {
         users.clear()
         orte.clear()
+        angebote.clear()
         logout()
     }
 

@@ -18,8 +18,7 @@ class TradeController : Controller() {
             orte += Database.findAll<Ort>()
             hafenTable.items = Database.findAll<Ort_has_Ware>().observable()
             schiffTable.items = Database.findAll<Schiff_has_Ware>().observable()
-            traderProperty.value = Session.user?.name
-
+            traderProperty.value = Session.loggedInUserProperty.name
         }
     }
 

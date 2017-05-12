@@ -20,7 +20,6 @@ class MainView : View("Kotlin Trader") {
     val masterView by inject<MasterView>()
 
     override val root = tabpane {
-        Session.stage = primaryStage
         primaryStage.icons += resources.image("/favicon.png")
         setMinSize(600.0, 400.0)
         setMaxSize(600.0, 400.0)
@@ -30,17 +29,17 @@ class MainView : View("Kotlin Trader") {
         }
 
         tab(tradeView) {
-            disableProperty().bind(Session.loggedIn.not())
+            disableProperty().bind(Session.isLoggedIn.not())
             isClosable = false
         }
 
         tab(angeboteView) {
-            disableProperty().bind(Database.connectedProperty.not())
+            disableProperty().bind(Database.connected.not())
             isClosable = false
         }
 
         tab(masterView) {
-            disableProperty().bind(Database.connectedProperty.not())
+            disableProperty().bind(Database.connected.not())
             isClosable = false
         }
     }

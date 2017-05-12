@@ -1,14 +1,16 @@
 package com.doubleu.kotlintrader.database
 
-import com.doubleu.kotlintrader.controller.DatabaseController
 import com.doubleu.kotlintrader.extensions.isBoolean
 import com.doubleu.kotlintrader.util.FxDialogs
 import com.doubleu.kotlintrader.util.Session
-import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.binding.Bindings
+import javafx.beans.property.SimpleObjectProperty
+import tornadofx.*
 import java.lang.RuntimeException
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
+import java.sql.SQLException
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.primaryConstructor
@@ -18,22 +20,25 @@ import kotlin.reflect.full.primaryConstructor
  */
 object Database {
 
-    val connectedProperty = SimpleBooleanProperty(false)
+    var connection: SimpleObjectProperty<Connection?> = SimpleObjectProperty(null)
 
-    var connection: Connection? = null
+    val connected = Bindings.isNotNull(connection)
 
     fun connect(host: String, database: String, user: String = "root", pw: String = "") {
-        val url = "jdbc:mysql://$host/$database?user=$user&password=$pw" +
+        val url = "jdbc:mysql://$host/$database?_loggedInUser=$user&password=$pw" +
                 "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
-        connection = DriverManager.getConnection(url)
-        connectedProperty.set(true)
-        DatabaseController.connected()
+        connection.value = try {
+            DriverManager.getConnection(url)
+        } catch (e: SQLException) {
+            FX.messages
+            FxDialogs.showError("")
+            null
+        }
     }
 
     fun disconnect() {
-        connection?.let {
+        connection.value?.let {
             it.close()
-            connectedProperty.set(false)
             Session.logout()
         }
     }
@@ -83,15 +88,15 @@ object Database {
     }
 
     fun query(sql: String): ResultSet {
-        return connection?.let {
-            val statement = connection!!.createStatement()
+        return connection.value?.let {
+            val statement = it.createStatement()
             return statement.executeQuery(sql)
         } ?: throw RuntimeException("No database connection")
     }
 
     fun execute(sql: String): Boolean {
-        return connection?.let {
-            val statement = connection!!.createStatement()
+        return connection.value?.let {
+            val statement = it.createStatement()
             return statement.execute(sql)
         } ?: throw RuntimeException("No database connection")
     }

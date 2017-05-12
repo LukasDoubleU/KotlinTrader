@@ -3,6 +3,7 @@ package com.doubleu.kotlintrader.view
 import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
+import com.doubleu.kotlintrader.util.Session
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.TableView
 import tornadofx.*
@@ -15,7 +16,7 @@ import tornadofx.*
 class LoginView : View("Login") {
 
     val controller by inject<LoginController>()
-    val connected = Database.connectedProperty
+    val connected = Database.connected
 
     val ipProperty = SimpleStringProperty("localhost")
     val dbProperty = SimpleStringProperty("mmbbs_trader")
@@ -63,7 +64,7 @@ class LoginView : View("Login") {
                 button("Login") {
                     action { controller.login() }
                 }
-                disableWhen { connected.not() }
+                disableWhen { Session.isLoggedIn }
             }
             // Master Felder
             hbox {

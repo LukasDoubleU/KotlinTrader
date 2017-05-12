@@ -7,7 +7,7 @@ import com.doubleu.kotlintrader.util.Session
 import com.doubleu.kotlintrader.view.LoginView
 import tornadofx.*
 
-class LoginController : Controller() {
+class LoginController : SuperController() {
 
     val view: LoginView by inject()
 
@@ -23,25 +23,14 @@ class LoginController : Controller() {
         }
     }
 
+
     // TODO Users should be stored in Session
     fun refreshUsers() = with(view) { userTable.items = Database.findAll<Trader>().observable() }
 
     /**
      * Login, verifies password, gives notification
      */
-    fun login() {
-        with(view) {
-            val name = nameProperty.get()
-            val user = Database.findFirstBy(Trader::name, name) ?: return
-            if (!user.checkPw(pwProperty.get())) {
-                FxDialogs.showError("Falsches Passwort")
-            } else {
-                FxDialogs.showInformation("Logged in as $name")
-                Session.userProperty.set(user)
-                Session.loggedIn.set(true)
-            }
-        }
-    }
+    fun login() = with(view) { Session.login(nameProperty.value, pwProperty.value) }
 
     /**
      * Attempts to assign a new master

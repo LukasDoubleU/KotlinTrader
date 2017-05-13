@@ -67,10 +67,16 @@ object Session : DatabaseAwareController() {
     }
 
     override fun onConnect() {
-        users += Database.findAll<Trader>()
-        masterUser = users.find { it.master ?: false }
-        orte += Database.findAll<Ort>()
-        angebote += Database.findAll<Ort_has_Ware>().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis }
+        runAsync { Database.findAll<Trader>() } ui {
+            users += it
+            masterUser = users.find { it.master ?: false }
+        }
+        runAsync { Database.findAll<Ort>() } ui {
+            orte += it
+        }
+        runAsync { Database.findAll<Ort_has_Ware>().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis } } ui {
+            angebote += it
+        }
     }
 
     override fun onDisconnect() {
@@ -82,16 +88,28 @@ object Session : DatabaseAwareController() {
 
     fun onLogin(user: Trader) {
         updateTitle("Kotlin Trader - Logged in as ${user.name}")
-        val userId = user.id
-        schiff = Database.findFirstBy(Schiff::trader_id, userId)
-        schiff?.let {
-            val schiff = it
-            val ortId = schiff.ort_id
-            if (ortId == null) throw throw RuntimeException("Data consistency error! No ort was found for id $ortId")
-            ort = findOrt(Ort::id, ortId)
-            ortWaren += Database.findAllBy(Ort_has_Ware::ort_id, ortId)
-            schiffWaren += Database.findAllBy(Schiff_has_Ware::schiff_id, schiff.id)
-        } ?: throw RuntimeException("Data consistency error! No ship was found for user id $userId")
+        runAsync {
+            val userId = user.id
+            Database.findFirstBy(Schiff::trader_id, userId)
+        } ui {
+            schiff = it
+            schiff?.let {
+                val schiff = it
+                runAsync {
+                    val ortId = schiff.ort_id
+                    if (ortId == null) throw throw RuntimeException("Data consistency error! No ort was found for id $ortId")
+                    findOrt(Ort::id, ortId)
+                } ui {
+                    ort = it
+                    runAsync { Database.findAllBy(Ort_has_Ware::ort_id, ort!!.id) } ui {
+                        ortWaren += it
+                        runAsync { Database.findAllBy(Schiff_has_Ware::schiff_id, schiff.id) } ui {
+                            schiffWaren += it
+                        }
+                    }
+                }
+            } ?: throw RuntimeException("Data consistency error! No ship was found for user id ${user.id}")
+        }
     }
 
     fun onLogout() {

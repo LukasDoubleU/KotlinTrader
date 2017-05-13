@@ -9,6 +9,8 @@ import tornadofx.*
 // TODO create ToolTips for disabled components
 // TODO Sexy GUI
 // TODO 1-2 Kommentare schaden nicht
+// TODO remove files ignored by .gitignore from GitHub
+// TODO figure out how to deploy properly as JAR
 
 class KotlinTraderApp : App(MainView::class) {
 

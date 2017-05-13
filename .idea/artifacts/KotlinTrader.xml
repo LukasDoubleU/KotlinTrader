@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="KotlinTrader">
+    <output-path>$PROJECT_DIR$/out/artifacts/KotlinTrader</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="alias" value="" />
+        <option name="appClass" value="com.doubleu.kotlintrader.KotlinTraderApp" />
+        <option name="description" value="" />
+        <option name="enabledSigning" value="true" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="linuxIcon" value="$PROJECT_DIR$/src/main/resources/favicon.ico" />
+            <option name="macIcon" value="$PROJECT_DIR$/src/main/resources/favicon.ico" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/favicon.ico" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="keystore" value="" />
+        <option name="title" value="KotlinTrader" />
+        <option name="vendor" value="LukasDoubleU" />
+        <option name="version" value="0.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="KotlinTrader.jar">
+        <element id="module-output" name="KotlinTrader" />
+      </element>
+    </root>
+  </artifact>
+</component>

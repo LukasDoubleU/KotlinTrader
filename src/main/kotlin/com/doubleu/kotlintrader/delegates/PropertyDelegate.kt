@@ -6,6 +6,9 @@ import javafx.beans.property.Property
 import javafx.beans.property.SimpleObjectProperty
 import kotlin.reflect.KProperty
 
+/**
+ * Delegates simple properties to the database
+ */
 class PropertyDelegate<V>(val entity: Entity, val field: KProperty<V?>) : DatabaseDelegate<V?>() {
 
     override val property: Property<V> = MyProperty()

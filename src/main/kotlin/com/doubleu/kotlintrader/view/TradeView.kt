@@ -8,8 +8,15 @@ import com.doubleu.kotlintrader.model.Schiff_has_Ware
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.TableView
 import javafx.scene.layout.ColumnConstraints
+import javafx.scene.paint.Color
 import tornadofx.*
 
+/**
+ * View responsible for trading.
+ * Left table shows [Ware][Ort_has_Ware] depending on the current [Ort][Session.ort].
+ * Right table shows [Ware][Schiff_has_Ware] depending on the current [Schiff][Session.schiff].
+ * Bottom panel shows information about the logged in [Trader][com.doubleu.kotlintrader.model.Trader] and his [Schiff][com.doubleu.kotlintrader.model.Schiff]
+ */
 class TradeView : View("Trade") {
 
     val controller by inject<TradeController>()
@@ -89,8 +96,15 @@ class TradeView : View("Trade") {
             }
             vbox(20) {
                 text(Session.loggedInUserProperty.doubleBinding { it?.geld ?: 0.0 }.asString())
-                combobox(Session.ortProperty, Session.orte) {
-                    disableWhen { Session.schiffProperty.booleanBinding { it?.blocked ?: false } }
+                hbox(20) {
+                    val blocked = Session.schiffProperty.booleanBinding { it?.blocked ?: false }
+                    combobox(Session.ortProperty, Session.orte) {
+                        disableWhen { blocked }
+                    }
+                    text("Das Schiff ist geblockt!") {
+                        fill = Color.RED
+                        visibleWhen { blocked }
+                    }
                 }
             }
         }

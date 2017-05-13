@@ -9,10 +9,13 @@ import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.control.TableView
+import javafx.scene.control.TextField
 import tornadofx.*
 
 /**
- * View mit den Login-Funktionen
+ * Presents the option for the database connection,
+ * the login and assigning the master user.
+ * The table on the right lists all available users.
  */
 class LoginView : View("Login") {
 
@@ -28,6 +31,7 @@ class LoginView : View("Login") {
     private val pwProperty = SimpleStringProperty("nero")
 
     private lateinit var userTable: TableView<Trader>
+    private lateinit var userNameField: TextField
 
     override val root = hbox(20) {
         paddingAll = 20
@@ -36,7 +40,7 @@ class LoginView : View("Login") {
             alignment = Pos.TOP_CENTER
             // Datenbankverbindung Felder
             vbox(10) {
-                hbox {
+                hbox(10) {
                     vbox(10) {
                         label("Server IP")
                         textfield(ipProperty)
@@ -50,7 +54,10 @@ class LoginView : View("Login") {
                 }
                 buttonbar {
                     button("Connect") {
-                        action { Database.connect(ipProperty.get(), dbProperty.get()) }
+                        action {
+                            Database.connect(ipProperty.get(), dbProperty.get())
+                            userNameField.requestFocus()
+                        }
                         disableWhen { connected }
                     }
                     button("Disconnect") {
@@ -62,12 +69,12 @@ class LoginView : View("Login") {
             // Login Felder
             vbox(10) {
                 label("Name")
-                textfield(nameProperty) {
-                    disableWhen { loggedIn }
+                userNameField = textfield(nameProperty) {
+                    enableWhen { connected.and(loggedIn.not()) }
                 }
                 label("Passwort")
                 passwordfield(pwProperty) {
-                    disableWhen { loggedIn }
+                    enableWhen { connected.and(loggedIn.not()) }
                 }
                 buttonbar {
                     button("Login") {
@@ -94,6 +101,8 @@ class LoginView : View("Login") {
         // Trader Tabelle
         vbox {
             userTable = tableview(Session.users) {
+                isFocusTraversable = false
+
                 column("ID", Trader::id)
                 column("Name", Trader::name)
                 column("Geld", Trader::geld)

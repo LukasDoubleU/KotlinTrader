@@ -8,6 +8,9 @@ import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.primaryConstructor
 
+/**
+ * Delegates mutable Entity-References to the database
+ */
 class MutableReferenceDelegate<T : Entity>(
         val referencedClazz: KClass<T>,
         val field: KMutableProperty0<Long?>)

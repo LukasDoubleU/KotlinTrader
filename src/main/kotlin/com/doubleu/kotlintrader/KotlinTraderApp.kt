@@ -6,15 +6,17 @@ import tornadofx.*
 
 // General TODOs:
 // TODO implement ViewModels
-// TODO if not solved with ViewModels: Implement lazy loading / caching for entity properties
-// TODO create ToolTips for disabled components
+// TODO implement lazy loading / caching for entity properties
 // TODO introduce a stylesheet
-// TODO 1-2 Kommentare schaden nicht
+// TODO comments
 // TODO remove files ignored by .gitignore from GitHub
 // TODO figure out how to deploy properly as JAR
 
 class KotlinTraderApp : App(MainView::class) {
 
+    /**
+     * Overridden to close the database connection when the application exists.
+     */
     override fun stop() {
         super.stop()
         Database.connection?.close()

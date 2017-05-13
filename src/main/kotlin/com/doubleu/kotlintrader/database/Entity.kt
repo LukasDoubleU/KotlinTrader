@@ -22,12 +22,18 @@ abstract class Entity {
 
     val delegateMap = mutableMapOf<KProperty<*>, DatabaseDelegate<*>>()
 
+    /**
+     * Returns a [Delegate][PropertyDelegate] to the given [property].
+     */
     fun <V> delegate(property: KProperty<V>): PropertyDelegate<V> {
         val delegate = PropertyDelegate(this, property)
         delegateMap[property] = delegate
         return delegate
     }
 
+    /**
+     * Returns a [Delegate][ReferenceDelegate] to the given [property].
+     */
     inline fun <reified T : Entity> reference(
             key: KProperty<T>,
             property: KProperty<Long>)
@@ -37,6 +43,9 @@ abstract class Entity {
         return delegate
     }
 
+    /**
+     * Returns a [Delegate][ReferenceDelegate] to the given [property].
+     */
     inline fun <reified T : Entity> mutableReference(
             key: KMutableProperty0<T?>,
             property: KMutableProperty0<Long?>)
@@ -46,6 +55,9 @@ abstract class Entity {
         return delegate
     }
 
+    /**
+     * Returns the [FXProperty][Property] associated with the passed [Entity-Property][property]
+     */
     @Suppress("UNCHECKED_CAST")
     fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.property
             ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>

@@ -33,6 +33,9 @@ object Database {
         connection = null
     }
 
+    /**
+     * Retrieves the [property] of the [entity] from the database via SQL-SELECT
+     */
     @Suppress("UNCHECKED_CAST")
     fun <V> getProperty(entity: Entity, property: KProperty<V>): V {
         val sql = "SELECT ${property.name} FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
@@ -47,14 +50,24 @@ object Database {
         } else value as V
     }
 
+    /**
+     * Sets the [property] of the given [entity] in the database via SQL-Update
+     */
     fun <V> setProperty(entity: Entity, property: KProperty<V>, value: V?) {
         val sql = "UPDATE ${DBHelper.getTableName(entity)} SET ${property.name} = $value ${DBHelper.getWhere(entity)}"
         execute(sql)
     }
 
-    inline fun <reified T : Entity> findAll() = select<T>(DBHelper.getIdColumnNames<T>())
+    /**
+     * Returns all database entries of the given [Entity][T]
+     */
+    inline fun <reified T : Entity> findAll() = selectEntities<T>(DBHelper.getIdColumnNames<T>())
 
-    inline fun <reified T : Entity> select(columns: Array<String>): List<T> {
+    /**
+     * Returns all [Entities][T].
+     * [columns]: The ID Columns of the Entity
+     */
+    inline fun <reified T : Entity> selectEntities(columns: Array<String>): List<T> {
         val list = mutableListOf<T>()
         val sql = "SELECT ${columns.joinToString(", ")} FROM ${DBHelper.getTableName<T>()}"
         val rs = query(sql)
@@ -66,16 +79,25 @@ object Database {
         return list.toList()
     }
 
+    /**
+     * Returns all database entries that match the given [property] [value]
+     */
     inline fun <reified T : Entity, V> findAllBy(property: KProperty1<T, V?>, value: V?): List<T> {
         return findAll<T>().filter { property.get(it) == value }
     }
 
+    /**
+     * Returns the first database entry that matches the given [property] [value] or null
+     */
     inline fun <reified T : Entity, V> findFirstBy(property: KProperty1<T, V?>, value: V?): T? {
         val retval = findAllBy(property, value).firstOrNull()
         if (retval == null) FxDialogs.showError("${T::class.simpleName} with ${property.name} '$value' was not found")
         return retval
     }
 
+    /**
+     * Executes the given [sql] as a query on the database
+     */
     fun query(sql: String): ResultSet {
         return connection?.let {
             val statement = it.createStatement()
@@ -83,6 +105,9 @@ object Database {
         } ?: throw RuntimeException("No database connection")
     }
 
+    /**
+     * Executes the given [sql] as a statement on the database
+     */
     fun execute(sql: String): Boolean {
         return connection?.let {
             val statement = it.createStatement()

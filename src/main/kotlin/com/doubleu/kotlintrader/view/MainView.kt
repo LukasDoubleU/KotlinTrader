@@ -2,9 +2,14 @@ package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.database.Database
+import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
+import javafx.scene.control.Tooltip
 import tornadofx.*
 
+/**
+ * Tying the other views together in a [TabPane]
+ */
 class MainView : View("Kotlin Trader") {
 
     val loginView by inject<LoginView>()
@@ -22,15 +27,27 @@ class MainView : View("Kotlin Trader") {
         // TODO try to bind enable-state properly
 
         tab(tradeView) {
+            showReasonForDisable(this, "You are not logged in!")
             disableProperty().bind(Session.isLoggedIn.not())
         }
 
         tab(angeboteView) {
+            showReasonForDisable(this, "There is no database connection!")
             disableProperty().bind(Database.connected.not())
         }
 
         tab(masterView) {
+            showReasonForDisable(this, "You are not the Master User!")
             disableProperty().bind(Session.isMasterUserLoggedIn.not())
+        }
+    }
+
+    private fun showReasonForDisable(tab: Tab, reason: String) {
+        tab.disableProperty().onChange {
+            if (it) {
+                if (tab.tooltip == null) tab.tooltip = Tooltip()
+                tab.tooltip.text = reason
+            } else tab.tooltip = null
         }
     }
 

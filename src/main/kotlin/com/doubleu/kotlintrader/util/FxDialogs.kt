@@ -11,6 +11,10 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.*
 
+/**
+ * Wrapper for JavaFX's OptionPane.
+ * Copied from StackOverflow.
+ */
 object FxDialogs {
 
     fun showInformation(message: String, title: String = "Information") {

@@ -5,6 +5,10 @@ import com.doubleu.kotlintrader.extensions.center
 import javafx.scene.text.Font
 import tornadofx.*
 
+/**
+ * Displays some game option for the [master user][com.doubleu.kotlintrader.controller.Session.masterUser].
+ * Only available when the master user is logged in.
+ */
 class MasterView : View("Master Functions") {
 
     val controller by inject<MasterController>()

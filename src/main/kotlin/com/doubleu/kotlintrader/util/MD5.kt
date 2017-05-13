@@ -2,6 +2,10 @@ package com.doubleu.kotlintrader.util
 
 import java.security.MessageDigest
 
+/**
+ * Handels MD5 Encryption.
+ * [The Trader's password][com.doubleu.kotlintrader.model.Trader.pass] is MD5 encrypted.
+ */
 object MD5 {
 
     private val encrypter = MessageDigest.getInstance("MD5")!!

@@ -4,6 +4,10 @@ import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import tornadofx.*
 
+/**
+ * Displays all [offers][Session.angebote] in a Table.
+ * Offers are represented by [Ort_has_Ware].
+ */
 class AngeboteView : View("Angebote") {
     override val root = vbox {
         tableview(Session.angebote) {

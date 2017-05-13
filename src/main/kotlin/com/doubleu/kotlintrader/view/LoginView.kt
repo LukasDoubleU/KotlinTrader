@@ -5,6 +5,7 @@ import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.extensions.fillHorizontally
 import com.doubleu.kotlintrader.model.Trader
+import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import javafx.scene.control.TableView
@@ -71,7 +72,7 @@ class LoginView : View("Login") {
                 buttonbar {
                     button("Login") {
                         action { Session.login(nameProperty.get(), pwProperty.get()) }
-                        enableWhen { Database.connected.and(loggedIn.not()) }
+                        enableWhen { connected.and(loggedIn.not()).and(Bindings.isNotEmpty(Session.users)) }
                     }
                     button("Logout") {
                         action { Session.logout() }

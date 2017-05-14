@@ -11,3 +11,6 @@ Es wird das TornadoFX Framework verwendet.
 Um das Programm zu starten reicht es die JAR des letzten Releases zu laden.
 (https://github.com/LukasDoubleU/KotlinTrader/releases/download/v0.9/KotlinTrader.jar).
 Es wird lediglich ein JRE 8 benötigt.
+
+# Doku
+Die gesamte Dokumentation steht unter https://lukasdoubleu.github.io/KotlinTrader/ zur Verfügung.

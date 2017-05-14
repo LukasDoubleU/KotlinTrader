@@ -9,7 +9,6 @@ import javafx.stage.StageStyle
 import java.awt.Robot
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.util.*
 
 /**
  * Wrapper for JavaFX's OptionPane.
@@ -108,14 +107,11 @@ object FxDialogs {
             }
         }
 
-        if (options == null || options.size == 0) {
+        if (options == null || options.isEmpty()) {
             options = arrayOf(OK, CANCEL)
         }
 
-        val buttons = ArrayList<ButtonType>()
-        for (option in options) {
-            buttons.add(ButtonType(option))
-        }
+        val buttons = options.map { ButtonType(it) }
 
         alert.buttonTypes.setAll(buttons)
 

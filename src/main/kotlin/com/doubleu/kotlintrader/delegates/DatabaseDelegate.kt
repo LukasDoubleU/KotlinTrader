@@ -26,7 +26,7 @@ abstract class DatabaseDelegate<X> {
             process(value)
         }
     }
-    protected var _value by valueProperty
+    protected var _value: X by valueProperty
 
     var retrieveFromDb = true
 

@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty1
  * All info is stored in [Properties][javafx.beans.property.Property].
  * Properties that depend on each other are also updated by this class.
  */
-object Session : DatabaseAwareController() {
+object Session : Controller() {
 
     val users = mutableListOf<Trader>().observable()
 
@@ -39,12 +39,16 @@ object Session : DatabaseAwareController() {
     val isMasterUserLoggedIn = isLoggedIn.and(Bindings.equal(loggedInUserProperty, masterUserProperty))!!
 
     private val runningTasks = mutableListOf<SessionTask<*>>().observable()
+
     /**
      * Indicates whether there are active [Tasks][SessionTask] running in this Session
      */
     val loading = Bindings.isNotEmpty(runningTasks)!!
 
     init {
+        Database.connected.onChange {
+            if (it) onConnect() else onDisconnect()
+        }
         masterUserProperty.onChange {
             users.forEach { it.master = false }
             it?.let { it.master = true }
@@ -103,19 +107,6 @@ object Session : DatabaseAwareController() {
     }
 
     /**
-     * Attempts to login the [Trader] with the given name.
-     * Will display an error when the [password][pw] is wrong.
-     */
-    fun login(name: String, pw: String) {
-        val user = findUser(Trader::name, name) ?: return
-        if (!user.checkPw(pw)) {
-            FxDialogs.showError("Falsches Passwort")
-        } else {
-            loggedInUser = user
-        }
-    }
-
-    /**
      * Tries to find the [user][Trader] whose [property] matches the given [value].
      * Searches in the [users] already loaded in the [Session].
      * Displays an error when no [user][Trader] was found.
@@ -138,17 +129,10 @@ object Session : DatabaseAwareController() {
     }
 
     /**
-     * Performs the [logout]
-     */
-    fun logout() {
-        loggedInUser = null
-    }
-
-    /**
      * Hook method that is executed when a [Database] connection was created.
      * Asyncly fills in the [Session]s properties.
      */
-    override fun onConnect() {
+    fun onConnect() {
         async { Database.findAll<Trader>() } ui {
             users += it
             masterUser = users.find { it.master ?: false }
@@ -169,8 +153,7 @@ object Session : DatabaseAwareController() {
     /**
      * Hook method, called when the [Database] connection is lost.
      */
-    override fun onDisconnect() {
-        logout()
+    fun onDisconnect() {
         users.clear()
         orte.clear()
         angebote.clear()
@@ -209,11 +192,15 @@ object Session : DatabaseAwareController() {
         override fun call() = func(this)
 
         override fun done() {
-            runningTasks.remove(this)
+            synchronized(runningTasks) {
+                runningTasks.remove(this)
+            }
         }
 
         fun start(): SessionTask<T> {
-            runningTasks += this
+            synchronized(runningTasks) {
+                runningTasks += this
+            }
             Thread(this).start()
             return this
         }

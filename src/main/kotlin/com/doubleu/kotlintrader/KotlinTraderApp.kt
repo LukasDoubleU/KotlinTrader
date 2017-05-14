@@ -4,13 +4,10 @@ import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.view.MainView
 import tornadofx.*
 
-// General TODOs:
-// TODO implement ViewModels
-// TODO implement lazy loading / caching for entity properties
-// TODO introduce a stylesheet
-// TODO comments
+// TODO implement Trade- and MasterController
+// TODO allow for creation of new entity objects
+// TODO ReferenceDelegates can not yet reference RefEntities
 // TODO remove files ignored by .gitignore from GitHub
-// TODO figure out how to deploy properly as JAR
 
 class KotlinTraderApp : App(MainView::class) {
 

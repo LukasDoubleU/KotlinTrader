@@ -2,6 +2,7 @@ package com.doubleu.kotlintrader.database
 
 import com.doubleu.kotlintrader.extensions.isBoolean
 import com.doubleu.kotlintrader.util.FxDialogs
+import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
@@ -15,28 +16,34 @@ import kotlin.reflect.full.primaryConstructor
 /**
  * Handles interaction with the database
  */
-object Database : Controller() {
+object Database {
 
     val connectionProperty = SimpleObjectProperty<Connection?>()
     var connection by connectionProperty
 
     val connected = Bindings.isNotNull(connectionProperty)!!
 
+    /**
+     * Attempts to asyncly create a database connection
+     */
     fun connect(host: String, database: String, user: String, pw: String) {
         val url = "jdbc:mysql://$host/$database?user=$user&password=$pw" +
                 "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
-        runAsync { DriverManager.getConnection(url) } ui {
-            connection = it
+        DriverManager.getConnection(url)?.let {
+            // Makes sure we're in FXThread
+            Platform.runLater {
+                connection = it
+            }
         }
     }
 
     fun disconnect() {
         // Attempt to close the connection, if there's any
-        runAsync {
-            connection?.let { it.close() }
+        connection?.close()
+        // Makes sure we're in FXThread
+        Platform.runLater {
+            connection = null
         }
-        // .. but let's not wait for that op to finish, we don't care actually :^)
-        connection = null
     }
 
     /**

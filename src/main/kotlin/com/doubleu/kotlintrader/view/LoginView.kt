@@ -1,10 +1,12 @@
 package com.doubleu.kotlintrader.view
 
+import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.extensions.fillHorizontally
 import com.doubleu.kotlintrader.model.Trader
+import com.doubleu.kotlintrader.util.Settings
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
@@ -19,18 +21,18 @@ import tornadofx.*
  */
 class LoginView : View("Login") {
 
+    val controller by inject<LoginController>()
+
     private val connected = Database.connected
     private val loggedIn = Session.isLoggedIn
 
-    // TODO Store the following in some local file
+    private val hostProperty = SimpleStringProperty(Settings.host)
+    private val databaseProperty = SimpleStringProperty(Settings.database)
+    private val dbUserProperty = SimpleStringProperty(Settings.dbUser)
+    private val dbPasswordProperty = SimpleStringProperty(Settings.dbPassword)
 
-    private val ipProperty = SimpleStringProperty("sql11.freemysqlhosting.net:3306")
-    private val dbProperty = SimpleStringProperty("sql11174308")
-    private val dbUserProperty = SimpleStringProperty("sql11174308")
-    private val dbPwProperty = SimpleStringProperty("7KhqAE94Bj")
-
-    private val nameProperty = SimpleStringProperty("nero")
-    private val pwProperty = SimpleStringProperty("nero")
+    private val userProperty = SimpleStringProperty(Settings.user)
+    private val passwordProperty = SimpleStringProperty(Settings.password)
 
     private lateinit var userTable: TableView<Trader>
     private lateinit var userNameField: TextField
@@ -45,22 +47,22 @@ class LoginView : View("Login") {
                 vbox(10) {
                     hbox(10) {
                         vbox(10) {
-                            label("Server IP")
-                            textfield(ipProperty)
+                            label("Host")
+                            textfield(hostProperty)
                         }
                         vbox(10) {
                             label("Datenbank")
-                            textfield(dbProperty)
+                            textfield(databaseProperty)
                         }
                     }
                     hbox(10) {
                         vbox(10) {
-                            label("DB User")
+                            label("DB Nutzer")
                             textfield(dbUserProperty)
                         }
                         vbox(10) {
-                            label("DB Pw")
-                            passwordfield(dbPwProperty)
+                            label("DB Passwort")
+                            passwordfield(dbPasswordProperty)
                         }
                     }
                     disableWhen { connected }
@@ -68,13 +70,13 @@ class LoginView : View("Login") {
                 buttonbar {
                     button("Connect") {
                         action {
-                            Database.connect(ipProperty.get(), dbProperty.get(), dbUserProperty.get(), dbPwProperty.get())
+                            controller.connect(hostProperty.get(), databaseProperty.get(), dbUserProperty.get(), dbPasswordProperty.get())
                             userNameField.requestFocus()
                         }
                         disableWhen { connected }
                     }
                     button("Disconnect") {
-                        action { Database.disconnect() }
+                        action { controller.disconnect() }
                         enableWhen { connected.and(Session.loading.not()) }
                     }
                 }
@@ -82,20 +84,20 @@ class LoginView : View("Login") {
             // Login Felder
             vbox(10) {
                 label("Name")
-                userNameField = textfield(nameProperty) {
+                userNameField = textfield(userProperty) {
                     enableWhen { connected.and(loggedIn.not()) }
                 }
                 label("Passwort")
-                passwordfield(pwProperty) {
+                passwordfield(passwordProperty) {
                     enableWhen { connected.and(loggedIn.not()) }
                 }
                 buttonbar {
                     button("Login") {
-                        action { Session.login(nameProperty.get(), pwProperty.get()) }
+                        action { controller.login(userProperty.get(), passwordProperty.get()) }
                         enableWhen { connected.and(loggedIn.not()).and(Bindings.isNotEmpty(Session.users)) }
                     }
                     button("Logout") {
-                        action { Session.logout() }
+                        action { controller.logout() }
                         enableWhen { loggedIn }
                     }
                 }

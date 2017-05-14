@@ -32,6 +32,7 @@ mainClassName = 'com.doubleu.kotlintrader.KotlinTraderApp'
 
 jar {
     manifest {
+        //noinspection GroovyAssignabilityCheck
         attributes(
                 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': 'com.doubleu.kotlintrader.KotlinTraderApp'

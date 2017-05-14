@@ -5,11 +5,6 @@ package com.doubleu.kotlintrader.database
  */
 abstract class RefEntity : Entity() {
 
-    init {
-        // TODO pass id1 AND id2
-        registerId(this.id2)
-    }
-
     abstract val id2: Long
 
 }

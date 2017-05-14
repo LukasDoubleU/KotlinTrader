@@ -15,10 +15,6 @@ import kotlin.reflect.KProperty
  */
 abstract class Entity {
 
-    init {
-        registerId(this.id)
-    }
-
     abstract val id: Long
 
     val delegateMap = mutableMapOf<KProperty<*>, DatabaseDelegate<*>>()
@@ -77,7 +73,4 @@ abstract class Entity {
     protected fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.valueProperty
             ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>
 
-    protected fun registerId(id: Long) {
-        // TODO: Use INSERT if not present, think of default values
-    }
 }

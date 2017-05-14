@@ -1,7 +1,6 @@
 package com.doubleu.kotlintrader.delegates
 
 import com.doubleu.kotlintrader.database.Entity
-import com.doubleu.kotlintrader.database.RefEntity
 import kotlin.reflect.KClass
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.full.primaryConstructor
@@ -13,11 +12,6 @@ class MutableReferenceDelegate<T : Entity>(
         val referencedClazz: KClass<T>,
         val field: KMutableProperty0<Long?>)
     : DatabaseDelegate<T?>() {
-
-    init {
-        // TODO fix that
-        if (referencedClazz is RefEntity) throw UnsupportedOperationException("RefEntities can not yet be referenced")
-    }
 
     override fun retrieve() = referencedClazz.primaryConstructor!!.call(field.get())
 

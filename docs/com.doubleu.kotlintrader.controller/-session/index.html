@@ -1,0 +1,286 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Session - KotlinTrader</title>
+    <link rel="stylesheet" href="..\..\..\style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.controller</a>&nbsp;/&nbsp;<a
+        href=".">Session</a><br/>
+<br/>
+<h1>Session</h1>
+<code><span class="keyword">object </span><span class="identifier">Session</span>&nbsp;<span class="symbol">:</span>&nbsp;<span
+        class="identifier">Controller</span></code>
+<p>Holds Session dependent information that can thus not be stored in the database.
+    All info is stored in <a href="#">Properties</a>.
+    Properties that depend on each other are also updated by this class.</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="angebote.html">angebote</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">angebote</span><span
+                    class="symbol">: </span><span class="identifier">ObservableList</span><span
+                    class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="is-logged-in.html">isLoggedIn</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">isLoggedIn</span><span
+                    class="symbol">: </span><span class="identifier">BooleanBinding</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="is-master-user-logged-in.html">isMasterUserLoggedIn</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">isMasterUserLoggedIn</span><span
+                    class="symbol">: </span><span class="identifier">BooleanBinding</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="loading.html">loading</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">loading</span><span class="symbol">: </span><span
+                    class="identifier">BooleanBinding</span></code>
+            <p>Indicates whether there are active <a href="#">Tasks</a> running in this Session</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="logged-in-user.html">loggedInUser</a></td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">loggedInUser</span><span
+                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">?</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="logged-in-user-property.html">loggedInUserProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">loggedInUserProperty</span><span
+                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="master-user.html">masterUser</a></td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">masterUser</span><span
+                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">?</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="master-user-property.html">masterUserProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">masterUserProperty</span><span
+                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="ort.html">ort</a></td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">ort</span><span class="symbol">: </span><a
+                    href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">?</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="ort-property.html">ortProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">ortProperty</span><span
+                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="ort-waren.html">ortWaren</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">ortWaren</span><span
+                    class="symbol">: </span><span class="identifier">ObservableList</span><span
+                    class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="orte.html">orte</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">orte</span><span
+                    class="symbol">: </span><span class="identifier">ObservableList</span><span
+                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="schiff.html">schiff</a></td>
+        <td>
+            <code><span class="keyword">var </span><span class="identifier">schiff</span><span
+                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span
+                    class="identifier">Schiff</span></a><span class="symbol">?</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="schiff-property.html">schiffProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">schiffProperty</span><span
+                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span
+                    class="identifier">Schiff</span></a><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="schiff-waren.html">schiffWaren</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">schiffWaren</span><span
+                    class="symbol">: </span><span class="identifier">ObservableList</span><span
+                    class="symbol">&lt;</span><a
+                    href="../../com.doubleu.kotlintrader.model/-schiff_has_-ware/index.html"><span class="identifier">Schiff_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="users.html">users</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">users</span><span
+                    class="symbol">: </span><span class="identifier">ObservableList</span><span
+                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">&gt;</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="find-ort.html">findOrt</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span
+                    class="identifier">V</span><span class="symbol">&gt;</span> <span
+                    class="identifier">findOrt</span><span class="symbol">(</span><span class="identifier"
+                                                                                        id="com.doubleu.kotlintrader.controller.Session$findOrt(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.controller.Session.findOrt.V)), com.doubleu.kotlintrader.controller.Session.findOrt.V)/property">property</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">KProperty1</span><span
+                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">,</span>&nbsp;<span
+                    class="identifier">V</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.controller.Session$findOrt(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.controller.Session.findOrt.V)), com.doubleu.kotlintrader.controller.Session.findOrt.V)/value">value</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">V</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">?</span></code>
+            <p>Tries to find the <a href="../../com.doubleu.kotlintrader.model/-ort/index.html">ort</a> whose <a
+                    href="find-ort.html#com.doubleu.kotlintrader.controller.Session$findOrt(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.controller.Session.findOrt.V)), com.doubleu.kotlintrader.controller.Session.findOrt.V)/property">property</a>
+                matches the given <a
+                        href="find-ort.html#com.doubleu.kotlintrader.controller.Session$findOrt(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.controller.Session.findOrt.V)), com.doubleu.kotlintrader.controller.Session.findOrt.V)/value">value</a>.
+                Searches in the <a href="orte.html">orte</a> already loaded in the Session.
+                Displays an error when no <a href="../../com.doubleu.kotlintrader.model/-ort/index.html">ort</a> was
+                found.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="find-user.html">findUser</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span
+                    class="identifier">V</span><span class="symbol">&gt;</span> <span class="identifier">findUser</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.controller.Session$findUser(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Trader, com.doubleu.kotlintrader.controller.Session.findUser.V)), com.doubleu.kotlintrader.controller.Session.findUser.V)/property">property</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">KProperty1</span><span
+                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">,</span>&nbsp;<span
+                    class="identifier">V</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.controller.Session$findUser(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Trader, com.doubleu.kotlintrader.controller.Session.findUser.V)), com.doubleu.kotlintrader.controller.Session.findUser.V)/value">value</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">V</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">?</span></code>
+            <p>Tries to find the <a href="../../com.doubleu.kotlintrader.model/-trader/index.html">user</a> whose <a
+                    href="find-user.html#com.doubleu.kotlintrader.controller.Session$findUser(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Trader, com.doubleu.kotlintrader.controller.Session.findUser.V)), com.doubleu.kotlintrader.controller.Session.findUser.V)/property">property</a>
+                matches the given <a
+                        href="find-user.html#com.doubleu.kotlintrader.controller.Session$findUser(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.model.Trader, com.doubleu.kotlintrader.controller.Session.findUser.V)), com.doubleu.kotlintrader.controller.Session.findUser.V)/value">value</a>.
+                Searches in the <a href="users.html">users</a> already loaded in the Session.
+                Displays an error when no <a href="../../com.doubleu.kotlintrader.model/-trader/index.html">user</a> was
+                found.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="on-connect.html">onConnect</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">onConnect</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span></code>
+            <p>Hook method that is executed when a <a
+                    href="../../com.doubleu.kotlintrader.database/-database/index.html">Database</a> connection was
+                created.
+                Asyncly fills in the Sessions properties.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="on-disconnect.html">onDisconnect</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">onDisconnect</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span></code>
+            <p>Hook method, called when the <a href="../../com.doubleu.kotlintrader.database/-database/index.html">Database</a>
+                connection is lost.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="on-login.html">onLogin</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">onLogin</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.controller.Session$onLogin(com.doubleu.kotlintrader.model.Trader)/user">user</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span></code>
+            <p>Updates the application title and refreshes the <a
+                    href="on-login.html#com.doubleu.kotlintrader.controller.Session$onLogin(com.doubleu.kotlintrader.model.Trader)/user">user</a>
+                dependent fields, which it does async</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="on-logout.html">onLogout</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">onLogout</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+            <p>Hook method that is called when a logout was performed.
+                Clears Session properties.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
+                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

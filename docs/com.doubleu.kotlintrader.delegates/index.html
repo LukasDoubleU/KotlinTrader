@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>com.doubleu.kotlintrader.delegates - KotlinTrader</title>
+    <link rel="stylesheet" href="..\..\style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href=".">com.doubleu.kotlintrader.delegates</a><br/>
+<br/>
+<h2>Package com.doubleu.kotlintrader.delegates</h2>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-database-delegate/index.html">DatabaseDelegate</a></td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">DatabaseDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">X</span><span class="symbol">&gt;</span></code>
+            <p>Super class for all Delegates that delegate Entity fields to the database.
+                Implementations of this also must provide a <a href="#">Property</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-mutable-reference-delegate/index.html">MutableReferenceDelegate</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">MutableReferenceDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="../com.doubleu.kotlintrader.database/-entity/index.html"><span
+                    class="identifier">Entity</span></a><span class="symbol">&gt;</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-database-delegate/index.html"><span class="identifier">DatabaseDelegate</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code>
+            <p>Delegates mutable Entity-References to the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-property-delegate/index.html">PropertyDelegate</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">PropertyDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">V</span><span
+                    class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="-database-delegate/index.html"><span class="identifier">DatabaseDelegate</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code>
+            <p>Delegates simple properties to the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-reference-delegate/index.html">ReferenceDelegate</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">ReferenceDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="../com.doubleu.kotlintrader.database/-entity/index.html"><span
+                    class="identifier">Entity</span></a><span class="symbol">&gt;</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-database-delegate/index.html"><span class="identifier">DatabaseDelegate</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+            <p>Delegates an immutable Entity-Reference to the database</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

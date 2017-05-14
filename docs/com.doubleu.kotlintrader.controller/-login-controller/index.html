@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>LoginController - KotlinTrader</title>
+    <link rel="stylesheet" href="..\..\..\style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.controller</a>&nbsp;/&nbsp;<a
+        href=".">LoginController</a><br/>
+<br/>
+<h1>LoginController</h1>
+<code><span class="keyword">class </span><span class="identifier">LoginController</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<span class="identifier">Controller</span></code>
+<h3>Constructors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-init-.html">&lt;init&gt;</a></td>
+        <td>
+            <code><span class="identifier">LoginController</span><span class="symbol">(</span><span
+                    class="symbol">)</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="connect.html">connect</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">connect</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.controller.LoginController$connect(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/host">host</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">, </span><span class="identifier"
+                                                  id="com.doubleu.kotlintrader.controller.LoginController$connect(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/database">database</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">, </span><span class="identifier"
+                                                  id="com.doubleu.kotlintrader.controller.LoginController$connect(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/dbUser">dbUser</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">, </span><span class="identifier"
+                                                  id="com.doubleu.kotlintrader.controller.LoginController$connect(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/dbPassword">dbPassword</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+            <p>Attempts to asyncly create a database connection.
+                Saves the login data in the <a
+                        href="../../com.doubleu.kotlintrader.util/-settings/index.html">Settings</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="disconnect.html">disconnect</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">disconnect</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span></code>
+            <p>Disconnects from the <a href="../../com.doubleu.kotlintrader.database/-database/index.html">Database</a>.
+                Also <a href="logout.html">logs out</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="login.html">login</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">login</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.controller.LoginController$login(kotlin.String, kotlin.String)/name">name</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">, </span><span class="identifier"
+                                                  id="com.doubleu.kotlintrader.controller.LoginController$login(kotlin.String, kotlin.String)/pw">pw</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+            <p>Attempts to login the <a href="../../com.doubleu.kotlintrader.model/-trader/index.html">Trader</a> with
+                the given name.
+                Will display an error when the <a
+                        href="login.html#com.doubleu.kotlintrader.controller.LoginController$login(kotlin.String, kotlin.String)/pw">password</a>
+                is wrong.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="logout.html">logout</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">logout</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span></code>
+            <p>Performs the <a href="logout.html">logout</a></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
+                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

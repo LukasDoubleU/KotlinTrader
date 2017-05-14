@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>DBHelper - KotlinTrader</title>
+    <link rel="stylesheet" href="..\..\..\style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.database</a>&nbsp;/&nbsp;<a
+        href=".">DBHelper</a><br/>
+<br/>
+<h1>DBHelper</h1>
+<code><span class="keyword">object </span><span class="identifier">DBHelper</span></code>
+<p>Helper methods for database interaction</p>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="get-id-column-names.html">getIdColumnNames</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getIdColumnNames</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.database.DBHelper$getIdColumnNames(com.doubleu.kotlintrader.database.Entity)/entity">entity</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Array</span><span
+                    class="symbol">&lt;</span><span class="identifier">String</span><span
+                    class="symbol">&gt;</span></code>
+            <p>Returns the names of the id columns of the given <a
+                    href="get-id-column-names.html#com.doubleu.kotlintrader.database.DBHelper$getIdColumnNames(com.doubleu.kotlintrader.database.Entity)/entity">entity</a>
+            </p>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&gt;</span> <span class="identifier">getIdColumnNames</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Array</span><span class="symbol">&lt;</span><span
+                    class="identifier">String</span><span class="symbol">&gt;</span></code><br/>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&gt;</span> <span class="identifier">getIdColumnNames</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.database.DBHelper$getIdColumnNames(kotlin.reflect.KClass((com.doubleu.kotlintrader.database.DBHelper.getIdColumnNames.T)))/entityClass">entityClass</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">KClass</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Array</span><span
+                    class="symbol">&lt;</span><span class="identifier">String</span><span
+                    class="symbol">&gt;</span></code>
+            <p>Returns the names of the id columns of the given <a href="#">Entity</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="get-table-name.html">getTableName</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&gt;</span> <span class="identifier">getTableName</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.database.DBHelper$getTableName(com.doubleu.kotlintrader.database.DBHelper.getTableName.T)/entity">entity</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span
+                    class="symbol">: </span><span class="identifier">String</span></code>
+            <p>Returns the name of the database table associated with the given <a
+                    href="get-table-name.html#com.doubleu.kotlintrader.database.DBHelper$getTableName(com.doubleu.kotlintrader.database.DBHelper.getTableName.T)/entity">entity</a>
+            </p>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&gt;</span> <span class="identifier">getTableName</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">String</span></code><br/>
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&gt;</span> <span class="identifier">getTableName</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.database.DBHelper$getTableName(kotlin.reflect.KClass((com.doubleu.kotlintrader.database.DBHelper.getTableName.T)))/clazz">clazz</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">KClass</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+            <p>Returns the name of the database table associated with the given <a href="#">Entity</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="get-where.html">getWhere</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getWhere</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.database.DBHelper$getWhere(com.doubleu.kotlintrader.database.Entity)/entity">entity</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+            <p>Returns a WHERE-clause that leads to the passed <a
+                    href="get-where.html#com.doubleu.kotlintrader.database.DBHelper$getWhere(com.doubleu.kotlintrader.database.Entity)/entity">entity</a>
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
+                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

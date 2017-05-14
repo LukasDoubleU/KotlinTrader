@@ -16,6 +16,7 @@
           </JavaFxApplicationIcons>
         </option>
         <option name="keystore" value="" />
+        <option name="nativeBundle" value="exe" />
         <option name="title" value="KotlinTrader" />
         <option name="vendor" value="LukasDoubleU" />
         <option name="version" value="0.1" />

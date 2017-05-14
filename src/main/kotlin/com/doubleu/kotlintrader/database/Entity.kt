@@ -59,7 +59,7 @@ abstract class Entity {
      * Returns the [FXProperty][Property] associated with the passed [Entity-Property][property]
      */
     @Suppress("UNCHECKED_CAST")
-    fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.property
+    fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.valueProperty
             ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>
 
     protected fun registerId(id: Long) {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$USER_HOME$/Desktop/mmbbs_trader (1).sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Desktop/mmbbs_trader.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mmbbs_trader.sql" dialect="MySQL" />
+  </component>
+</project>

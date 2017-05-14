@@ -15,21 +15,27 @@ import kotlin.reflect.full.primaryConstructor
 /**
  * Handles interaction with the database
  */
-object Database {
+object Database : Controller() {
 
     val connectionProperty = SimpleObjectProperty<Connection?>()
     var connection by connectionProperty
 
     val connected = Bindings.isNotNull(connectionProperty)!!
 
-    fun connect(host: String, database: String, user: String = "root", pw: String = "") {
+    fun connect(host: String, database: String, user: String, pw: String) {
         val url = "jdbc:mysql://$host/$database?user=$user&password=$pw" +
                 "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
-        connection = DriverManager.getConnection(url)
+        runAsync { DriverManager.getConnection(url) } ui {
+            connection = it
+        }
     }
 
     fun disconnect() {
-        connection?.close()
+        // Attempt to close the connection, if there's any
+        runAsync {
+            connection?.let { it.close() }
+        }
+        // .. but let's not wait for that op to finish, we don't care actually :^)
         connection = null
     }
 
@@ -40,14 +46,17 @@ object Database {
     fun <V> getProperty(entity: Entity, property: KProperty<V>): V {
         val sql = "SELECT ${property.name} FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
         val rs = query(sql)
-        rs.next()
-        val value = rs.getObject(property.name)
-        // Treat Boolean differently: They may be displayed as numeric or string
-        return if (property.isBoolean() && (value is Number || value is String)) {
-            // Type insurance granted by checking property.returnType
-            // (V is Boolean in this case)
-            (value.toString() != "0") as V
-        } else value as V
+        synchronized(rs) {
+            rs.next()
+            val value = rs.getObject(property.name)
+            rs.close()
+            // Treat Boolean differently: They may be displayed as numeric or string
+            return if (property.isBoolean() && (value is Number || value is String)) {
+                // Type insurance granted by checking property.returnType
+                // (V is Boolean in this case)
+                (value.toString() != "0") as V
+            } else value as V
+        }
     }
 
     /**
@@ -71,10 +80,13 @@ object Database {
         val list = mutableListOf<T>()
         val sql = "SELECT ${columns.joinToString(", ")} FROM ${DBHelper.getTableName<T>()}"
         val rs = query(sql)
-        while (rs.next()) {
-            val params = mutableListOf<Int>()
-            for (s in columns) params += rs.getInt(s)
-            list += T::class.primaryConstructor!!.call(*params.toTypedArray())
+        synchronized(rs) {
+            while (rs.next()) {
+                val params = mutableListOf<Int>()
+                for (s in columns) params += rs.getInt(s)
+                list += T::class.primaryConstructor!!.call(*params.toTypedArray())
+            }
+            rs.close()
         }
         return list.toList()
     }
@@ -101,6 +113,7 @@ object Database {
     fun query(sql: String): ResultSet {
         return connection?.let {
             val statement = it.createStatement()
+            statement.closeOnCompletion()
             return statement.executeQuery(sql)
         } ?: throw RuntimeException("No database connection")
     }
@@ -111,6 +124,7 @@ object Database {
     fun execute(sql: String): Boolean {
         return connection?.let {
             val statement = it.createStatement()
+            statement.closeOnCompletion()
             return statement.execute(sql)
         } ?: throw RuntimeException("No database connection")
     }

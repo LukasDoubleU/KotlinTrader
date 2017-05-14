@@ -6,3 +6,8 @@ Auf ein SQL-Framework wird jedoch zum Wohle der Kernaufgabe verzichtet.
 # Umsetzung
 Das Projekt ist mit der JVM-Sprache Kotlin umgesetzt.
 Es wird das TornadoFX Framework verwendet.
+
+# Benutzung
+Um das Programm zu starten reicht es die JAR des letzten Releases zu laden.
+(https://github.com/LukasDoubleU/KotlinTrader/releases/download/v0.9/KotlinTrader.jar).
+Es wird lediglich ein JRE 8 benötigt.

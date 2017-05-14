@@ -10,15 +10,27 @@ import tornadofx.*
  */
 class AngeboteView : View("Angebote") {
     override val root = vbox {
-        tableview(Session.angebote) {
+        stackpane {
             vboxConstraints {
                 marginTop = 30.0
                 marginLeftRight(60.0)
             }
-            column("Stadt", Ort_has_Ware::ortName)
-            column("Ware", Ort_has_Ware::wareName)
-            column("Menge", Ort_has_Ware::menge)
-            column("Preis", Ort_has_Ware::preis)
+            tableview(Session.angebote) {
+                column("Stadt", Ort_has_Ware::ortName)
+                column("Ware", Ort_has_Ware::wareName)
+                column("Menge", Ort_has_Ware::menge)
+                column("Preis", Ort_has_Ware::preis)
+
+                visibleWhen {
+                    Session.loading.not()
+                }
+            }
+
+            progressindicator {
+                visibleWhen {
+                    Session.loading
+                }
+            }
         }
     }
 }

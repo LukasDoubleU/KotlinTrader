@@ -24,8 +24,10 @@ class LoginView : View("Login") {
 
     // TODO Store the following in some local file
 
-    private val ipProperty = SimpleStringProperty("localhost")
-    private val dbProperty = SimpleStringProperty("mmbbs_trader")
+    private val ipProperty = SimpleStringProperty("sql11.freemysqlhosting.net:3306")
+    private val dbProperty = SimpleStringProperty("sql11174308")
+    private val dbUserProperty = SimpleStringProperty("sql11174308")
+    private val dbPwProperty = SimpleStringProperty("7KhqAE94Bj")
 
     private val nameProperty = SimpleStringProperty("nero")
     private val pwProperty = SimpleStringProperty("nero")
@@ -40,29 +42,40 @@ class LoginView : View("Login") {
             alignment = Pos.TOP_CENTER
             // Datenbankverbindung Felder
             vbox(10) {
-                hbox(10) {
-                    vbox(10) {
-                        label("Server IP")
-                        textfield(ipProperty)
-                        disableWhen { connected }
+                vbox(10) {
+                    hbox(10) {
+                        vbox(10) {
+                            label("Server IP")
+                            textfield(ipProperty)
+                        }
+                        vbox(10) {
+                            label("Datenbank")
+                            textfield(dbProperty)
+                        }
                     }
-                    vbox(10) {
-                        label("Datenbank")
-                        textfield(dbProperty)
-                        disableWhen { connected }
+                    hbox(10) {
+                        vbox(10) {
+                            label("DB User")
+                            textfield(dbUserProperty)
+                        }
+                        vbox(10) {
+                            label("DB Pw")
+                            passwordfield(dbPwProperty)
+                        }
                     }
+                    disableWhen { connected }
                 }
                 buttonbar {
                     button("Connect") {
                         action {
-                            Database.connect(ipProperty.get(), dbProperty.get())
+                            Database.connect(ipProperty.get(), dbProperty.get(), dbUserProperty.get(), dbPwProperty.get())
                             userNameField.requestFocus()
                         }
                         disableWhen { connected }
                     }
                     button("Disconnect") {
                         action { Database.disconnect() }
-                        enableWhen { connected }
+                        enableWhen { connected.and(Session.loading.not()) }
                     }
                 }
             }
@@ -99,7 +112,7 @@ class LoginView : View("Login") {
             }
         }
         // Trader Tabelle
-        vbox {
+        stackpane {
             userTable = tableview(Session.users) {
                 isFocusTraversable = false
 
@@ -113,6 +126,15 @@ class LoginView : View("Login") {
                             Session.masterUser = it
                         }
                     }
+                }
+
+                visibleWhen {
+                    Session.loading.not()
+                }
+            }
+            progressindicator {
+                visibleWhen {
+                    Session.loading
                 }
             }
         }

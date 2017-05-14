@@ -24,8 +24,6 @@ class MainView : View("Kotlin Trader") {
 
         tab(loginView)
 
-        // TODO try to bind enable-state properly
-
         tab(tradeView) {
             showReasonForDisable(this, "You are not logged in!")
             disableProperty().bind(Session.isLoggedIn.not())

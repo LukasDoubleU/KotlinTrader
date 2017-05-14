@@ -3,8 +3,10 @@ package com.doubleu.kotlintrader.controller
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.*
 import com.doubleu.kotlintrader.util.FxDialogs
+import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
+import javafx.concurrent.Task
 import tornadofx.*
 import kotlin.reflect.KProperty1
 
@@ -36,6 +38,12 @@ object Session : DatabaseAwareController() {
     var masterUser by masterUserProperty
     val isMasterUserLoggedIn = isLoggedIn.and(Bindings.equal(loggedInUserProperty, masterUserProperty))!!
 
+    private val runningTasks = mutableListOf<SessionTask<*>>().observable()
+    /**
+     * Indicates whether there are active [Tasks][SessionTask] running in this Session
+     */
+    val loading = Bindings.isNotEmpty(runningTasks)!!
+
     init {
         masterUserProperty.onChange {
             users.forEach { it.master = false }
@@ -55,14 +63,14 @@ object Session : DatabaseAwareController() {
     private fun refreshSchiff(schiff: Schiff?) {
         schiffWaren.clear()
         if (schiff != null) {
-            runAsync {
+            async {
                 val ortId = schiff.ort_id
                 if (ortId == null) throw throw RuntimeException("Data consistency error! No ort was found for id $ortId")
                 findOrt(Ort::id, ortId)
             } ui {
                 ort = it
             }
-            runAsync { Database.findAllBy(Schiff_has_Ware::schiff_id, schiff.id) } ui {
+            async { Database.findAllBy(Schiff_has_Ware::schiff_id, schiff.id) } ui {
                 schiffWaren += it
             }
         } else {
@@ -76,7 +84,7 @@ object Session : DatabaseAwareController() {
     private fun refreshOrt(ort: Ort?) {
         ortWaren.clear()
         if (ort != null)
-            runAsync { Database.findAllBy(Ort_has_Ware::ort_id, ort.id) } ui {
+            async { Database.findAllBy(Ort_has_Ware::ort_id, ort.id) } ui {
                 ortWaren += it
             }
     }
@@ -86,7 +94,7 @@ object Session : DatabaseAwareController() {
      */
     fun onLogin(user: Trader) {
         updateTitle("Kotlin Trader - Logged in as ${user.name}")
-        runAsync {
+        async {
             Database.findFirstBy(Schiff::trader_id, user.id)
                     ?: throw RuntimeException("Data consistency error! No ship was found for user id ${user.id}")
         } ui {
@@ -141,17 +149,22 @@ object Session : DatabaseAwareController() {
      * Asyncly fills in the [Session]s properties.
      */
     override fun onConnect() {
-        runAsync { Database.findAll<Trader>() } ui {
+        async { Database.findAll<Trader>() } ui {
             users += it
             masterUser = users.find { it.master ?: false }
         }
-        runAsync { Database.findAll<Ort>() } ui {
+        async { Database.findAll<Ort>() } ui {
             orte += it
         }
-        runAsync { Database.findAll<Ort_has_Ware>().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis } } ui {
+        async { Database.findAll<Ort_has_Ware>().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis } } ui {
             angebote += it
         }
     }
+
+    /**
+     * Executes the given [Function][func] asyncly.
+     */
+    private fun <T> async(func: SessionTask<*>.() -> T) = SessionTask(func).start()
 
     /**
      * Hook method, called when the [Database] connection is lost.
@@ -180,6 +193,39 @@ object Session : DatabaseAwareController() {
             primaryStage.titleProperty().unbind()
         }
         primaryStage.title = title
+    }
+
+    /**
+     * Task for async execution.
+     * Peeked from [FXTask].
+     * Updates the [Loading-Property][loading] of the Session.
+     */
+    private class SessionTask<T>(val func: SessionTask<*>.() -> T) : Task<T>() {
+
+        init {
+            setOnFailed({ Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), exception) })
+        }
+
+        override fun call() = func(this)
+
+        override fun done() {
+            runningTasks.remove(this)
+        }
+
+        fun start(): SessionTask<T> {
+            runningTasks += this
+            Thread(this).start()
+            return this
+        }
+
+        infix fun ui(func: (T) -> Unit) = success(func)
+
+        infix fun success(func: (T) -> Unit): Task<T> {
+            Platform.runLater {
+                setOnSucceeded { func(value) }
+            }
+            return this
+        }
     }
 
 }

@@ -12,28 +12,30 @@ import kotlin.reflect.KProperty
  */
 abstract class DatabaseDelegate<X> {
 
-    internal val valueProperty = SimpleObjectProperty<X>()
-    internal var value by valueProperty
+    val valueProperty = object : SimpleObjectProperty<X>() {
+        override fun get(): X {
+            if (retrieveFromDb) {
+                super.set(retrieve())
+                retrieveFromDb = false
+            }
+            return super.get()
+        }
+
+        override fun set(newValue: X) {
+            super.set(newValue)
+            process(value)
+        }
+    }
+    protected var _value by valueProperty
 
     var retrieveFromDb = true
 
-    internal abstract fun retrieve(): X
-    internal abstract fun process(value: X)
+    protected abstract fun retrieve(): X
+    protected abstract fun process(value: X)
 
-    operator fun getValue(ignore: Entity, ignore2: KProperty<*>) = getValue()
-    operator fun setValue(ignore: Entity, ignore2: KProperty<*>, value: X) = setValue(value)
-
-    fun getValue(): X {
-        if (retrieveFromDb) {
-            value = retrieve()
-            retrieveFromDb = false
-        }
-        return value
-    }
-
-    fun setValue(value: X) {
-        this.value = value
-        process(value)
+    operator fun getValue(ignore: Entity, ignore2: KProperty<*>): X = _value
+    operator fun setValue(ignore: Entity, ignore2: KProperty<*>, newValue: X) {
+        _value = newValue
     }
 
 }

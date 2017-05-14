@@ -39,12 +39,24 @@ class TradeView : View("Trade") {
                     marginLeft = 10.0
                 }
                 label("Hafen")
-                hafenTable = tableview(Session.ortWaren) {
-                    column("ID", Ort_has_Ware::ware_id)
-                    column("Name", Ort_has_Ware::wareName)
-                    column("Menge", Ort_has_Ware::menge)
-                    column("Preis", Ort_has_Ware::preis)
-                    items.onChange { resizeColumnsToFitContent() }
+                stackpane {
+                    hafenTable = tableview(Session.ortWaren) {
+                        column("ID", Ort_has_Ware::ware_id)
+                        column("Name", Ort_has_Ware::wareName)
+                        column("Menge", Ort_has_Ware::menge)
+                        column("Preis", Ort_has_Ware::preis)
+
+                        items.onChange { resizeColumnsToFitContent() }
+
+                        visibleWhen {
+                            Session.loading.not()
+                        }
+                    }
+                    progressindicator {
+                        visibleWhen {
+                            Session.loading
+                        }
+                    }
                 }
             }
             // Handels Spalte
@@ -70,11 +82,24 @@ class TradeView : View("Trade") {
                     marginRight = 10.0
                 }
                 label("Schiff")
-                schiffTable = tableview(Session.schiffWaren) {
-                    column("ID", Schiff_has_Ware::ware_id)
-                    column("Name", Schiff_has_Ware::wareName)
-                    column("Menge", Schiff_has_Ware::menge)
-                    items.onChange { resizeColumnsToFitContent() }
+                stackpane {
+                    schiffTable = tableview(Session.schiffWaren) {
+                        column("ID", Schiff_has_Ware::ware_id)
+                        column("Name", Schiff_has_Ware::wareName)
+                        column("Menge", Schiff_has_Ware::menge)
+
+                        items.onChange { resizeColumnsToFitContent() }
+
+                        visibleWhen {
+                            Session.loading.not()
+                        }
+                    }
+
+                    progressindicator {
+                        visibleWhen {
+                            Session.loading
+                        }
+                    }
                 }
             }
         }

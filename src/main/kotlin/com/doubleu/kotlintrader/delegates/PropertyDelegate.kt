@@ -7,7 +7,7 @@ import kotlin.reflect.KProperty
 /**
  * Delegates simple properties to the database
  */
-class PropertyDelegate<V>(val entity: Entity, val field: KProperty<V>) : DatabaseDelegate<V>() {
+class PropertyDelegate<V>(val entity: Entity<*>, val field: KProperty<V>) : DatabaseDelegate<V>() {
 
     override fun retrieve() = Database.getProperty(entity, field)
 

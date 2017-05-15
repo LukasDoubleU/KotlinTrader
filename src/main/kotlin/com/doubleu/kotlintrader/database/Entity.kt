@@ -6,8 +6,10 @@ import com.doubleu.kotlintrader.delegates.PropertyDelegate
 import com.doubleu.kotlintrader.delegates.ReferenceDelegate
 import com.doubleu.kotlintrader.extensions.get
 import javafx.beans.property.LongProperty
+import javafx.beans.property.ObjectProperty
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleLongProperty
+import tornadofx.*
 import kotlin.collections.set
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
@@ -15,8 +17,8 @@ import kotlin.reflect.KProperty
 /**
  * A simple Database Entity. ID Column is required
  */
-abstract class Entity(open val id: Long,
-                      val idProperty: LongProperty = SimpleLongProperty(id)) {
+abstract class Entity<T : Entity<T>>(open val id: Long,
+                                     val idProperty: LongProperty = SimpleLongProperty(id)) {
 
     val delegateMap = mutableMapOf<KProperty<*>, DatabaseDelegate<*>>()
 
@@ -46,11 +48,11 @@ abstract class Entity(open val id: Long,
     /**
      * Returns a [Delegate][ReferenceDelegate] to the given [property].
      */
-    protected inline fun <reified T : Entity> reference(
-            key: KProperty<T>,
+    protected inline fun <reified E : Entity<E>> reference(
+            key: KProperty<E>,
             property: KProperty<Long>)
-            : ReferenceDelegate<T> {
-        val delegate = ReferenceDelegate(T::class, property)
+            : ReferenceDelegate<E> {
+        val delegate = ReferenceDelegate(E::class, property)
         delegateMap[key] = delegate
         return delegate
     }
@@ -58,11 +60,11 @@ abstract class Entity(open val id: Long,
     /**
      * Returns a [Delegate][ReferenceDelegate] to the given [property].
      */
-    protected inline fun <reified T : Entity> mutableReference(
-            key: KMutableProperty0<T?>,
-            property: KMutableProperty0<Long?>)
-            : MutableReferenceDelegate<T> {
-        val delegate = MutableReferenceDelegate(T::class, property)
+    protected inline fun <reified E : Entity<E>> mutableReference(
+            key: KMutableProperty0<E>,
+            property: KMutableProperty0<Long>)
+            : MutableReferenceDelegate<E> {
+        val delegate = MutableReferenceDelegate(E::class, property)
         delegateMap[key] = delegate
         return delegate
     }
@@ -74,4 +76,8 @@ abstract class Entity(open val id: Long,
     protected fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.valueProperty
             ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>
 
+    /**
+     * Returns an [ItemViewModel] containing the given [Entity][T]
+     */
+    abstract fun model(property: ObjectProperty<T?>): ItemViewModel<T?>
 }

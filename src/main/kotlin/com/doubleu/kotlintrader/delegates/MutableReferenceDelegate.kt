@@ -8,12 +8,12 @@ import kotlin.reflect.full.primaryConstructor
 /**
  * Delegates mutable Entity-References to the database
  */
-class MutableReferenceDelegate<T : Entity>(
+class MutableReferenceDelegate<T : Entity<T>>(
         val referencedClazz: KClass<T>,
-        val field: KMutableProperty0<Long?>)
-    : DatabaseDelegate<T?>() {
+        val field: KMutableProperty0<Long>)
+    : DatabaseDelegate<T>() {
 
     override fun retrieve() = referencedClazz.primaryConstructor!!.call(field.get())
 
-    override fun process(value: T?) = field.set(value?.id)
+    override fun process(value: T) = field.set(value.id)
 }

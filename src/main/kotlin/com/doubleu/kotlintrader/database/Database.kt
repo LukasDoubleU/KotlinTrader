@@ -18,8 +18,8 @@ import kotlin.reflect.full.primaryConstructor
  */
 object Database {
 
-    val connectionProperty = SimpleObjectProperty<Connection?>()
-    var connection by connectionProperty
+    private val connectionProperty = SimpleObjectProperty<Connection?>()
+    private var connection by connectionProperty
 
     val connected = Bindings.isNotNull(connectionProperty)!!
 
@@ -40,17 +40,23 @@ object Database {
     fun disconnect() {
         // Attempt to close the connection, if there's any
         connection?.close()
-        // Makes sure we're in FXThread
         Platform.runLater {
             connection = null
         }
     }
 
     /**
+     * Forces the [connection] to close.
+     * The App will not receive updates of this event,
+     * use [disconnect] instead.
+     */
+    fun forceClose() = connection?.close()
+
+    /**
      * Retrieves the [property] of the [entity] from the database via SQL-SELECT
      */
     @Suppress("UNCHECKED_CAST")
-    fun <V> getProperty(entity: Entity, property: KProperty<V>): V {
+    fun <V> getProperty(entity: Entity<*>, property: KProperty<V>): V {
         val sql = "SELECT ${property.name} FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
         val rs = query(sql)
         synchronized(rs) {
@@ -69,21 +75,21 @@ object Database {
     /**
      * Sets the [property] of the given [entity] in the database via SQL-Update
      */
-    fun <V> setProperty(entity: Entity, property: KProperty<V>, value: V?) {
+    fun <V> setProperty(entity: Entity<*>, property: KProperty<V>, value: V?) {
         val sql = "UPDATE ${DBHelper.getTableName(entity)} SET ${property.name} = $value ${DBHelper.getWhere(entity)}"
         execute(sql)
     }
 
     /**
-     * Returns all database entries of the given [Entity][T]
+     * Returns all database entries of the given [Entity<*>][T]
      */
-    inline fun <reified T : Entity> findAll() = selectEntities<T>(DBHelper.getIdColumnNames<T>())
+    inline fun <reified T : Entity<*>> findAll() = selectEntities<T>(DBHelper.getIdColumnNames<T>())
 
     /**
      * Returns all [Entities][T].
-     * [columns]: The ID Columns of the Entity
+     * [columns]: The ID Columns of the Entity<*>
      */
-    inline fun <reified T : Entity> selectEntities(columns: Array<String>): List<T> {
+    inline fun <reified T : Entity<*>> selectEntities(columns: Array<String>): List<T> {
         val list = mutableListOf<T>()
         val sql = "SELECT ${columns.joinToString(", ")} FROM ${DBHelper.getTableName<T>()}"
         val rs = query(sql)
@@ -101,14 +107,14 @@ object Database {
     /**
      * Returns all database entries that match the given [property] [value]
      */
-    inline fun <reified T : Entity, V> findAllBy(property: KProperty1<T, V?>, value: V?): List<T> {
+    inline fun <reified T : Entity<*>, V> findAllBy(property: KProperty1<T, V?>, value: V?): List<T> {
         return findAll<T>().filter { property.get(it) == value }
     }
 
     /**
      * Returns the first database entry that matches the given [property] [value] or null
      */
-    inline fun <reified T : Entity, V> findFirstBy(property: KProperty1<T, V?>, value: V?): T? {
+    inline fun <reified T : Entity<*>, V> findFirstBy(property: KProperty1<T, V?>, value: V?): T? {
         val retval = findAllBy(property, value).firstOrNull()
         if (retval == null) FxDialogs.showError("${T::class.simpleName} with ${property.name} '$value' was not found")
         return retval

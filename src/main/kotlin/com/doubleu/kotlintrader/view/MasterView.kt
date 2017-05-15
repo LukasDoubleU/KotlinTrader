@@ -6,7 +6,7 @@ import javafx.scene.text.Font
 import tornadofx.*
 
 /**
- * Displays some game option for the [master user][com.doubleu.kotlintrader.controller.Session.masterUser].
+ * Displays some game option for the master user.
  * Only available when the master user is logged in.
  */
 class MasterView : View("Master Functions") {

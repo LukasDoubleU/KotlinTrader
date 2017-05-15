@@ -1,7 +1,6 @@
 package com.doubleu.kotlintrader.view
 
-import com.doubleu.kotlintrader.controller.Session
-import com.doubleu.kotlintrader.controller.TradeController
+import com.doubleu.kotlintrader.data.Data
 import com.doubleu.kotlintrader.database.Database
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
@@ -20,18 +19,15 @@ class MainView : View("Kotlin Trader") {
 
     override val root = tabpane {
 
-        // TODO init them differently
-        val traderController = find<TradeController>()
-
         primaryStage.icons += resources.image("/favicon.png")
-        setPrefSize(650.0, 600.0)
+        setPrefSize(650.0, 400.0)
         tabClosingPolicy = TabPane.TabClosingPolicy.UNAVAILABLE
 
         tab(loginView)
 
         tab(tradeView) {
             showReasonForDisable(this, "You are not logged in!")
-            disableProperty().bind(Session.isLoggedIn.not())
+            disableProperty().bind(Data.User.isLoggedIn.not())
         }
 
         tab(angeboteView) {
@@ -41,7 +37,7 @@ class MainView : View("Kotlin Trader") {
 
         tab(masterView) {
             showReasonForDisable(this, "You are not the Master User!")
-            disableProperty().bind(Session.isMasterUserLoggedIn.not())
+            disableProperty().bind(Data.MasterUser.isLoggedIn.not())
         }
     }
 

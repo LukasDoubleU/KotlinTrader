@@ -1,5 +1,6 @@
 package com.doubleu.kotlintrader.extensions
 
+import javafx.beans.value.ObservableValue
 import javafx.geometry.Pos
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
@@ -30,3 +31,9 @@ fun Region.fillHorizontally() {
     useMaxWidth = true
     hgrow = Priority.ALWAYS
 }
+
+fun Number.pow(number: Number) = Math.pow(this.toDouble(), number.toDouble())
+
+fun Number.sqrt() = Math.sqrt(this.toDouble())
+
+fun <T> ObservableValue<T>.onChangeWithOld(op: (T?, T?) -> Unit) = apply { addListener { _, oldValue, newValue -> op(oldValue, newValue) } }

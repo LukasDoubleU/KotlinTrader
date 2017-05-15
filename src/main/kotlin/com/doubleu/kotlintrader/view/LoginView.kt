@@ -1,7 +1,8 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.LoginController
-import com.doubleu.kotlintrader.controller.Session
+import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.Users
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.extensions.fillHorizontally
@@ -24,7 +25,7 @@ class LoginView : View("Login") {
     val controller by inject<LoginController>()
 
     private val connected = Database.connected
-    private val loggedIn = Session.isLoggedIn
+    private val loggedIn = Data.User.isLoggedIn
 
     private val hostProperty = SimpleStringProperty(Settings.host)
     private val databaseProperty = SimpleStringProperty(Settings.database)
@@ -70,31 +71,37 @@ class LoginView : View("Login") {
                 buttonbar {
                     button("Connect") {
                         action {
-                            controller.connect(hostProperty.get(), databaseProperty.get(), dbUserProperty.get(), dbPasswordProperty.get())
+                            controller.connect(hostProperty.get(), databaseProperty.get(),
+                                    dbUserProperty.get(), dbPasswordProperty.get())
                             userNameField.requestFocus()
                         }
                         disableWhen { connected }
                     }
                     button("Disconnect") {
                         action { controller.disconnect() }
-                        enableWhen { connected.and(Session.loading.not()) }
+                        enableWhen { connected.and(Users.anyLoading.not()) }
                     }
                 }
             }
             // Login Felder
             vbox(10) {
-                label("Name")
-                userNameField = textfield(userProperty) {
-                    enableWhen { connected.and(loggedIn.not()) }
+                val loginEnabled = connected.and(loggedIn.not())
+                label("Name") {
+                    enableWhen { loginEnabled }
                 }
-                label("Passwort")
+                userNameField = textfield(userProperty) {
+                    enableWhen { loginEnabled }
+                }
+                label("Passwort") {
+                    enableWhen { loginEnabled }
+                }
                 passwordfield(passwordProperty) {
-                    enableWhen { connected.and(loggedIn.not()) }
+                    enableWhen { loginEnabled }
                 }
                 buttonbar {
                     button("Login") {
                         action { controller.login(userProperty.get(), passwordProperty.get()) }
-                        enableWhen { connected.and(loggedIn.not()).and(Bindings.isNotEmpty(Session.users)) }
+                        enableWhen { connected.and(loggedIn.not()).and(Bindings.isNotEmpty(Users.get())) }
                     }
                     button("Logout") {
                         action { controller.logout() }
@@ -106,37 +113,37 @@ class LoginView : View("Login") {
             hbox(10) {
                 fillHorizontally()
                 label("Master")
-                combobox(Session.masterUserProperty, Session.users) {
+                combobox(Data.MasterUser, Users.get()) {
                     fillHorizontally()
                     enableWhen { connected }
-                    valueProperty().onChange { userTable.refresh() }
                 }
             }
         }
         // Trader Tabelle
         stackpane {
-            userTable = tableview(Session.users) {
+            userTable = tableview(Users.get()) {
                 isFocusTraversable = false
 
                 column("ID", Trader::id)
                 column("Name", Trader::name)
                 column("Geld", Trader::geld)
+                column("Master", Trader::master)
 
                 contextmenu {
                     item("Assign New Master").action {
                         selectedItem?.let {
-                            Session.masterUser = it
+                            Data.masterUser = it
                         }
                     }
                 }
 
                 visibleWhen {
-                    Session.loading.not()
+                    Users.loading.not()
                 }
             }
             progressindicator {
                 visibleWhen {
-                    Session.loading
+                    Users.loading
                 }
             }
         }

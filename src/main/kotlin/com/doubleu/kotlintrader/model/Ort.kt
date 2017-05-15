@@ -1,12 +1,14 @@
 package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.Entity
+import com.doubleu.kotlintrader.extensions.pow
+import com.doubleu.kotlintrader.extensions.sqrt
 import com.doubleu.kotlintrader.extensions.valueOf
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
-class Ort(override val id: Long) : Entity(id) {
+class Ort(override val id: Long) : Entity<Ort>(id) {
 
     var name: String by delegate(this::name)
     val nameProperty = property(this::name)
@@ -28,9 +30,9 @@ class Ort(override val id: Long) : Entity(id) {
     /**
      * Calculates the distance between this and the [other] [Ort]
      */
-    fun distanceTo(other: Ort) = Math.sqrt((other.x - x).pow(2) - (other.y - y).pow(2))
+    fun distanceTo(other: Ort) = ((other.x - x).pow(2) - (other.y - y).pow(2)).sqrt()
 
-    private fun Number.pow(number: Number) = Math.pow(this.toDouble(), number.toDouble())
+    override fun model(property: ObjectProperty<Ort?>) = Model(property)
 
     class Model(property: ObjectProperty<Ort?> = SimpleObjectProperty<Ort>())
         : ItemViewModel<Ort?>(itemProperty = property) {

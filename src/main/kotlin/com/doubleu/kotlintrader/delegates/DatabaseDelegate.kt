@@ -33,8 +33,8 @@ abstract class DatabaseDelegate<X> {
     protected abstract fun retrieve(): X
     protected abstract fun process(value: X)
 
-    operator fun getValue(ignore: Entity, ignore2: KProperty<*>): X = _value
-    operator fun setValue(ignore: Entity, ignore2: KProperty<*>, newValue: X) {
+    operator fun getValue(ignore: Entity<*>, ignore2: KProperty<*>): X = _value
+    operator fun setValue(ignore: Entity<*>, ignore2: KProperty<*>, newValue: X) {
         _value = newValue
     }
 

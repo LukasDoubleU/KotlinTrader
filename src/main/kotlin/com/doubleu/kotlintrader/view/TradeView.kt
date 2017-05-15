@@ -1,11 +1,13 @@
 package com.doubleu.kotlintrader.view
 
-import com.doubleu.kotlintrader.controller.Session
 import com.doubleu.kotlintrader.controller.TradeController
+import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.OrtWaren
+import com.doubleu.kotlintrader.data.Orte
+import com.doubleu.kotlintrader.data.SchiffWaren
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
-import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.TableView
 import javafx.scene.layout.ColumnConstraints
@@ -14,8 +16,8 @@ import tornadofx.*
 
 /**
  * View responsible for trading.
- * Left table shows [Ware][Ort_has_Ware] depending on the current [Ort][Session.ort].
- * Right table shows [Ware][Schiff_has_Ware] depending on the current [Schiff][Session.schiff].
+ * Left table shows [Ware][Ort_has_Ware] depending on the current [Ort][com.doubleu.kotlintrader.data.Data.Ort].
+ * Right table shows [Ware][Schiff_has_Ware] depending on the current [Schiff][com.doubleu.kotlintrader.data.Data.Schiff].
  * Bottom panel shows information about the logged in [Trader][com.doubleu.kotlintrader.model.Trader] and his [Schiff][com.doubleu.kotlintrader.model.Schiff]
  */
 class TradeView : View("Trade") {
@@ -41,7 +43,7 @@ class TradeView : View("Trade") {
                 }
                 label("Hafen")
                 stackpane {
-                    hafenTable = tableview(Session.ortWaren) {
+                    hafenTable = tableview(OrtWaren.get()) {
                         column("ID", Ort_has_Ware::ware_id)
                         column("Name", Ort_has_Ware::wareName)
                         column("Menge", Ort_has_Ware::menge)
@@ -50,12 +52,12 @@ class TradeView : View("Trade") {
                         items.onChange { resizeColumnsToFitContent() }
 
                         visibleWhen {
-                            Session.loading.not()
+                            OrtWaren.loading.not()
                         }
                     }
                     progressindicator {
                         visibleWhen {
-                            Session.loading
+                            OrtWaren.loading
                         }
                     }
                 }
@@ -84,7 +86,7 @@ class TradeView : View("Trade") {
                 }
                 label("Schiff")
                 stackpane {
-                    schiffTable = tableview(Session.schiffWaren) {
+                    schiffTable = tableview(SchiffWaren.get()) {
                         column("ID", Schiff_has_Ware::ware_id)
                         column("Name", Schiff_has_Ware::wareName)
                         column("Menge", Schiff_has_Ware::menge)
@@ -92,13 +94,13 @@ class TradeView : View("Trade") {
                         items.onChange { resizeColumnsToFitContent() }
 
                         visibleWhen {
-                            Session.loading.not()
+                            SchiffWaren.loading.not()
                         }
                     }
 
                     progressindicator {
                         visibleWhen {
-                            Session.loading
+                            SchiffWaren.loading
                         }
                     }
                 }
@@ -110,8 +112,8 @@ class TradeView : View("Trade") {
                 label("Standort:")
             }
             vbox(20) {
-                textfield(Session.loggedInUserModel.name)
-                text(Session.ortModel.name) {
+                text(Data.User.model.name)
+                text(Data.Ort.model.name) {
                     // To Prevent Layout reordering on valueChange
                     minWidth = 75.0
                 }
@@ -121,10 +123,10 @@ class TradeView : View("Trade") {
                 label("Reise nach:")
             }
             vbox(20) {
-                text(DoubleBinding.doubleExpression(Session.loggedInUserModel.geld).asString())
+                text(Data.User.model.geldAsString)
                 hbox(20) {
-                    val blocked = Session.schiffProperty.booleanBinding { it?.blocked ?: false }
-                    combobox(Session.ortProperty, Session.orte) {
+                    val blocked = Data.Schiff.model.blocked
+                    combobox(Data.Ort, Orte.get()) {
                         disableWhen { blocked }
                     }
                     text("Das Schiff ist geblockt!") {

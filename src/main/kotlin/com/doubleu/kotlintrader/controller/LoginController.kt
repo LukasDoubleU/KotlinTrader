@@ -1,5 +1,7 @@
 package com.doubleu.kotlintrader.controller
 
+import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.Users
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.model.Trader
 import com.doubleu.kotlintrader.util.FxDialogs
@@ -13,11 +15,11 @@ class LoginController : Controller() {
      * Will display an error when the [password][pw] is wrong.
      */
     fun login(name: String, pw: String) {
-        val user = Session.findUser(Trader::name, name) ?: return
+        val user = Users.find { it.name == name } ?: return
         if (!user.checkPw(pw)) {
             FxDialogs.showError("Falsches Passwort")
         } else {
-            Session.loggedInUser = user
+            Data.user = user
             Settings.user = name
             Settings.password = pw
             Settings.store()
@@ -48,7 +50,7 @@ class LoginController : Controller() {
      * Performs the [logout]
      */
     fun logout() {
-        Session.loggedInUser = null
+        Data.user = null
     }
 
     /**

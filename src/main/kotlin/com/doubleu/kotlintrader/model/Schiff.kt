@@ -1,40 +1,54 @@
 package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.Entity
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleObjectProperty
+import tornadofx.*
 
-class Schiff(override val id: Long) : Entity(id) {
+class Schiff(override val id: Long) : Entity<Schiff>(id) {
 
-    companion object {
-        // TODO implement defaults inside a map that can be retrieved
-        // via its reference property
-        const val FAHRTKOSTEN_DEFAULT = 1f
-    }
-
-    var ort_id: Long? by delegate(this::ort_id)
+    var ort_id: Long by delegate(this::ort_id)
     val ort_idProperty = property(this::ort_id)
 
-    var ort: Ort? by mutableReference(this::ort, this::ort_id)
+    var ort: Ort by mutableReference(this::ort, this::ort_id)
     val ortProperty = property(this::ort)
 
-    var trader_id: Long? by delegate(this::trader_id)
+    var trader_id: Long by delegate(this::trader_id)
     val trader_idProperty = property(this::trader_id)
 
-    var trader: Trader? by mutableReference(this::trader, this::trader_id)
+    var trader: Trader by mutableReference(this::trader, this::trader_id)
     val traderProperty = property(this::trader)
 
-    var name: String? by delegate(this::name)
+    var name: String by delegate(this::name)
     val nameProperty = property(this::name)
 
-    var tonnage: Int? by delegate(this::tonnage)
+    var tonnage: Int by delegate(this::tonnage)
     val tonnageProperty = property(this::tonnage)
 
-    var wert: Double? by delegate(this::wert)
+    var wert: Double by delegate(this::wert)
     val wertProperty = property(this::wert)
 
-    var fahrkosten: Float? by delegate(this::fahrkosten)
+    var fahrkosten: Float by delegate(this::fahrkosten)
     val fahrkostenProperty = property(this::fahrkosten)
 
-    var blocked: Boolean? by delegate(this::blocked)
+    var blocked: Boolean by delegate(this::blocked)
     val blockedProperty = property(this::blocked)
+
+    override fun model(property: ObjectProperty<Schiff?>) = Model(property)
+
+    class Model(property: ObjectProperty<Schiff?> = SimpleObjectProperty<Schiff>())
+        : ItemViewModel<Schiff?>(itemProperty = property) {
+
+        val id = bind { item?.idProperty }
+        val ort_id = bind { item?.ort_idProperty }
+        val ort = bind { item?.ortProperty }
+        val trader_id = bind { item?.trader_idProperty }
+        val trader = bind { item?.traderProperty }
+        val name = bind { item?.nameProperty }
+        val tonnage = bind { item?.tonnageProperty }
+        val wert = bind { item?.wertProperty }
+        val fahrkosten = bind { item?.fahrkostenProperty }
+        val blocked = bind { item?.blockedProperty }
+    }
 
 }

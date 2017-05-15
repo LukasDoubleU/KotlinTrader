@@ -25,7 +25,7 @@ sealed class Storage<T : Entity<T>>(
 
     init {
         for (observer in loadOnChange) {
-            observer.onChange { load() }
+            observer.onChange { if (it != null) load() else clear() }
         }
         // Load / Clear when we Connect / Disconnect from the Database
         DBHelper.onConnect { load() }

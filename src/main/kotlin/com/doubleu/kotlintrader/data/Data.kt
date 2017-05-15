@@ -36,6 +36,9 @@ object Data {
                 val schiffOrtId = it?.ort_id
                 ort = Orte.find { it.id == schiffOrtId }
             }
+            User.onChange {
+                if (it == null) ort = null
+            }
         }
     }
 

@@ -9,9 +9,7 @@ class TradeController : Controller() {
 
     fun travel(von: Ort?, nach: Ort?) {
         // Just return the new value if it was null previously
-        if (von == null) return
-        // Null setting shouldn't happen but whatever
-        if (nach == null) return
+        if (von == null || nach == null) return
         val distance = von.distanceTo(nach)
         val fahrtkosten = Data.schiff?.fahrkosten ?: 0f
         val price = (fahrtkosten * distance).toLong()

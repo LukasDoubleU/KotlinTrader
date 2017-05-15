@@ -22,6 +22,7 @@ object Session : Controller() {
     val orte = mutableListOf<Ort>().observable()
     val ortProperty = SimpleObjectProperty<Ort?>()
     var ort by ortProperty
+    val ortModel = Ort.Model(ortProperty)
     val ortWaren = mutableListOf<Ort_has_Ware>().observable()
 
     val schiffProperty = SimpleObjectProperty<Schiff?>()
@@ -32,6 +33,7 @@ object Session : Controller() {
 
     val loggedInUserProperty = SimpleObjectProperty<Trader?>()
     var loggedInUser by loggedInUserProperty
+    val loggedInUserModel = Trader.Model(loggedInUserProperty)
     val isLoggedIn = Bindings.isNotNull(loggedInUserProperty)!!
 
     val masterUserProperty = SimpleObjectProperty<Trader?>()
@@ -135,7 +137,7 @@ object Session : Controller() {
     fun onConnect() {
         async { Database.findAll<Trader>() } ui {
             users += it
-            masterUser = users.find { it.master ?: false }
+            masterUser = users.find { it.master }
         }
         async { Database.findAll<Ort>() } ui {
             orte += it
@@ -165,17 +167,21 @@ object Session : Controller() {
      */
     fun onLogout() {
         updateTitle("Kotlin Trader")
-        schiff = null
+        Platform.runLater {
+            schiff = null
+        }
     }
 
     /**
      * Updates the Application's title to the given [title]
      */
     private fun updateTitle(title: String) {
-        if (primaryStage.titleProperty().isBound) {
-            primaryStage.titleProperty().unbind()
+        Platform.runLater {
+            if (primaryStage.titleProperty().isBound) {
+                primaryStage.titleProperty().unbind()
+            }
+            primaryStage.title = title
         }
-        primaryStage.title = title
     }
 
     /**

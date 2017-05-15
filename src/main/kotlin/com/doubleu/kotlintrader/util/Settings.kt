@@ -1,6 +1,5 @@
 package com.doubleu.kotlintrader.util
 
-import javafx.application.Platform
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -52,9 +51,7 @@ object Settings {
     fun restoreDefaults() {
         properties.load(javaClass.getResourceAsStream("/DefaultSettings.properties"))
         store()
-        Platform.runLater {
-            FxDialogs.showInformation("Default Settings were restored.\n(${file.absolutePath})")
-        }
+        FxDialogs.showInformation("Default Settings were restored.\n(${file.absolutePath})")
     }
 
     var host: String by delegate

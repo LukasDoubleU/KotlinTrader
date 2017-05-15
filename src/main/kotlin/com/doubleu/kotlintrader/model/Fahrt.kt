@@ -2,11 +2,7 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.RefEntity
 
-class Fahrt(val von_id: Long, val nach_id: Long) : RefEntity() {
-
-    // ID aliases
-    override val id = von_id
-    override val id2 = nach_id
+class Fahrt(val von_id: Long, val nach_id: Long) : RefEntity(von_id, nach_id) {
 
     val von: Ort by reference(this::von, this::von_id)
     val vonProperty = property(this::von)

@@ -5,6 +5,7 @@ import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
+import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.TableView
 import javafx.scene.layout.ColumnConstraints
@@ -109,8 +110,8 @@ class TradeView : View("Trade") {
                 label("Standort:")
             }
             vbox(20) {
-                text(Session.loggedInUserProperty.stringBinding { it?.name ?: "" })
-                text(Session.ortProperty.stringBinding { it?.name ?: "" }) {
+                textfield(Session.loggedInUserModel.name)
+                text(Session.ortModel.name) {
                     // To Prevent Layout reordering on valueChange
                     minWidth = 75.0
                 }
@@ -120,7 +121,7 @@ class TradeView : View("Trade") {
                 label("Reise nach:")
             }
             vbox(20) {
-                text(Session.loggedInUserProperty.doubleBinding { it?.geld ?: 0.0 }.asString())
+                text(DoubleBinding.doubleExpression(Session.loggedInUserModel.geld).asString())
                 hbox(20) {
                     val blocked = Session.schiffProperty.booleanBinding { it?.blocked ?: false }
                     combobox(Session.ortProperty, Session.orte) {

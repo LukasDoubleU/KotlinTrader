@@ -5,7 +5,9 @@ import com.doubleu.kotlintrader.delegates.MutableReferenceDelegate
 import com.doubleu.kotlintrader.delegates.PropertyDelegate
 import com.doubleu.kotlintrader.delegates.ReferenceDelegate
 import com.doubleu.kotlintrader.extensions.get
+import javafx.beans.property.LongProperty
 import javafx.beans.property.Property
+import javafx.beans.property.SimpleLongProperty
 import kotlin.collections.set
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
@@ -13,9 +15,8 @@ import kotlin.reflect.KProperty
 /**
  * A simple Database Entity. ID Column is required
  */
-abstract class Entity {
-
-    abstract val id: Long
+abstract class Entity(open val id: Long,
+                      val idProperty: LongProperty = SimpleLongProperty(id)) {
 
     val delegateMap = mutableMapOf<KProperty<*>, DatabaseDelegate<*>>()
 

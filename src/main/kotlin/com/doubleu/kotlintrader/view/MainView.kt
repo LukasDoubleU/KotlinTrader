@@ -1,6 +1,7 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.Session
+import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.database.Database
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
@@ -18,8 +19,12 @@ class MainView : View("Kotlin Trader") {
     val masterView by inject<MasterView>()
 
     override val root = tabpane {
+
+        // TODO init them differently
+        val traderController = find<TradeController>()
+
         primaryStage.icons += resources.image("/favicon.png")
-        setPrefSize(600.0, 400.0)
+        setPrefSize(650.0, 600.0)
         tabClosingPolicy = TabPane.TabClosingPolicy.UNAVAILABLE
 
         tab(loginView)

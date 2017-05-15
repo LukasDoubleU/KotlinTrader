@@ -1,5 +1,6 @@
 package com.doubleu.kotlintrader.util
 
+import javafx.application.Platform
 import javafx.scene.control.*
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
@@ -17,66 +18,74 @@ import java.io.StringWriter
 object FxDialogs {
 
     fun showInformation(message: String, title: String = "Information") {
-        val alert = Alert(Alert.AlertType.INFORMATION)
-        alert.initStyle(StageStyle.UTILITY)
-        alert.title = title
-        alert.headerText = title
-        alert.contentText = message
+        Platform.runLater {
+            val alert = Alert(Alert.AlertType.INFORMATION)
+            alert.initStyle(StageStyle.UTILITY)
+            alert.title = title
+            alert.headerText = title
+            alert.contentText = message
 
-        alert.showAndWait()
+            alert.showAndWait()
+        }
     }
 
     fun showWarning(title: String, message: String) {
-        val alert = Alert(Alert.AlertType.WARNING)
-        alert.initStyle(StageStyle.UTILITY)
-        alert.title = "Warning"
-        alert.headerText = title
-        alert.contentText = message
+        Platform.runLater {
+            val alert = Alert(Alert.AlertType.WARNING)
+            alert.initStyle(StageStyle.UTILITY)
+            alert.title = "Warning"
+            alert.headerText = title
+            alert.contentText = message
 
-        alert.showAndWait()
+            alert.showAndWait()
+        }
     }
 
     fun showError(message: String, title: String = "Error") {
-        val alert = Alert(Alert.AlertType.ERROR)
-        alert.initStyle(StageStyle.UTILITY)
-        alert.title = title
-        alert.headerText = title
-        alert.contentText = message
+        Platform.runLater {
+            val alert = Alert(Alert.AlertType.ERROR)
+            alert.initStyle(StageStyle.UTILITY)
+            alert.title = title
+            alert.headerText = title
+            alert.contentText = message
 
-        alert.showAndWait()
+            alert.showAndWait()
+        }
     }
 
     fun showException(title: String, message: String, exception: Exception) {
-        val alert = Alert(Alert.AlertType.ERROR)
-        alert.initStyle(StageStyle.UTILITY)
-        alert.title = "Exception"
-        alert.headerText = title
-        alert.contentText = message
+        Platform.runLater {
+            val alert = Alert(Alert.AlertType.ERROR)
+            alert.initStyle(StageStyle.UTILITY)
+            alert.title = "Exception"
+            alert.headerText = title
+            alert.contentText = message
 
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        exception.printStackTrace(pw)
-        val exceptionText = sw.toString()
+            val sw = StringWriter()
+            val pw = PrintWriter(sw)
+            exception.printStackTrace(pw)
+            val exceptionText = sw.toString()
 
-        val label = Label("Details:")
+            val label = Label("Details:")
 
-        val textArea = TextArea(exceptionText)
-        textArea.isEditable = false
-        textArea.isWrapText = true
+            val textArea = TextArea(exceptionText)
+            textArea.isEditable = false
+            textArea.isWrapText = true
 
-        textArea.maxWidth = java.lang.Double.MAX_VALUE
-        textArea.maxHeight = java.lang.Double.MAX_VALUE
-        GridPane.setVgrow(textArea, Priority.ALWAYS)
-        GridPane.setHgrow(textArea, Priority.ALWAYS)
+            textArea.maxWidth = java.lang.Double.MAX_VALUE
+            textArea.maxHeight = java.lang.Double.MAX_VALUE
+            GridPane.setVgrow(textArea, Priority.ALWAYS)
+            GridPane.setHgrow(textArea, Priority.ALWAYS)
 
-        val expContent = GridPane()
-        expContent.maxWidth = java.lang.Double.MAX_VALUE
-        expContent.add(label, 0, 0)
-        expContent.add(textArea, 0, 1)
+            val expContent = GridPane()
+            expContent.maxWidth = java.lang.Double.MAX_VALUE
+            expContent.add(label, 0, 0)
+            expContent.add(textArea, 0, 1)
 
-        alert.dialogPane.expandableContent = expContent
+            alert.dialogPane.expandableContent = expContent
 
-        alert.showAndWait()
+            alert.showAndWait()
+        }
     }
 
     val YES = "Yes"
@@ -107,7 +116,7 @@ object FxDialogs {
             }
         }
 
-        if (options == null || options.isEmpty()) {
+        if (options.isEmpty()) {
             options = arrayOf(OK, CANCEL)
         }
 

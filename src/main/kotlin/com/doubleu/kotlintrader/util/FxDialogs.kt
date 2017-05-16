@@ -29,11 +29,11 @@ object FxDialogs {
         }
     }
 
-    fun showWarning(title: String, message: String) {
+    fun showWarning(message: String, title: String = "Warning") {
         Platform.runLater {
             val alert = Alert(Alert.AlertType.WARNING)
             alert.initStyle(StageStyle.UTILITY)
-            alert.title = "Warning"
+            alert.title = title
             alert.headerText = title
             alert.contentText = message
 

@@ -18,6 +18,11 @@ class Schiff_has_Ware(val ware_id: Long, val schiff_id: Long) : RefEntity<Schiff
     var menge: Long by delegate(this::menge)
     val mengeProperty = property(this::menge)
 
+    /**
+     * Gibt den Preis dieser Ware im aktuellen Ort zurueck
+     */
+    fun preisVorOrt() = ware.preisVorOrt()
+
     override fun model(property: ObjectProperty<Schiff_has_Ware?>) = Model(property)
 
     class Model(property: ObjectProperty<Schiff_has_Ware?> = SimpleObjectProperty<Schiff_has_Ware>())

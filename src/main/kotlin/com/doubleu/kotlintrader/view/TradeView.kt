@@ -8,7 +8,9 @@ import com.doubleu.kotlintrader.data.SchiffWaren
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
+import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.scene.control.Button
 import javafx.scene.control.TableView
 import javafx.scene.layout.ColumnConstraints
 import javafx.scene.paint.Color
@@ -26,6 +28,8 @@ class TradeView : View("Trade") {
 
     private val mengeProperty = SimpleIntegerProperty(0)
 
+    private lateinit var buyButton: Button
+    private lateinit var sellButton: Button
     private lateinit var hafenTable: TableView<Ort_has_Ware>
     private lateinit var schiffTable: TableView<Schiff_has_Ware>
 
@@ -70,12 +74,20 @@ class TradeView : View("Trade") {
                 }
                 center()
                 label("Menge")
-                textfield(mengeProperty)
-                button("Kaufen ->>-") {
-                    action { controller.buy() }
+                textfield(mengeProperty) {
+                    // Allow only numeric
+                    textProperty().onChange {
+                        val newValue = it ?: ""
+                        if (!newValue.matches("\\d*".toRegex())) {
+                            this@textfield.text = newValue.replace("[^\\d]".toRegex(), "")
+                        }
+                    }
                 }
-                button("-<<- Verkaufen") {
-                    action { controller.sell() }
+                buyButton = button("Kaufen ->>-") {
+                    action { controller.buy(hafenTable.selectedItem!!, mengeProperty.get()) }
+                }
+                sellButton = button("-<<- Verkaufen") {
+                    action { controller.sell(schiffTable.selectedItem!!, mengeProperty.get()) }
                 }
             }
             // Schiff Spalte
@@ -97,11 +109,18 @@ class TradeView : View("Trade") {
                             SchiffWaren.loading.not()
                         }
                     }
-
                     progressindicator {
                         visibleWhen {
                             SchiffWaren.loading
                         }
+                    }
+                    buyButton.enableWhen {
+                        Bindings.greaterThan(mengeProperty, 0)
+                                .and(Bindings.isNotNull(hafenTable.selectionModel.selectedItemProperty()))
+                    }
+                    sellButton.enableWhen {
+                        Bindings.greaterThan(mengeProperty, 0)
+                                .and(Bindings.isNotNull(schiffTable.selectionModel.selectedItemProperty()))
                     }
                 }
             }

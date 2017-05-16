@@ -10,7 +10,22 @@
 <br/>
 <h1>Ort_has_Ware</h1>
 <code><span class="keyword">class </span><span class="identifier">Ort_has_Ware</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
-        href="../../com.doubleu.kotlintrader.database/-ref-entity/index.html"><span class="identifier">RefEntity</span></a></code>
+        href="../../com.doubleu.kotlintrader.database/-ref-entity/index.html"><span class="identifier">RefEntity</span></a><span
+        class="symbol">&lt;</span><span class="identifier">Ort_has_Ware</span><span class="symbol">&gt;</span></code>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-model/index.html">Model</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">Model</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ItemViewModel</span><span
+                    class="symbol">&lt;</span><span class="identifier">Ort_has_Ware</span><span
+                    class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+    </tr>
+    </tbody>
+</table>
 <h3>Constructors</h3>
 <table>
     <tbody>
@@ -33,24 +48,10 @@
     <tbody>
     <tr>
         <td>
-            <a href="id.html">id</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><span
-                    class="identifier">Long</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="id2.html">id2</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">id2</span><span
-                    class="symbol">: </span><span class="identifier">Long</span></code></td>
-    </tr>
-    <tr>
-        <td>
             <a href="kapazitaet.html">kapazitaet</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">kapazitaet</span><span
-                    class="symbol">: </span><span class="identifier">Int</span><span class="symbol">?</span></code></td>
+                    class="symbol">: </span><span class="identifier">Int</span></code></td>
     </tr>
     <tr>
         <td>
@@ -58,16 +59,16 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">kapazitaetProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">?</span><span
-                    class="symbol">&gt;</span></code></td>
+                    class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">&gt;</span></code>
+        </td>
     </tr>
     <tr>
         <td>
             <a href="menge.html">menge</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">menge</span><span class="symbol">: </span><a
-                    href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a><span
-                    class="symbol">?</span></code></td>
+                    href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a></code>
+        </td>
     </tr>
     <tr>
         <td>
@@ -76,7 +77,7 @@
             <code><span class="keyword">val </span><span class="identifier">mengeProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span class="symbol">&lt;</span><a
                     href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a><span
-                    class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+                    class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
         <td>
@@ -90,7 +91,7 @@
             <a href="ort-name.html">ortName</a></td>
         <td>
             <code><span class="keyword">val </span><span class="identifier">ortName</span><span class="symbol">: </span><span
-                    class="identifier">String</span><span class="symbol">?</span></code></td>
+                    class="identifier">String</span></code></td>
     </tr>
     <tr>
         <td>
@@ -113,8 +114,8 @@
             <a href="preis.html">preis</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">preis</span><span class="symbol">: </span><a
-                    href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a><span
-                    class="symbol">?</span></code></td>
+                    href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a></code>
+        </td>
     </tr>
     <tr>
         <td>
@@ -123,15 +124,14 @@
             <code><span class="keyword">val </span><span class="identifier">preisProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span class="symbol">&lt;</span><a
                     href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html"><span class="identifier">BigDecimal</span></a><span
-                    class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+                    class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
         <td>
             <a href="produktion.html">produktion</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">produktion</span><span
-                    class="symbol">: </span><span class="identifier">Double</span><span class="symbol">?</span></code>
-        </td>
+                    class="symbol">: </span><span class="identifier">Double</span></code></td>
     </tr>
     <tr>
         <td>
@@ -139,7 +139,7 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">produktionProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">?</span><span
+                    class="symbol">&lt;</span><span class="identifier">Double</span><span
                     class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
@@ -147,8 +147,7 @@
             <a href="verbrauch.html">verbrauch</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">verbrauch</span><span
-                    class="symbol">: </span><span class="identifier">Double</span><span class="symbol">?</span></code>
-        </td>
+                    class="symbol">: </span><span class="identifier">Double</span></code></td>
     </tr>
     <tr>
         <td>
@@ -156,7 +155,7 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">verbrauchProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">?</span><span
+                    class="symbol">&lt;</span><span class="identifier">Double</span><span
                     class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
@@ -171,8 +170,15 @@
             <a href="ware-name.html">wareName</a></td>
         <td>
             <code><span class="keyword">val </span><span class="identifier">wareName</span><span
-                    class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code>
-        </td>
+                    class="symbol">: </span><span class="identifier">String</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="ware-name-property.html">wareNameProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">wareNameProperty</span><span class="symbol">: </span><span
+                    class="identifier">Property</span><span class="symbol">&lt;</span><span
+                    class="identifier">String</span><span class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
         <td>
@@ -189,6 +195,52 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">ware_id</span><span class="symbol">: </span><span
                     class="identifier">Long</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id.html">id</a></td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">val </span><span
+                    class="identifier">id</span><span class="symbol">: </span><span
+                    class="identifier">Long</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id2.html">id2</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">id2</span><span
+                    class="symbol">: </span><span class="identifier">Long</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id2-property.html">id2Property</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">id2Property</span><span
+                    class="symbol">: </span><span class="identifier">LongProperty</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="model.html">model</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">model</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.model.Ort_has_Ware$model(javafx.beans.property.ObjectProperty((com.doubleu.kotlintrader.model.Ort_has_Ware)))/property">property</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ObjectProperty</span><span
+                    class="symbol">&lt;</span><span class="identifier">Ort_has_Ware</span><span
+                    class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a href="-model/index.html"><span class="identifier">Model</span></a></code>
+            <p>Returns an <a href="#">ItemViewModel</a> containing the given <a href="#">Entity</a></p>
+        </td>
     </tr>
     </tbody>
 </table>

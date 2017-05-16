@@ -24,7 +24,7 @@ object Database {
     val connected = Bindings.isNotNull(connectionProperty)!!
 
     /**
-     * Attempts to asyncly create a database connection
+     * Attempts to create a database connection
      */
     fun connect(host: String, database: String, user: String, pw: String) {
         val url = "jdbc:mysql://$host/$database?user=$user&password=$pw" +
@@ -37,6 +37,9 @@ object Database {
         }
     }
 
+    /**
+     * Closes the database connection
+     */
     fun disconnect() {
         // Attempt to close the connection, if there's any
         connection?.close()

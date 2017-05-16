@@ -21,23 +21,6 @@
             <code><span class="keyword">val </span><span class="identifier">connected</span><span
                     class="symbol">: </span><span class="identifier">BooleanBinding</span></code></td>
     </tr>
-    <tr>
-        <td>
-            <a href="connection.html">connection</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">connection</span><span
-                    class="symbol">: </span><a href="http://docs.oracle.com/javase/6/docs/api/java/sql/Connection.html"><span
-                    class="identifier">Connection</span></a><span class="symbol">?</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="connection-property.html">connectionProperty</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">connectionProperty</span><span
-                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><a
-                    href="http://docs.oracle.com/javase/6/docs/api/java/sql/Connection.html"><span class="identifier">Connection</span></a><span
-                    class="symbol">?</span><span class="symbol">&gt;</span></code></td>
-    </tr>
     </tbody>
 </table>
 <h3>Functions</h3>
@@ -61,7 +44,7 @@
                                                   id="com.doubleu.kotlintrader.database.Database$connect(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/pw">pw</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
                     class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
-            <p>Attempts to asyncly create a database connection</p>
+            <p>Attempts to create a database connection</p>
         </td>
     </tr>
     <tr>
@@ -70,7 +53,9 @@
         <td>
             <code><span class="keyword">fun </span><span class="identifier">disconnect</span><span
                     class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code></td>
+                    class="identifier">Unit</span></code>
+            <p>Closes the database connection</p>
+        </td>
     </tr>
     <tr>
         <td>
@@ -92,10 +77,11 @@
         <td>
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">&gt;</span> <span class="identifier">findAll</span><span class="symbol">(</span><span
                     class="symbol">)</span><span class="symbol">: </span><span class="identifier">List</span><span
                     class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
-            <p>Returns all database entries of the given <a href="#">Entity</a></p>
+            <p>Returns all database entries of the given <a href="#">Entity&lt;*&gt;</a></p>
         </td>
     </tr>
     <tr>
@@ -104,6 +90,7 @@
         <td>
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span
                     class="identifier">findAllBy</span><span class="symbol">(</span><span class="identifier"
                                                                                           id="com.doubleu.kotlintrader.database.Database$findAllBy(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.database.Database.findAllBy.T, com.doubleu.kotlintrader.database.Database.findAllBy.V)), com.doubleu.kotlintrader.database.Database.findAllBy.V)/property">property</span><span
@@ -126,6 +113,7 @@
         <td>
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier">V</span><span class="symbol">&gt;</span> <span
                     class="identifier">findFirstBy</span><span class="symbol">(</span><span class="identifier"
                                                                                             id="com.doubleu.kotlintrader.database.Database$findFirstBy(kotlin.reflect.KProperty1((com.doubleu.kotlintrader.database.Database.findFirstBy.T, com.doubleu.kotlintrader.database.Database.findFirstBy.V)), com.doubleu.kotlintrader.database.Database.findFirstBy.V)/property">property</span><span
@@ -144,22 +132,35 @@
     </tr>
     <tr>
         <td>
+            <a href="force-close.html">forceClose</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">forceClose</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Unit</span><span class="symbol">?</span></code>
+            <p>Forces the <a href="#">connection</a> to close.
+                The App will not receive updates of this event,
+                use <a href="disconnect.html">disconnect</a> instead.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="get-property.html">getProperty</a></td>
         <td>
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span
                     class="identifier">V</span><span class="symbol">&gt;</span> <span
                     class="identifier">getProperty</span><span class="symbol">(</span><span class="identifier"
-                                                                                            id="com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/entity">entity</span><span
+                                                                                            id="com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/entity">entity</span><span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/property">property</span><span
+                                                  id="com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/property">property</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
                     class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span><span
                     class="symbol">)</span><span class="symbol">: </span><span class="identifier">V</span></code>
             <p>Retrieves the <a
-                    href="get-property.html#com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/property">property</a>
+                    href="get-property.html#com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/property">property</a>
                 of the <a
-                        href="get-property.html#com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/entity">entity</a>
+                        href="get-property.html#com.doubleu.kotlintrader.database.Database$getProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.getProperty.V)))/entity">entity</a>
                 from the database via SQL-SELECT</p>
         </td>
     </tr>
@@ -184,6 +185,7 @@
         <td>
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">&gt;</span> <span class="identifier">selectEntities</span><span
                     class="symbol">(</span><span class="identifier"
                                                  id="com.doubleu.kotlintrader.database.Database$selectEntities(kotlin.Array((kotlin.String)))/columns">columns</span><span
@@ -194,7 +196,7 @@
                     class="symbol">&gt;</span></code>
             <p>Returns all <a href="#">Entities</a>.
                 <a href="select-entities.html#com.doubleu.kotlintrader.database.Database$selectEntities(kotlin.Array((kotlin.String)))/columns">columns</a>:
-                The ID Columns of the Entity</p>
+                The ID Columns of the Entity&lt;*&gt;</p>
         </td>
     </tr>
     <tr>
@@ -204,20 +206,21 @@
             <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span
                     class="identifier">V</span><span class="symbol">&gt;</span> <span
                     class="identifier">setProperty</span><span class="symbol">(</span><span class="identifier"
-                                                                                            id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/entity">entity</span><span
+                                                                                            id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/entity">entity</span><span
                     class="symbol">:</span>&nbsp;<a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
+                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/property">property</span><span
+                                                  id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/property">property</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
                     class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/value">value</span><span
+                                                  id="com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/value">value</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">V</span><span class="symbol">?</span><span
                     class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
             <p>Sets the <a
-                    href="set-property.html#com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/property">property</a>
+                    href="set-property.html#com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/property">property</a>
                 of the given <a
-                        href="set-property.html#com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/entity">entity</a>
+                        href="set-property.html#com.doubleu.kotlintrader.database.Database$setProperty(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Database.setProperty.V)), com.doubleu.kotlintrader.database.Database.setProperty.V)/entity">entity</a>
                 in the database via SQL-Update</p>
         </td>
     </tr>

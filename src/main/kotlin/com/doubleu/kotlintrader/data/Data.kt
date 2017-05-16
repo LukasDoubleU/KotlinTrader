@@ -9,49 +9,82 @@ import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
-abstract class EntityProperty<T : Entity<T>> : SimpleObjectProperty<T>() {
-    abstract val model: ItemViewModel<T?>
-}
-
 object Data {
 
-    object User : EntityProperty<Trader>() {
-        val isLoggedIn = Bindings.isNotNull(this)!!
-        override val model = Trader.Model(this)
+    /**
+     * A Property representing an Entity
+     */
+    abstract class EntityProperty<T : Entity<T>> : SimpleObjectProperty<T>() {
+        /**
+         * An Entity model representing the inherited [Entity][T].
+         * By Contract every Entity has one.
+         */
+        abstract val model: ItemViewModel<T?>
     }
 
-    var user: Trader? by User
-
-    object Ort : EntityProperty<com.doubleu.kotlintrader.model.Ort>() {
-        override val model = com.doubleu.kotlintrader.model.Ort.Model(this)
+    /**
+     * Represents the current user, may be null
+     */
+    object User : EntityProperty<Trader>() {
+        /**
+         * Indicates whether a user is logged in
+         */
+        val isLoggedIn = Bindings.isNotNull(this)!!
+        override val model = Trader.Model(this)
 
         init {
-            onChangeWithOld {
-                von, nach ->
-                find<TradeController>().travel(von, nach)
-            }
-            // Refresh the Ort when the ship changes.
-            // Usually happens when another user logs in.
-            Schiff.onChange {
-                val schiffOrtId = it?.ort_id
-                ort = Orte.find { it.id == schiffOrtId }
-            }
-            User.onChange {
-                if (it == null) ort = null
+            onChange { user ->
+                // Update the fields that depend on this
+                if (user == null) {
+                    ort = null
+                    schiff = null
+                    Title.update("Kotlin Trader")
+                } else {
+                    Title.update("Kotlin Trader - Logged in as ${user.name}")
+                    schiff = Schiffe.find { it.trader_id == user.id }
+                }
             }
         }
     }
 
+    /**
+     * Represents the current user, may be null
+     */
+    var user: Trader? by User
+
+    /**
+     * Represents the current Ort, may be null
+     */
+    object Ort : EntityProperty<com.doubleu.kotlintrader.model.Ort>() {
+        override val model = com.doubleu.kotlintrader.model.Ort.Model(this)
+        val traderController = find<TradeController>()
+
+        init {
+            // Update itself when the [Orte] are being reloaded
+            Orte.onLoadFinish { ort = it.find { it.id == schiff?.ort_id } }
+            // Update the fields that depend on this
+            onChangeWithOld { von, nach ->
+                traderController.travel(von, nach)
+                if (nach == null) OrtWaren.clear() else OrtWaren.load()
+            }
+        }
+    }
+
+    /**
+     * Represents the current Ort, may be null
+     */
     var ort: com.doubleu.kotlintrader.model.Ort? by Ort
 
+    /**
+     * Represents the current MasterUser, may be null
+     */
     object MasterUser : EntityProperty<Trader>() {
         override val model = Trader.Model(this)
         val isLoggedIn = User.isLoggedIn.and(Bindings.equal(User, this))!!
 
         init {
-            Users.onLoadFinish {
-                masterUser = it.firstOrNull { it.master }
-            }
+            // Update itself when the [Users] are being loaded
+            Users.onLoadFinish { masterUser = it.find { it.master } }
             // All previous masters (should only be one) are no longer masters
             onChange {
                 Users.filter { it.master }.forEach { it.master = false }
@@ -60,34 +93,43 @@ object Data {
         }
     }
 
+    /**
+     * Represents the current MasterUser, may be null
+     */
     var masterUser: com.doubleu.kotlintrader.model.Trader? by MasterUser
 
+    /**
+     * Represents the current Schiff, may be null
+     */
     object Schiff : EntityProperty<com.doubleu.kotlintrader.model.Schiff>() {
         override val model = com.doubleu.kotlintrader.model.Schiff.Model(this)
 
         init {
-            User.onChange {
-                it?.let {
-                    val traderId = it.id
-                    schiff = Schiffe.find { it.trader_id == traderId }
+            // Update itself when the [Schiffe] are being loaded
+            Schiffe.onLoadFinish { schiff = Schiffe.find { it.trader_id == user?.id } }
+            onChange { schiff ->
+                // Refresh the Ort when the ship changes.
+                // Usually happens when another user logs in.
+                if (schiff == null) {
+                    ort = null
+                    SchiffWaren.clear()
+                } else {
+                    ort = Orte.find { it.id == schiff.ort_id }
+                    SchiffWaren.load()
                 }
             }
         }
     }
 
+    /**
+     * Represents the current Schiff, may be null
+     */
     var schiff: com.doubleu.kotlintrader.model.Schiff? by Schiff
 
     private object Title {
         val primaryStage = FX.primaryStage
 
-        init {
-            User.onChange {
-                update(if (it == null) "Kotlin Trader"
-                else "Kotlin Trader - Logged in as ${it.name}")
-            }
-        }
-
-        private fun update(title: String) {
+        fun update(title: String) {
             Platform.runLater {
                 if (primaryStage.titleProperty().isBound) {
                     primaryStage.titleProperty().unbind()

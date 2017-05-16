@@ -11,7 +11,22 @@
 <h1>Ware</h1>
 <code><span class="keyword">class </span><span class="identifier">Ware</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-        class="identifier">Entity</span></a></code>
+        class="identifier">Entity</span></a><span class="symbol">&lt;</span><span class="identifier">Ware</span><span
+        class="symbol">&gt;</span></code>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-model/index.html">Model</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">Model</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ItemViewModel</span><span
+                    class="symbol">&lt;</span><span class="identifier">Ware</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    </tbody>
+</table>
 <h3>Constructors</h3>
 <table>
     <tbody>
@@ -41,8 +56,7 @@
             <a href="name.html">name</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">name</span><span
-                    class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code>
-        </td>
+                    class="symbol">: </span><span class="identifier">String</span></code></td>
     </tr>
     <tr>
         <td>
@@ -50,7 +64,7 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">nameProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">String</span><span class="symbol">?</span><span
+                    class="symbol">&lt;</span><span class="identifier">String</span><span
                     class="symbol">&gt;</span></code></td>
     </tr>
     <tr>
@@ -58,8 +72,7 @@
             <a href="preis.html">preis</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">preis</span><span
-                    class="symbol">: </span><span class="identifier">Double</span><span class="symbol">?</span></code>
-        </td>
+                    class="symbol">: </span><span class="identifier">Double</span></code></td>
     </tr>
     <tr>
         <td>
@@ -67,7 +80,7 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">preisDouble</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">?</span><span
+                    class="symbol">&lt;</span><span class="identifier">Double</span><span
                     class="symbol">&gt;</span></code></td>
     </tr>
     </tbody>
@@ -87,6 +100,32 @@
                     href="../../com.doubleu.kotlintrader.delegates/-database-delegate/index.html"><span
                     class="identifier">DatabaseDelegate</span></a><span class="symbol">&lt;</span><span
                     class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-entity/id-property.html">idProperty</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">idProperty</span><span
+                    class="symbol">: </span><span class="identifier">LongProperty</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="model.html">model</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">model</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.model.Ware$model(javafx.beans.property.ObjectProperty((com.doubleu.kotlintrader.model.Ware)))/property">property</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ObjectProperty</span><span
+                    class="symbol">&lt;</span><span class="identifier">Ware</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="-model/index.html"><span class="identifier">Model</span></a></code>
+            <p>Returns an <a href="#">ItemViewModel</a> containing the given <a href="#">Entity</a></p>
         </td>
     </tr>
     </tbody>
@@ -118,25 +157,26 @@
         <td>
             <a href="../../com.doubleu.kotlintrader.database/-entity/mutable-reference.html">mutableReference</a></td>
         <td>
-            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&gt;</span> <span class="identifier">mutableReference</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.T)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/key">key</span><span
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">E</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <span
+                    class="identifier">mutableReference</span><span class="symbol">(</span><span class="identifier"
+                                                                                                 id="com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.E)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/key">key</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KMutableProperty0</span><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.T)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/property">property</span><span
+                    class="identifier">E</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.E)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/property">property</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KMutableProperty0</span><span class="symbol">&lt;</span><span
-                    class="identifier">Long</span><span class="symbol">?</span><span class="symbol">&gt;</span><span
-                    class="symbol">)</span><span class="symbol">: </span><a
+                    class="identifier">Long</span><span class="symbol">&gt;</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a
                     href="../../com.doubleu.kotlintrader.delegates/-mutable-reference-delegate/index.html"><span
                     class="identifier">MutableReferenceDelegate</span></a><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span></code>
+                    class="identifier">E</span><span class="symbol">&gt;</span></code>
             <p>Returns a <a href="../../com.doubleu.kotlintrader.delegates/-reference-delegate/index.html">Delegate</a>
                 to the given <a
-                        href="../../com.doubleu.kotlintrader.database/-entity/mutable-reference.html#com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.T)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/property">property</a>.
+                        href="../../com.doubleu.kotlintrader.database/-entity/mutable-reference.html#com.doubleu.kotlintrader.database.Entity$mutableReference(kotlin.reflect.KMutableProperty0((com.doubleu.kotlintrader.database.Entity.mutableReference.E)), kotlin.reflect.KMutableProperty0((kotlin.Long)))/property">property</a>.
             </p>
         </td>
     </tr>
@@ -161,25 +201,26 @@
         <td>
             <a href="../../com.doubleu.kotlintrader.database/-entity/reference.html">reference</a></td>
         <td>
-            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span
+            <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&gt;</span> <span class="identifier">reference</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.T)), kotlin.reflect.KProperty((kotlin.Long)))/key">key</span><span
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">E</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <span
+                    class="identifier">reference</span><span class="symbol">(</span><span class="identifier"
+                                                                                          id="com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.E)), kotlin.reflect.KProperty((kotlin.Long)))/key">key</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span
+                    class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.T)), kotlin.reflect.KProperty((kotlin.Long)))/property">property</span><span
+                                                  id="com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.E)), kotlin.reflect.KProperty((kotlin.Long)))/property">property</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
                     class="symbol">&lt;</span><span class="identifier">Long</span><span class="symbol">&gt;</span><span
                     class="symbol">)</span><span class="symbol">: </span><a
                     href="../../com.doubleu.kotlintrader.delegates/-reference-delegate/index.html"><span
                     class="identifier">ReferenceDelegate</span></a><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span></code>
+                    class="identifier">E</span><span class="symbol">&gt;</span></code>
             <p>Returns a <a href="../../com.doubleu.kotlintrader.delegates/-reference-delegate/index.html">Delegate</a>
                 to the given <a
-                        href="../../com.doubleu.kotlintrader.database/-entity/reference.html#com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.T)), kotlin.reflect.KProperty((kotlin.Long)))/property">property</a>.
+                        href="../../com.doubleu.kotlintrader.database/-entity/reference.html#com.doubleu.kotlintrader.database.Entity$reference(kotlin.reflect.KProperty((com.doubleu.kotlintrader.database.Entity.reference.E)), kotlin.reflect.KProperty((kotlin.Long)))/property">property</a>.
             </p>
         </td>
     </tr>

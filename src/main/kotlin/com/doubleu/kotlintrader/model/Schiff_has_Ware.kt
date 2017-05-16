@@ -10,6 +10,7 @@ class Schiff_has_Ware(val ware_id: Long, val schiff_id: Long) : RefEntity<Schiff
     val ware: Ware by reference(this::ware, this::ware_id)
     val wareProperty = property(this::ware)
     val wareName = ware.name
+    val wareNameProperty = ware.nameProperty
 
     val schiff: Schiff by reference(this::schiff, this::schiff_id)
     val schiffProperty = property(this::schiff)

@@ -65,11 +65,13 @@
         <td>
             <code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((kotlin.Any)))/ignore">ignore</span><span
+                                                 id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)))/ignore">ignore</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((kotlin.Any)))/ignore2">ignore2</span><span
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)))/ignore2">ignore2</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
                     class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">)</span><span class="symbol">: </span><span class="identifier">X</span></code></td>
@@ -98,15 +100,17 @@
         <td>
             <code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">setValue</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/ignore">ignore</span><span
+                                                 id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/ignore">ignore</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/ignore2">ignore2</span><span
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/ignore2">ignore2</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
                     class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
                     class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity, kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/newValue">newValue</span><span
+                                                  id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$setValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)), com.doubleu.kotlintrader.delegates.DatabaseDelegate.X)/newValue">newValue</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">X</span><span class="symbol">)</span><span
                     class="symbol">: </span><span class="identifier">Unit</span></code></td>
     </tr>
@@ -136,9 +140,10 @@
             <code><span class="keyword">class </span><span class="identifier">MutableReferenceDelegate</span><span
                     class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&gt;</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<span class="identifier">DatabaseDelegate</span><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code>
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">T</span><span class="symbol">&gt;</span><span
+                    class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DatabaseDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
             <p>Delegates mutable Entity-References to the database</p>
         </td>
     </tr>
@@ -149,8 +154,7 @@
             <code><span class="keyword">class </span><span class="identifier">PropertyDelegate</span><span
                     class="symbol">&lt;</span><span class="identifier">V</span><span
                     class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DatabaseDelegate</span><span
-                    class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">?</span><span
-                    class="symbol">&gt;</span></code>
+                    class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span></code>
             <p>Delegates simple properties to the database</p>
         </td>
     </tr>
@@ -161,9 +165,10 @@
             <code><span class="keyword">class </span><span class="identifier">ReferenceDelegate</span><span
                     class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
                     href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&gt;</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<span class="identifier">DatabaseDelegate</span><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span></code>
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">T</span><span class="symbol">&gt;</span><span
+                    class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DatabaseDelegate</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
             <p>Delegates an immutable Entity-Reference to the database</p>
         </td>
     </tr>

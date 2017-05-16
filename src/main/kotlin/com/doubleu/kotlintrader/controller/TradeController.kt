@@ -1,12 +1,18 @@
 package com.doubleu.kotlintrader.controller
 
 import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.Data.schiff
 import com.doubleu.kotlintrader.model.Ort
 import com.doubleu.kotlintrader.util.FxDialogs
 import tornadofx.*
 
 class TradeController : Controller() {
 
+    /**
+     * Called whenever the current [Ort] changes.
+     * Changing of the Ort requires the current [User][Data.user] to pay.
+     * If he doesn't want to or can't the change is reverted.
+     */
     fun travel(von: Ort?, nach: Ort?) {
         // Just return the new value if it was null previously
         if (von == null || nach == null) return
@@ -23,6 +29,7 @@ class TradeController : Controller() {
             }
             it.geld = remaining
         }
+        schiff?.ort = nach
     }
 
     fun buy() {

@@ -9,9 +9,25 @@
         href=".">Fahrt</a><br/>
 <br/>
 <h1>Fahrt</h1>
-<code><span class="keyword">class </span><span class="identifier">Fahrt</span>&nbsp;<span
-        class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.database/-ref-entity/index.html"><span
-        class="identifier">RefEntity</span></a></code>
+<code><span class="keyword">class </span><s><span class="identifier">Fahrt</span></s>&nbsp;<span class="symbol">:</span>&nbsp;<a
+        href="../../com.doubleu.kotlintrader.database/-ref-entity/index.html"><span class="identifier">RefEntity</span></a><span
+        class="symbol">&lt;</span><span class="identifier">Fahrt</span><span class="symbol">&gt;</span></code><br/>
+<strong>Deprecated:</strong> Not usable as of now, requires inserts<br/>
+<br/>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-model/index.html">Model</a></td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">Model</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ItemViewModel</span><span
+                    class="symbol">&lt;</span><span class="identifier">Fahrt</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span></code></td>
+    </tr>
+    </tbody>
+</table>
 <h3>Constructors</h3>
 <table>
     <tbody>
@@ -34,20 +50,6 @@
     <tbody>
     <tr>
         <td>
-            <a href="id.html">id</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><span
-                    class="identifier">Long</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="id2.html">id2</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">id2</span><span
-                    class="symbol">: </span><span class="identifier">Long</span></code></td>
-    </tr>
-    <tr>
-        <td>
             <a href="nach.html">nach</a></td>
         <td>
             <code><span class="keyword">val </span><span class="identifier">nach</span><span class="symbol">: </span><a
@@ -64,17 +66,10 @@
     </tr>
     <tr>
         <td>
-            <a href="nach_id.html">nach_id</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">nach_id</span><span class="symbol">: </span><span
-                    class="identifier">Long</span></code></td>
-    </tr>
-    <tr>
-        <td>
             <a href="strecke.html">strecke</a></td>
         <td>
             <code><span class="keyword">var </span><span class="identifier">strecke</span><span class="symbol">: </span><span
-                    class="identifier">Int</span><span class="symbol">?</span></code></td>
+                    class="identifier">Int</span></code></td>
     </tr>
     <tr>
         <td>
@@ -82,8 +77,8 @@
         <td>
             <code><span class="keyword">val </span><span class="identifier">streckeProperty</span><span
                     class="symbol">: </span><span class="identifier">Property</span><span
-                    class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">?</span><span
-                    class="symbol">&gt;</span></code></td>
+                    class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">&gt;</span></code>
+        </td>
     </tr>
     <tr>
         <td>
@@ -101,12 +96,51 @@
                     href="../-ort/index.html"><span class="identifier">Ort</span></a><span
                     class="symbol">&gt;</span></code></td>
     </tr>
+    </tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+    <tbody>
     <tr>
         <td>
-            <a href="von_id.html">von_id</a></td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id.html">id</a></td>
         <td>
-            <code><span class="keyword">val </span><span class="identifier">von_id</span><span
+            <code><span class="keyword">open</span> <span class="keyword">val </span><span
+                    class="identifier">id</span><span class="symbol">: </span><span
+                    class="identifier">Long</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id2.html">id2</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">id2</span><span
                     class="symbol">: </span><span class="identifier">Long</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../com.doubleu.kotlintrader.database/-ref-entity/id2-property.html">id2Property</a></td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">id2Property</span><span
+                    class="symbol">: </span><span class="identifier">LongProperty</span></code></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="model.html">model</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">model</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="com.doubleu.kotlintrader.model.Fahrt$model(javafx.beans.property.ObjectProperty((com.doubleu.kotlintrader.model.Fahrt)))/property">property</span><span
+                    class="symbol">:</span>&nbsp;<span class="identifier">ObjectProperty</span><span
+                    class="symbol">&lt;</span><span class="identifier">Fahrt</span><span class="symbol">?</span><span
+                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="-model/index.html"><span class="identifier">Model</span></a></code>
+            <p>Returns an <a href="#">ItemViewModel</a> containing the given <a href="#">Entity</a></p>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -2,6 +2,7 @@ package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.LoginController
 import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.Storage
 import com.doubleu.kotlintrader.data.Users
 import com.doubleu.kotlintrader.database.Database
 import com.doubleu.kotlintrader.extensions.center
@@ -79,7 +80,7 @@ class LoginView : View("Login") {
                     }
                     button("Disconnect") {
                         action { controller.disconnect() }
-                        enableWhen { connected.and(Users.anyLoading.not()) }
+                        enableWhen { connected.and(Storage.anyLoading.not()) }
                     }
                 }
             }
@@ -124,10 +125,10 @@ class LoginView : View("Login") {
             userTable = tableview(Users.get()) {
                 isFocusTraversable = false
 
-                column("ID", Trader::id)
-                column("Name", Trader::name)
-                column("Geld", Trader::geld)
-                column("Master", Trader::master)
+                column("ID", Trader::idProperty)
+                column("Name", Trader::nameProperty)
+                column("Geld", Trader::geldProperty)
+                column("Master", Trader::masterProperty)
 
                 contextmenu {
                     item("Assign New Master").action {

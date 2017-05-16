@@ -44,10 +44,10 @@ class TradeView : View("Trade") {
                 label("Hafen")
                 stackpane {
                     hafenTable = tableview(OrtWaren.get()) {
-                        column("ID", Ort_has_Ware::ware_id)
-                        column("Name", Ort_has_Ware::wareName)
-                        column("Menge", Ort_has_Ware::menge)
-                        column("Preis", Ort_has_Ware::preis)
+                        column("ID", Ort_has_Ware::idProperty)
+                        column("Name", Ort_has_Ware::wareNameProperty)
+                        column("Menge", Ort_has_Ware::mengeProperty)
+                        column("Preis", Ort_has_Ware::preisProperty)
 
                         items.onChange { resizeColumnsToFitContent() }
 
@@ -87,9 +87,9 @@ class TradeView : View("Trade") {
                 label("Schiff")
                 stackpane {
                     schiffTable = tableview(SchiffWaren.get()) {
-                        column("ID", Schiff_has_Ware::ware_id)
-                        column("Name", Schiff_has_Ware::wareName)
-                        column("Menge", Schiff_has_Ware::menge)
+                        column("ID", Schiff_has_Ware::idProperty)
+                        column("Name", Schiff_has_Ware::wareNameProperty)
+                        column("Menge", Schiff_has_Ware::mengeProperty)
 
                         items.onChange { resizeColumnsToFitContent() }
 

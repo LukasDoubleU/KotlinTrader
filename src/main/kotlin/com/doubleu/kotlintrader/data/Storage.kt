@@ -7,41 +7,37 @@ import com.doubleu.kotlintrader.model.*
 import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.value.ObservableValue
 import javafx.collections.ObservableList
 import javafx.concurrent.Task
 import tornadofx.*
 
-sealed class Storage<T : Entity<T>>(
-        val supplier: () -> List<T>,
-        vararg loadOnChange: ObservableValue<*>) {
+/**
+ * Provides Storage for various [Entity]s
+ */
+sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
     companion object {
         private val tasks = mutableListOf<Storage<*>.StorageTask>().observable()
+        /**
+         * Indicates whether any Storage is currently being loaded.
+         * (Implicates an open database operation)
+         */
+        val anyLoading = Bindings.isNotEmpty(tasks)!!
     }
 
     private val items: ObservableList<T> = mutableListOf<T>().observable()
-    private val onLoadFinish = mutableListOf<(List<T>) -> Unit>()
-
-    init {
-        for (observer in loadOnChange) {
-            observer.onChange { if (it != null) load() else clear() }
-        }
-        // Load / Clear when we Connect / Disconnect from the Database
-        DBHelper.onConnect { load() }
-        DBHelper.onDisconnect { clear() }
-    }
+    private val onLoadFinish = mutableListOf<(Storage<T>) -> Unit>()
 
     /**
      * Indicates whether the [items] are currently being [loaded][load]
      */
     val loading = SimpleBooleanProperty(false)
 
-    /**
-     * Indicates whether ANY [StorageTask] is running.
-     * (Not just the one associated with the receiver object!)
-     */
-    val anyLoading = Bindings.isNotEmpty(tasks)!!
+    init {
+        // Load / Clear when we Connect / Disconnect from the Database
+        DBHelper.onConnect { load() }
+        DBHelper.onDisconnect { clear() }
+    }
 
     /**
      * Retrieves the stored [items]
@@ -56,7 +52,7 @@ sealed class Storage<T : Entity<T>>(
     /**
      * Executes the given [op] when [load] finishes
      */
-    fun onLoadFinish(op: (List<T>) -> Unit) {
+    fun onLoadFinish(op: (Storage<T>) -> Unit) {
         onLoadFinish += op
     }
 
@@ -80,7 +76,10 @@ sealed class Storage<T : Entity<T>>(
      */
     fun filter(predicate: (T) -> Boolean) = items.filter(predicate)
 
-    internal inner class StorageTask(val func: () -> List<T>) : Task<Unit>() {
+    /**
+     * Helps running [storage loading][load] asyncly
+     */
+    private inner class StorageTask(val func: () -> List<T>) : Task<Unit>() {
         private var _items = mutableListOf<T>()
 
         override fun call() {
@@ -91,28 +90,51 @@ sealed class Storage<T : Entity<T>>(
 
         override fun done() {
             Platform.runLater {
-                items.clear()
-                items += _items
-                onLoadFinish.forEach { it.invoke(items) }
-                tasks.remove(this)
-                loading.set(false)
+                try {
+                    items.clear()
+                    items += _items
+                    onLoadFinish.forEach { it.invoke(this@Storage) }
+                } finally {
+                    tasks -= this
+                    loading.set(false)
+                }
             }
         }
     }
 }
 
+/**
+ * Holding all [Trader] objects that were loaded from the database
+ */
 object Users : Storage<Trader>({ Database.findAll<Trader>() })
 
+/**
+ * Holding all [Ort] objects that were loaded from the database
+ */
 object Orte : Storage<Ort>({ Database.findAll<Ort>() })
 
+/**
+ * Holding all [Ort_has_Ware] objects that were loaded from the database
+ */
 object Angebote : Storage<Ort_has_Ware>({ Database.findAll<Ort_has_Ware>() }) {
 
     fun sorted() = get().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis }.observable()
 
 }
 
-object OrtWaren : Storage<Ort_has_Ware>({ Database.findAllBy(Ort_has_Ware::ort_id, Data.ort?.id) }, Data.Ort)
+/**
+ * Holding [Ort_has_Ware] objects that were loaded from the database.
+ * They always depend on the [current ort][Data.ort]
+ */
+object OrtWaren : Storage<Ort_has_Ware>({ Database.findAllBy(Ort_has_Ware::ort_id, Data.ort?.id) })
 
-object SchiffWaren : Storage<Schiff_has_Ware>({ Database.findAllBy(Schiff_has_Ware::schiff_id, Data.schiff?.id) }, Data.Schiff)
+/**
+ * Holding [Schiff_has_Ware] objects that were loaded from the database.
+ * They always depend on the [current schiff][Data.schiff]
+ */
+object SchiffWaren : Storage<Schiff_has_Ware>({ Database.findAllBy(Schiff_has_Ware::schiff_id, Data.schiff?.id) })
 
+/**
+ * Holding all [Schiff] objects that were loaded from the database
+ */
 object Schiffe : Storage<Schiff>({ Database.findAll<Schiff>() })

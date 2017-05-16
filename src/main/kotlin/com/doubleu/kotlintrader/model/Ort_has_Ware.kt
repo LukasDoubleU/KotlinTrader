@@ -11,6 +11,7 @@ class Ort_has_Ware(val ware_id: Long, val ort_id: Long) : RefEntity<Ort_has_Ware
     val ware: Ware by reference(this::ware, this::ware_id)
     val wareProperty = property(this::ware)
     val wareName = ware.name
+    val wareNameProperty = ware.nameProperty
 
     val ort: Ort by reference(this::ort, this::ort_id)
     val ortProperty = property(this::ort)

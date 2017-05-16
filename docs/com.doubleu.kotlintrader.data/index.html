@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>com.doubleu.kotlintrader.data - KotlinTrader</title>
+    <link rel="stylesheet" href="..\..\style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href=".">com.doubleu.kotlintrader.data</a><br/>
+<br/>
+<h2>Package com.doubleu.kotlintrader.data</h2>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="-angebote/index.html">Angebote</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">Angebote</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-storage/index.html"><span
+                    class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
+                    href="../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>Holding all <a href="../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html">Ort_has_Ware</a>
+                objects that were loaded from the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-data/index.html">Data</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">Data</span></code></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-ort-waren.html">OrtWaren</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">OrtWaren</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-storage/index.html"><span
+                    class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
+                    href="../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>Holding <a href="../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html">Ort_has_Ware</a> objects
+                that were loaded from the database.
+                They always depend on the <a href="-data/ort.html">current ort</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-orte.html">Orte</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">Orte</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-storage/index.html"><span
+                    class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
+                    href="../com.doubleu.kotlintrader.model/-ort/index.html"><span
+                    class="identifier">Ort</span></a><span class="symbol">&gt;</span></code>
+            <p>Holding all <a href="../com.doubleu.kotlintrader.model/-ort/index.html">Ort</a> objects that were loaded
+                from the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-schiff-waren.html">SchiffWaren</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">SchiffWaren</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-storage/index.html"><span
+                    class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
+                    href="../com.doubleu.kotlintrader.model/-schiff_has_-ware/index.html"><span class="identifier">Schiff_has_Ware</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>Holding <a href="../com.doubleu.kotlintrader.model/-schiff_has_-ware/index.html">Schiff_has_Ware</a>
+                objects that were loaded from the database.
+                They always depend on the <a href="-data/schiff.html">current schiff</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-schiffe.html">Schiffe</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">Schiffe</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="-storage/index.html"><span class="identifier">Storage</span></a><span
+                    class="symbol">&lt;</span><a href="../com.doubleu.kotlintrader.model/-schiff/index.html"><span
+                    class="identifier">Schiff</span></a><span class="symbol">&gt;</span></code>
+            <p>Holding all <a href="../com.doubleu.kotlintrader.model/-schiff/index.html">Schiff</a> objects that were
+                loaded from the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-storage/index.html">Storage</a></td>
+        <td>
+            <code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Storage</span><span
+                    class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="../com.doubleu.kotlintrader.database/-entity/index.html"><span
+                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
+                    class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+            <p>Provides Storage for various <a href="../com.doubleu.kotlintrader.database/-entity/index.html">Entity</a>s
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="-users.html">Users</a></td>
+        <td>
+            <code><span class="keyword">object </span><span class="identifier">Users</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-storage/index.html"><span
+                    class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
+                    href="../com.doubleu.kotlintrader.model/-trader/index.html"><span
+                    class="identifier">Trader</span></a><span class="symbol">&gt;</span></code>
+            <p>Holding all <a href="../com.doubleu.kotlintrader.model/-trader/index.html">Trader</a> objects that were
+                loaded from the database</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

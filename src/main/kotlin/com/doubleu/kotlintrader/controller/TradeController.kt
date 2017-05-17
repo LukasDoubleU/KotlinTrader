@@ -1,7 +1,6 @@
 package com.doubleu.kotlintrader.controller
 
 import com.doubleu.kotlintrader.data.Data
-import com.doubleu.kotlintrader.data.Data.schiff
 import com.doubleu.kotlintrader.data.SchiffWaren
 import com.doubleu.kotlintrader.model.Ort
 import com.doubleu.kotlintrader.model.Ort_has_Ware
@@ -13,31 +12,25 @@ import java.math.BigDecimal
 class TradeController : Controller() {
 
     /**
-     * Called whenever the current [Ort] changes.
      * Changing of the Ort requires the current [User][Data.user] to pay.
      * If he doesn't want to or can't the change is reverted.
-     *
-     * @return new value for Ort
      */
-    fun travel(nach: Ort?): Ort? {
-        val von = schiff?.ort
-        // Just return the new value if it was null previously
-        if (von == null || nach == null || nach == schiff?.ort) return nach
+    fun travel(nach: Ort) {
+        val von = Data.ort!!
+        if (von == nach) return
         val distance = von.distanceTo(nach)
-        val fahrtkosten = Data.schiff?.fahrkosten ?: 0f
+        val fahrtkosten = Data.schiff!!.fahrkosten
         val price = (fahrtkosten * distance).toLong()
         val decision = FxDialogs.showConfirm("Reise bestaetigen",
                 "Von ${von.name} nach ${nach.name} reisen?\nDas wuerde $price kosten!")
-        if (decision != FxDialogs.OK) return von
-        Data.user!!.let {
-            val remaining = (it.geld) - price
-            if (remaining < 0) {
-                FxDialogs.showError("Nicht genug Geld!")
-                return von
-            }
-            it.geld = remaining
+        if (decision != FxDialogs.OK) return
+        val remaining = Data.user!!.geld - price
+        if (remaining < 0) {
+            FxDialogs.showError("Nicht genug Geld!")
+            return
         }
-        return nach
+        Data.user!!.geld = remaining
+        Data.ort = nach
     }
 
     /**
@@ -49,18 +42,16 @@ class TradeController : Controller() {
             FxDialogs.showWarning("Nicht mehr genuegend ${selectedItem.wareName} vorhanden")
             return
         }
-        Data.user?.let { user ->
-            if (price > user.geld) {
-                FxDialogs.showError("Not enough money")
-                return
-            }
-            val decs = FxDialogs.showConfirm("Kauf bestaetigen", "$menge ${selectedItem.wareName} fuer $price kaufen?")
-            if (decs != FxDialogs.OK) return
-            val ware = SchiffWaren.find { it.ware_id == selectedItem.ware_id } ?: throw RuntimeException()
-            selectedItem.menge -= BigDecimal(menge)
-            ware.menge += menge
-            user.geld -= price
+        if (price > Data.user!!.geld) {
+            FxDialogs.showError("Not enough money")
+            return
         }
+        val decs = FxDialogs.showConfirm("Kauf bestaetigen", "$menge ${selectedItem.wareName} fuer $price kaufen?")
+        if (decs != FxDialogs.OK) return
+        val ware = SchiffWaren.find { it.ware_id == selectedItem.ware_id } ?: throw RuntimeException()
+        selectedItem.menge -= BigDecimal(menge)
+        ware.menge += menge
+        Data.user!!.geld -= price
     }
 
     /**

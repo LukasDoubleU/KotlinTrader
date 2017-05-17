@@ -1,9 +1,8 @@
 package com.doubleu.kotlintrader.data
 
-import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.database.Entity
+import com.doubleu.kotlintrader.extensions.onChangeWithOld
 import com.doubleu.kotlintrader.model.Trader
-import com.doubleu.kotlintrader.view.TradeView
 import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
@@ -14,7 +13,7 @@ object Data {
     /**
      * A Property representing an Entity
      */
-    abstract class EntityProperty<T : Entity<T>> : SimpleObjectProperty<T>() {
+    abstract class EntityProperty<T : Entity<T>?> : SimpleObjectProperty<T?>() {
         /**
          * An Entity model representing the inherited [Entity][T].
          * By Contract every Entity has one.
@@ -57,22 +56,17 @@ object Data {
      */
     object Ort : EntityProperty<com.doubleu.kotlintrader.model.Ort>() {
         override val model = com.doubleu.kotlintrader.model.Ort.Model(this)
-        val traderController = find<TradeController>()
-        val tradeView = find<TradeView>()
 
         init {
             // Update itself when the [Orte] are being reloaded
             Orte.onLoadFinish { ort = it.find { it.id == schiff?.ort_id } }
             // Update the fields that depend on this
-            mutateOnChange {
-                val new = traderController.travel(it)
-                if (new == null || new == schiff?.ort)
+            onChange {
+                if (it == null)
                     OrtWaren.clear()
                 else {
-                    schiff?.ort = new
                     OrtWaren.load()
                 }
-                return@mutateOnChange new
             }
         }
     }
@@ -80,7 +74,7 @@ object Data {
     /**
      * Represents the current Ort, may be null
      */
-    var ort: com.doubleu.kotlintrader.model.Ort? by Ort
+    var ort by Ort
 
     /**
      * Represents the current MasterUser, may be null
@@ -93,9 +87,11 @@ object Data {
             // Update itself when the [Users] are being loaded
             Users.onLoadFinish { masterUser = it.find { it.master } }
             // All previous masters (should only be one) are no longer masters
-            onChange {
-                Users.filter { it.master }.forEach { it.master = false }
-                it?.master = true
+            onChangeWithOld { old, new ->
+                new?.let {
+                    old?.master = false
+                    new.master = true
+                }
             }
         }
     }
@@ -103,7 +99,7 @@ object Data {
     /**
      * Represents the current MasterUser, may be null
      */
-    var masterUser: com.doubleu.kotlintrader.model.Trader? by MasterUser
+    var masterUser by MasterUser
 
     /**
      * Represents the current Schiff, may be null
@@ -131,7 +127,7 @@ object Data {
     /**
      * Represents the current Schiff, may be null
      */
-    var schiff: com.doubleu.kotlintrader.model.Schiff? by Schiff
+    var schiff by Schiff
 
     private object Title {
         val primaryStage = FX.primaryStage

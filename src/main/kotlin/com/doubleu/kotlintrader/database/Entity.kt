@@ -17,8 +17,8 @@ import kotlin.reflect.KProperty
 /**
  * A simple Database Entity. ID Column is required
  */
-abstract class Entity<T : Entity<T>>(open val id: Long,
-                                     val idProperty: LongProperty = SimpleLongProperty(id)) {
+abstract class Entity<T : Entity<T>?>(open val id: Long,
+                                      val idProperty: LongProperty = SimpleLongProperty(id)) {
 
     val delegateMap = mutableMapOf<KProperty<*>, DatabaseDelegate<*>>()
 

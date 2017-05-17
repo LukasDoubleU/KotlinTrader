@@ -3,10 +3,13 @@ package com.doubleu.kotlintrader.view
 import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.data.*
 import com.doubleu.kotlintrader.extensions.center
+import com.doubleu.kotlintrader.model.Ort
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
+import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleObjectProperty
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.TableView
@@ -25,6 +28,7 @@ class TradeView : View("Trade") {
     val controller by inject<TradeController>()
 
     private val mengeProperty = SimpleIntegerProperty(0)
+    private val ortProperty = SimpleObjectProperty<Ort?>()
     private lateinit var buyButton: Button
     private lateinit var sellButton: Button
     private lateinit var hafenTable: TableView<Ort_has_Ware>
@@ -146,7 +150,15 @@ class TradeView : View("Trade") {
                 text(Data.User.model.geldAsString)
                 hbox(20) {
                     val blocked = Data.Schiff.model.blocked
-                    combobox(Data.Ort, Orte.get()) {
+                    combobox(ortProperty, Orte.get()) {
+                        ortProperty.onChange {
+                            if (it != null) {
+                                controller.travel(it)
+                                Platform.runLater {
+                                    this@combobox.selectionModel.clearSelection()
+                                }
+                            }
+                        }
                         disableWhen { blocked }
                     }
                     text("Das Schiff ist geblockt!") {

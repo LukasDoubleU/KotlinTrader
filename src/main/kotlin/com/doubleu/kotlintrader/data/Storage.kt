@@ -10,7 +10,6 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.collections.ObservableList
 import javafx.concurrent.Task
 import tornadofx.*
-import java.lang.ref.WeakReference
 
 /**
  * Provides Storage for various [Entity]s
@@ -18,7 +17,7 @@ import java.lang.ref.WeakReference
 sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
     companion object {
-        private val tasks = mutableListOf<WeakReference<Any>>().observable()
+        private val tasks = mutableListOf<Storage<*>.StorageTask>().observable()
 
         /**
          * Indicates whether any Storage is currently being loaded.
@@ -97,7 +96,7 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
         override fun call() {
             loading.set(true)
-            tasks.add(WeakReference(this))
+            tasks.add(this)
             items.clear()
             _items.addAll(func.invoke())
             // Retrieve the items eagerly
@@ -112,6 +111,7 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
                     onLoadFinish.forEach { it.invoke(this@Storage) }
                 } finally {
                     loading.set(false)
+                    tasks.remove(this)
                 }
             }
         }

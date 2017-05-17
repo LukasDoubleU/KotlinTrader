@@ -130,6 +130,8 @@ class LoginView : View("Login") {
                 column("Geld", Trader::geldProperty)
                 column("Master", Trader::masterProperty)
 
+                Users.onLoadFinish { resizeColumnsToFitContent() }
+
                 contextmenu {
                     item("Assign New Master").action {
                         selectedItem?.let {
@@ -137,12 +139,14 @@ class LoginView : View("Login") {
                         }
                     }
                 }
-
-                visibleWhen {
-                    Users.loading.not()
-                }
             }
             progressindicator {
+                stackpaneConstraints {
+                    alignment = Pos.BOTTOM_RIGHT
+                    marginRight = 10.0
+                    marginBottom = 10.0
+                }
+                setMaxSize(50.0, 50.0)
                 visibleWhen {
                     Users.loading
                 }

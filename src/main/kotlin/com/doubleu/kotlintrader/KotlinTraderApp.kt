@@ -9,6 +9,7 @@ import tornadofx.*
 // TODO implement Default Values inside Entities
 // TODO allow for creation of new entity objects
 // TODO remove files ignored by .gitignore from GitHub
+// TODO Enh: References could be loaded from corresponding Storage (e.g. Ort_has_Ware.ware from within "Orte")
 // TODO implement some of dem nice ControlsFX
 // TODO ReferenceDelegates can not yet reference RefEntities
 // TODO use JavaFX-Gradle-Plugin for JAR creation

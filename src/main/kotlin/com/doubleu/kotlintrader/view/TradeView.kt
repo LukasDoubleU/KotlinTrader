@@ -1,15 +1,13 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.TradeController
-import com.doubleu.kotlintrader.data.Data
-import com.doubleu.kotlintrader.data.OrtWaren
-import com.doubleu.kotlintrader.data.Orte
-import com.doubleu.kotlintrader.data.SchiffWaren
+import com.doubleu.kotlintrader.data.*
 import com.doubleu.kotlintrader.extensions.center
 import com.doubleu.kotlintrader.model.Ort_has_Ware
 import com.doubleu.kotlintrader.model.Schiff_has_Ware
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.TableView
 import javafx.scene.layout.ColumnConstraints
@@ -27,7 +25,6 @@ class TradeView : View("Trade") {
     val controller by inject<TradeController>()
 
     private val mengeProperty = SimpleIntegerProperty(0)
-
     private lateinit var buyButton: Button
     private lateinit var sellButton: Button
     private lateinit var hafenTable: TableView<Ort_has_Ware>
@@ -53,15 +50,17 @@ class TradeView : View("Trade") {
                         column("Menge", Ort_has_Ware::mengeProperty)
                         column("Preis", Ort_has_Ware::preisProperty)
 
-                        items.onChange { resizeColumnsToFitContent() }
-
-                        visibleWhen {
-                            OrtWaren.loading.not()
-                        }
+                        OrtWaren.onLoadFinish { resizeColumnsToFitContent() }
                     }
                     progressindicator {
+                        stackpaneConstraints {
+                            alignment = Pos.BOTTOM_RIGHT
+                            marginRight = 10.0
+                            marginBottom = 10.0
+                        }
+                        setMaxSize(50.0, 50.0)
                         visibleWhen {
-                            OrtWaren.loading
+                            OrtWaren.loading.or(Angebote.loading)
                         }
                     }
                 }
@@ -103,13 +102,15 @@ class TradeView : View("Trade") {
                         column("Name", Schiff_has_Ware::wareNameProperty)
                         column("Menge", Schiff_has_Ware::mengeProperty)
 
-                        items.onChange { resizeColumnsToFitContent() }
-
-                        visibleWhen {
-                            SchiffWaren.loading.not()
-                        }
+                        SchiffWaren.onLoadFinish { resizeColumnsToFitContent() }
                     }
                     progressindicator {
+                        stackpaneConstraints {
+                            alignment = Pos.BOTTOM_RIGHT
+                            marginRight = 10.0
+                            marginBottom = 10.0
+                        }
+                        setMaxSize(50.0, 50.0)
                         visibleWhen {
                             SchiffWaren.loading
                         }

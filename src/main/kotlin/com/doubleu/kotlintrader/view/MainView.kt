@@ -20,7 +20,7 @@ class MainView : View("Kotlin Trader") {
     override val root = tabpane {
 
         primaryStage.icons += resources.image("/favicon.png")
-        setPrefSize(650.0, 400.0)
+        setPrefSize(650.0, 450.0)
         tabClosingPolicy = TabPane.TabClosingPolicy.UNAVAILABLE
 
         tab(loginView)

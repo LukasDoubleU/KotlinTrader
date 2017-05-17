@@ -2,8 +2,8 @@ package com.doubleu.kotlintrader.data
 
 import com.doubleu.kotlintrader.controller.TradeController
 import com.doubleu.kotlintrader.database.Entity
-import com.doubleu.kotlintrader.extensions.onChangeWithOld
 import com.doubleu.kotlintrader.model.Trader
+import com.doubleu.kotlintrader.view.TradeView
 import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
@@ -58,14 +58,21 @@ object Data {
     object Ort : EntityProperty<com.doubleu.kotlintrader.model.Ort>() {
         override val model = com.doubleu.kotlintrader.model.Ort.Model(this)
         val traderController = find<TradeController>()
+        val tradeView = find<TradeView>()
 
         init {
             // Update itself when the [Orte] are being reloaded
             Orte.onLoadFinish { ort = it.find { it.id == schiff?.ort_id } }
             // Update the fields that depend on this
-            onChangeWithOld { von, nach ->
-                traderController.travel(von, nach)
-                if (nach == null) OrtWaren.clear() else OrtWaren.load()
+            mutateOnChange {
+                val new = traderController.travel(it)
+                if (new == null || new == schiff?.ort)
+                    OrtWaren.clear()
+                else {
+                    schiff?.ort = new
+                    OrtWaren.load()
+                }
+                return@mutateOnChange new
             }
         }
     }

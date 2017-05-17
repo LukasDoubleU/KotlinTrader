@@ -2,6 +2,7 @@ package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.data.Angebote
 import com.doubleu.kotlintrader.model.Ort_has_Ware
+import javafx.geometry.Pos
 import tornadofx.*
 
 /**
@@ -21,12 +22,16 @@ class AngeboteView : View("Angebote") {
                 column("Menge", Ort_has_Ware::menge)
                 column("Preis", Ort_has_Ware::preis)
 
-                visibleWhen {
-                    Angebote.loading.not()
-                }
+                Angebote.onLoadFinish { resizeColumnsToFitContent() }
             }
 
             progressindicator {
+                stackpaneConstraints {
+                    alignment = Pos.BOTTOM_RIGHT
+                    marginRight = 10.0
+                    marginBottom = 10.0
+                }
+                setMaxSize(50.0, 50.0)
                 visibleWhen {
                     Angebote.loading
                 }

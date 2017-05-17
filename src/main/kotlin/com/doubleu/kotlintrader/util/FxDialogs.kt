@@ -53,11 +53,11 @@ object FxDialogs {
         }
     }
 
-    fun showException(title: String, message: String, exception: Exception) {
+    fun showException(message: String, exception: Throwable, title: String = "Error") {
         Platform.runLater {
             val alert = Alert(Alert.AlertType.ERROR)
             alert.initStyle(StageStyle.UTILITY)
-            alert.title = "Exception"
+            alert.title = title
             alert.headerText = title
             alert.contentText = message
 

@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.collections.ObservableList
 import javafx.concurrent.Task
 import tornadofx.*
+import java.lang.ref.WeakReference
 
 /**
  * Provides Storage for various [Entity]s
@@ -17,7 +18,8 @@ import tornadofx.*
 sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
     companion object {
-        private val tasks = mutableListOf<Storage<*>.StorageTask>().observable()
+        private val tasks = mutableListOf<WeakReference<Any>>().observable()
+
         /**
          * Indicates whether any Storage is currently being loaded.
          * (Implicates an open database operation)
@@ -50,6 +52,12 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     fun load() = Thread(StorageTask(supplier)).start()
 
     /**
+     * Whether loaded Entities should be retrieved eagerly after loading.
+     * Recommended when Entities are being loaded directly from the database
+     */
+    open protected val retrieveOnLoad = true
+
+    /**
      * Executes the given [op] when [load] finishes
      */
     fun onLoadFinish(op: (Storage<T>) -> Unit) {
@@ -72,6 +80,11 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     fun find(predicate: (T) -> Boolean) = items.firstOrNull(predicate)
 
     /**
+     * Return all elements matching the given [predicate]
+     */
+    fun findAll(predicate: (T) -> Boolean) = items.filter(predicate)
+
+    /**
      * Returns a list containing only elements matching the given [predicate].
      */
     fun filter(predicate: (T) -> Boolean) = items.filter(predicate)
@@ -84,18 +97,20 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
         override fun call() {
             loading.set(true)
-            tasks += this
+            tasks.add(WeakReference(this))
+            items.clear()
             _items.addAll(func.invoke())
+            // Retrieve the items eagerly
+            if (retrieveOnLoad)
+                _items.forEach { it.retrieve(false) }
         }
 
         override fun done() {
             Platform.runLater {
                 try {
-                    items.clear()
                     items += _items
                     onLoadFinish.forEach { it.invoke(this@Storage) }
                 } finally {
-                    tasks -= this
                     loading.set(false)
                 }
             }
@@ -118,6 +133,10 @@ object Orte : Storage<Ort>({ Database.findAll<Ort>() })
  */
 object Angebote : Storage<Ort_has_Ware>({ Database.findAll<Ort_has_Ware>() }) {
 
+    init {
+        onLoadFinish { OrtWaren.load() }
+    }
+
     fun sorted() = get().sortedBy { it.ortName }.sortedBy { it.wareName }.sortedByDescending { it.preis }.observable()
 
 }
@@ -126,7 +145,10 @@ object Angebote : Storage<Ort_has_Ware>({ Database.findAll<Ort_has_Ware>() }) {
  * Holding [Ort_has_Ware] objects that were loaded from the database.
  * They always depend on the [current ort][Data.ort]
  */
-object OrtWaren : Storage<Ort_has_Ware>({ Database.findAllBy(Ort_has_Ware::ort_id, Data.ort?.id) })
+object OrtWaren : Storage<Ort_has_Ware>({ Angebote.findAll { it.ort_id == Data.ort?.id } }) {
+    // Do not retrieve eagerly since we're not loading directly from the Database
+    override val retrieveOnLoad = false
+}
 
 /**
  * Holding [Schiff_has_Ware] objects that were loaded from the database.

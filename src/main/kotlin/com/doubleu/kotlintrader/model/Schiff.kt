@@ -20,7 +20,7 @@ class Schiff(override val id: Long) : Entity<Schiff>(id) {
     var trader: Trader by mutableReference(this::trader, this::trader_id)
     val traderProperty = property(this::trader)
 
-    var name: String by delegate(this::name, "NoNameSchiff")
+    var name: String by delegate(this::name, "-1")
     val nameProperty = property(this::name)
 
     var tonnage: Int by delegate(this::tonnage, 1000)

@@ -11,7 +11,7 @@ import tornadofx.*
 
 class Ort(override val id: Long) : Entity<Ort>(id) {
 
-    var name: String by delegate(this::name, "NoNameOrt")
+    var name: String by delegate(this::name, "-1")
     val nameProperty = property(this::name)
 
     var kapazitaet: Double by delegate(this::kapazitaet, random(100, 1000))

@@ -8,8 +8,6 @@ import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import tornadofx.*
 
-// TODO Data.Ort is not being set atm
-// TODO implement MasterController
 // TODO allow for creation of new entity objects
 // TODO remove files ignored by .gitignore from GitHub
 // TODO Enh: References could be loaded from corresponding Storage (e.g. Ort_has_Ware.ware from within "Orte")
@@ -21,7 +19,6 @@ class KotlinTraderApp : App(MainView::class) {
 
     init {
         DBHelper.register()
-//        setUserAgentStylesheet(STYLESHEET_CASPIAN)
     }
 
     override fun stop() {

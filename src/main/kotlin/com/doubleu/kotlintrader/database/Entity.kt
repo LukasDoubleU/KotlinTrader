@@ -5,6 +5,7 @@ import com.doubleu.kotlintrader.delegates.MutableReferenceDelegate
 import com.doubleu.kotlintrader.delegates.PropertyDelegate
 import com.doubleu.kotlintrader.delegates.ReferenceDelegate
 import com.doubleu.kotlintrader.extensions.get
+import com.doubleu.kotlintrader.extensions.isEntity
 import com.doubleu.kotlintrader.extensions.set
 import javafx.beans.property.LongProperty
 import javafx.beans.property.ObjectProperty
@@ -46,7 +47,7 @@ abstract class Entity<T>(open val id: Long,
      */
     @Suppress("UNCHECKED_CAST")
     fun <V> default(property: KProperty<V>) = (defaultsMap[property]
-            ?: throw RuntimeException("No default provided for ${property.name}")) as V
+            ?: throw RuntimeException("No default provided for ${this::class.simpleName}.${property.name}")) as V
 
     /**
      * Returns a [Delegate][PropertyDelegate] to the given [property].
@@ -87,7 +88,7 @@ abstract class Entity<T>(open val id: Long,
      */
     @Suppress("UNCHECKED_CAST")
     protected fun <V> property(property: KProperty<V>): Property<V> = (delegateMap[property]?.valueProperty
-            ?: throw RuntimeException("${property.name} wasn't yet delegated!")) as Property<V>
+            ?: throw RuntimeException("${property.name} hasn't yet been delegated!")) as Property<V>
 
     /**
      * Returns an [ItemViewModel] containing the given [Entity][T]
@@ -99,6 +100,8 @@ abstract class Entity<T>(open val id: Long,
      */
     fun reset() = delegateMap.keys.asSequence()
             .filter { it is KMutableProperty }
+            .filterNot { it.isEntity() } // Don't reset references
+            .filterNot { "" + this.default(it) == "-1" } // -1 indicates no valid default
             .map { it as KMutableProperty }
             .forEach { it.set(this.default(it)) }
 }

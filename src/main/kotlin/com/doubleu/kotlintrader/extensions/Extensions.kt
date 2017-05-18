@@ -7,6 +7,8 @@ import javafx.scene.layout.Priority
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
 import tornadofx.*
+import java.util.concurrent.ThreadLocalRandom
+import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
@@ -16,6 +18,8 @@ fun <R> KProperty<R>.isBoolean() = this.clazz().isSubclassOf(Boolean::class)
 fun <R> KProperty<R>.clazz() = this.returnType.jvmErasure
 
 fun <R> KProperty<R>.get() = this.getter.call()
+
+fun <R, V> KMutableProperty<R>.set(value: V) = this.setter.call(value)
 
 fun Any?.valueOf() = this?.toString() ?: ""
 
@@ -37,3 +41,5 @@ fun Number.pow(number: Number) = Math.pow(this.toDouble(), number.toDouble())
 fun Number.sqrt() = Math.sqrt(this.toDouble())
 
 fun <T> ObservableValue<T>.onChangeWithOld(op: (T, T) -> Unit) = apply { addListener { _, oldValue, newValue -> op(oldValue, newValue) } }
+
+fun random(from: Number, to: Number) = ThreadLocalRandom.current().nextDouble(from.toDouble(), to.toDouble())

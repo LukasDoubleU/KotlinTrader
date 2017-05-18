@@ -52,5 +52,4 @@ abstract class DatabaseDelegate<X> {
         if (clazz == null) clazz = ignore::class.simpleName
         _value = newValue
     }
-
 }

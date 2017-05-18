@@ -1,6 +1,7 @@
 package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.RefEntity
+import com.doubleu.kotlintrader.extensions.random
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
@@ -17,19 +18,20 @@ class Ort_has_Ware(val ware_id: Long, val ort_id: Long) : RefEntity<Ort_has_Ware
     val ortProperty = property(this::ort)
     val ortName = ort.name
 
-    var menge: BigDecimal by delegate(this::menge)
-    val mengeProperty = property(this::menge)
-
-    var kapazitaet: Int by delegate(this::kapazitaet)
+    var kapazitaet: Int by delegate(this::kapazitaet, random(100, 1000).toInt())
     val kapazitaetProperty = property(this::kapazitaet)
 
-    var preis: BigDecimal by delegate(this::preis)
+    var menge: BigDecimal by delegate(this::menge, BigDecimal(random(99, kapazitaet)))
+    val mengeProperty = property(this::menge)
+
+    var preis: BigDecimal by delegate(this::preis,
+            BigDecimal(random(ware.basispreis / 3, ware.basispreis * 3)))
     val preisProperty = property(this::preis)
 
-    var produktion: Double by delegate(this::produktion)
+    var produktion: Double by delegate(this::produktion, random(0, 1))
     val produktionProperty = property(this::produktion)
 
-    var verbrauch: Double by delegate(this::verbrauch)
+    var verbrauch: Double by delegate(this::verbrauch, random(0, 1))
     val verbrauchProperty = property(this::verbrauch)
 
     override fun model(property: ObjectProperty<Ort_has_Ware?>) = Model(property)

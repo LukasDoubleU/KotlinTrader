@@ -14,10 +14,17 @@ import tornadofx.*
 /**
  * Provides Storage for various [Entity]s
  */
+@Suppress("LeakingThis")
 sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
     companion object {
+        private val storages = mutableListOf<Storage<*>>()
         private val tasks = mutableListOf<Storage<*>.StorageTask>().observable()
+
+        /**
+         * Returns all storages that are in use
+         */
+        fun all() = storages.toList()
 
         /**
          * Indicates whether any Storage is currently being loaded.
@@ -35,6 +42,7 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     val loading = SimpleBooleanProperty(false)
 
     init {
+        storages += this
         // Load / Clear when we Connect / Disconnect from the Database
         DBHelper.onConnect { load() }
         DBHelper.onDisconnect { clear() }
@@ -48,7 +56,7 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     /**
      * Reloads the contained [items]
      */
-    fun load() = Thread(StorageTask(supplier)).start()
+    open fun load() = Thread(StorageTask(supplier)).start()
 
     /**
      * Whether loaded Entities should be retrieved eagerly after loading.
@@ -74,6 +82,11 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     fun forEach(action: (T) -> Unit) = items.forEach(action)
 
     /**
+     * Creates a [Sequence] instance that wraps the original collection returning its elements when being iterated.
+     */
+    fun asSequence() = items.asSequence()
+
+    /**
      * Returns the first element matching the given [predicate], or `null` if element was not found.
      */
     fun find(predicate: (T) -> Boolean) = items.firstOrNull(predicate)
@@ -94,6 +107,10 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
     private inner class StorageTask(val func: () -> List<T>) : Task<Unit>() {
         private var _items = mutableListOf<T>()
 
+        init {
+            fail { it.printStackTrace() }
+        }
+
         override fun call() {
             loading.set(true)
             tasks.add(this)
@@ -111,7 +128,12 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
                     onLoadFinish.forEach { it.invoke(this@Storage) }
                 } finally {
                     loading.set(false)
-                    tasks.remove(this)
+                    try {
+                        tasks.remove(this)
+                    } catch (e: Exception) {
+                        System.err.println("${e::class.simpleName}: " +
+                                "That weird error on task removal appeared again")
+                    }
                 }
             }
         }
@@ -159,4 +181,10 @@ object SchiffWaren : Storage<Schiff_has_Ware>({ Database.findAllBy(Schiff_has_Wa
 /**
  * Holding all [Schiff] objects that were loaded from the database
  */
-object Schiffe : Storage<Schiff>({ Database.findAll<Schiff>() })
+object Schiffe : Storage<Schiff>({ Database.findAll<Schiff>() }) {
+
+    override fun load() {
+        super.load()
+    }
+
+}

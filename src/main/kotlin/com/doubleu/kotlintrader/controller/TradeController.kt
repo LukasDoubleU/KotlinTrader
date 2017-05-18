@@ -16,7 +16,7 @@ class TradeController : Controller() {
      * If he doesn't want to or can't the change is reverted.
      */
     fun travel(nach: Ort) {
-        val von = Data.ort!!
+        val von = Data.ort ?: return
         if (von == nach) return
         val distance = von.distanceTo(nach)
         val fahrtkosten = Data.schiff!!.fahrkosten

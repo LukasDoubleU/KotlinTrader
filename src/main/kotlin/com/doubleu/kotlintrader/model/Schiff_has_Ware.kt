@@ -15,7 +15,7 @@ class Schiff_has_Ware(val ware_id: Long, val schiff_id: Long) : RefEntity<Schiff
     val schiff: Schiff by reference(this::schiff, this::schiff_id)
     val schiffProperty = property(this::schiff)
 
-    var menge: Long by delegate(this::menge)
+    var menge: Long by delegate(this::menge, 0)
     val mengeProperty = property(this::menge)
 
     /**

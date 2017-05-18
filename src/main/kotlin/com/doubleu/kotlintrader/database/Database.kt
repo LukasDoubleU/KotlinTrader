@@ -59,7 +59,7 @@ object Database {
      * Retrieves the [property] of the [entity] from the database via SQL-SELECT
      */
     @Suppress("UNCHECKED_CAST")
-    fun <V> getProperty(entity: Entity<*>, property: KProperty<V>): V {
+    fun <V> getProperty(entity: Entity<*>, property: KProperty<V>): V? {
         val sql = "SELECT ${property.name} FROM ${DBHelper.getTableName(entity)} ${DBHelper.getWhere(entity)}"
         val rs = query(sql)
         synchronized(rs) {

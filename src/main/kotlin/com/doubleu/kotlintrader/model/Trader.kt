@@ -10,16 +10,16 @@ import tornadofx.*
 
 class Trader(override val id: Long) : Entity<Trader>(id) {
 
-    var name: String by delegate(this::name)
+    var name: String by delegate(this::name, "NoNameTrader")
     val nameProperty = property(this::name)
 
-    var pass: String by delegate(this::pass)
+    var pass: String by delegate(this::pass, name)
     val passProperty = property(this::pass)
 
-    var geld: Double by delegate(this::geld)
+    var geld: Double by delegate(this::geld, 10_000.0)
     val geldProperty = property(this::geld)
 
-    var master: Boolean by delegate(this::master)
+    var master: Boolean by delegate(this::master, false)
     val masterProperty = property(this::master)
 
     fun checkPw(s: String) = MD5.encrypt(s) == pass

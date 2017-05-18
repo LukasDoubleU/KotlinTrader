@@ -35,12 +35,11 @@ object Data {
             onChange { user ->
                 // Update the fields that depend on this
                 if (user == null) {
-                    ort = null
                     schiff = null
                     Title.update("Kotlin Trader")
                 } else {
-                    Title.update("Kotlin Trader - Logged in as ${user.name}")
                     schiff = Schiffe.find { it.trader_id == user.id }
+                    Title.update("Kotlin Trader - Logged in as ${user.name}")
                 }
             }
         }

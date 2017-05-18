@@ -5,7 +5,7 @@ import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
-@Deprecated("Not usable as of now, requires inserts")
+@Deprecated("No use case")
 class Fahrt(von_id: Long, nach_id: Long) : RefEntity<Fahrt>(von_id, nach_id) {
 
     val von: Ort by reference(this::von, this::id)
@@ -14,7 +14,7 @@ class Fahrt(von_id: Long, nach_id: Long) : RefEntity<Fahrt>(von_id, nach_id) {
     val nach: Ort by reference(this::nach, this::id2)
     val nachProperty = property(this::nach)
 
-    var strecke: Int by delegate(this::strecke)
+    var strecke: Int by delegate(this::strecke, 0)
     val streckeProperty = property(this::strecke)
 
     override fun model(property: ObjectProperty<Fahrt?>) = Model(property)

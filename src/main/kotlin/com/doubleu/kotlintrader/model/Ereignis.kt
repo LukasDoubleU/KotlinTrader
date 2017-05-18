@@ -5,9 +5,10 @@ import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
+@Deprecated("No use-case for dis")
 class Ereignis(override val id: Long) : Entity<Ereignis>(id) {
 
-    var beschreibung: String by delegate(this::beschreibung)
+    var beschreibung: String by delegate(this::beschreibung, "")
     val beschreibungProperty = property(this::beschreibung)
 
     override fun model(property: ObjectProperty<Ereignis?>) = Model(property)
@@ -17,5 +18,4 @@ class Ereignis(override val id: Long) : Entity<Ereignis>(id) {
 
         val beschreibung = bind { item?.beschreibungProperty }
     }
-
 }

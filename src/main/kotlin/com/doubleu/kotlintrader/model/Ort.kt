@@ -2,6 +2,7 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.database.Entity
 import com.doubleu.kotlintrader.extensions.pow
+import com.doubleu.kotlintrader.extensions.random
 import com.doubleu.kotlintrader.extensions.sqrt
 import com.doubleu.kotlintrader.extensions.valueOf
 import javafx.beans.property.ObjectProperty
@@ -10,16 +11,16 @@ import tornadofx.*
 
 class Ort(override val id: Long) : Entity<Ort>(id) {
 
-    var name: String by delegate(this::name)
+    var name: String by delegate(this::name, "NoNameOrt")
     val nameProperty = property(this::name)
 
-    var kapazitaet: Double by delegate(this::kapazitaet)
+    var kapazitaet: Double by delegate(this::kapazitaet, random(100, 1000))
     val kapazitaetProperty = property(this::kapazitaet)
 
-    var x: Int by delegate(this::x)
+    var x: Int by delegate(this::x, random(1, 2000).toInt())
     val xProperty = property(this::x)
 
-    var y: Int by delegate(this::y)
+    var y: Int by delegate(this::y, random(1, 2000).toInt())
     val yProperty = property(this::y)
 
     /**

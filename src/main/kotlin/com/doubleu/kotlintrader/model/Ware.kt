@@ -2,16 +2,17 @@ package com.doubleu.kotlintrader.model
 
 import com.doubleu.kotlintrader.data.OrtWaren
 import com.doubleu.kotlintrader.database.Entity
+import com.doubleu.kotlintrader.extensions.random
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
 class Ware(override val id: Long) : Entity<Ware>(id) {
 
-    var name: String by delegate(this::name)
+    var name: String by delegate(this::name, "noNameWare")
     val nameProperty = property(this::name)
 
-    var basispreis: Double by delegate(this::basispreis)
+    var basispreis: Double by delegate(this::basispreis, random(10, 200))
     val basispreisDouble = property(this::basispreis)
 
     /**

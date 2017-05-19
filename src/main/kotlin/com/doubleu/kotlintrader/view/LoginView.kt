@@ -128,7 +128,6 @@ class LoginView : View("Login") {
                 column("ID", Trader::idProperty)
                 column("Name", Trader::nameProperty)
                 column("Geld", Trader::geldProperty)
-                column("Master", Trader::masterProperty)
 
                 Users.onLoadFinish { resizeColumnsToFitContent() }
 

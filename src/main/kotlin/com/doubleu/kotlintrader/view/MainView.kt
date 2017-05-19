@@ -1,6 +1,7 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.data.Data
+import com.doubleu.kotlintrader.data.Storage
 import com.doubleu.kotlintrader.database.Database
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
@@ -36,7 +37,7 @@ class MainView : View("Kotlin Trader") {
 
         tab(masterView) {
             showReasonForDisable(this, "You are not the Master User!")
-            disableProperty().bind(Data.MasterUser.isLoggedIn.not())
+            disableProperty().bind(Data.MasterUser.isLoggedIn.not().or(Storage.anyLoading))
         }
     }
 

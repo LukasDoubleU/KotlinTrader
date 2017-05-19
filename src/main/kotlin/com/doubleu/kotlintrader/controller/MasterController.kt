@@ -45,7 +45,7 @@ class MasterController : Controller() {
                 it.blocked = true
             }
         }
-        val traderList = blocked.map { it.trader.name }.joinToString(prefix = " • ", separator = "\n")
+        val traderList = blocked.map { it.trader.name }.joinToString(prefix = " • ")
         FxDialogs.showInformation("Die Schiffe der folgenden Trader wurden geblockt:\n$traderList")
     }
 

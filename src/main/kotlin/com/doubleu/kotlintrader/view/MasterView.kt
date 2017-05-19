@@ -1,6 +1,7 @@
 package com.doubleu.kotlintrader.view
 
 import com.doubleu.kotlintrader.controller.MasterController
+import com.doubleu.kotlintrader.data.Storage
 import com.doubleu.kotlintrader.extensions.center
 import javafx.scene.text.Font
 import tornadofx.*

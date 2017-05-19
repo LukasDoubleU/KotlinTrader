@@ -90,9 +90,6 @@ object Data {
                 new?.let {
                     old?.master = false
                     new.master = true
-                    new.masterProperty.onChange {
-                        masterUser = null
-                    }
                 }
             }
         }

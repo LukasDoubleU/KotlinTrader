@@ -1,7 +1,6 @@
 package com.doubleu.kotlintrader.delegates
 
 import com.doubleu.kotlintrader.database.Entity
-import com.doubleu.kotlintrader.util.FxDialogs
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
@@ -23,14 +22,18 @@ abstract class DatabaseDelegate<X> {
         }
 
         override fun set(newValue: X) {
-            task {
-                process(newValue)
-            } success {
-                super.set(newValue)
-            } fail {
-                FxDialogs.showException("Failed to write $newValue in $clazz", it)
-                super.set(newValue)
-            }
+            process(newValue)
+            super.set(newValue)
+            // Async has to be smarter than that.
+            // Let's keep it synchronized till we get there
+//            task {
+//                process(newValue)
+//            } success {
+//                super.set(newValue)
+//            } fail {
+//                FxDialogs.showException("Failed to write $newValue in $clazz", it)
+//                super.set(newValue)
+//            }
         }
     }
 

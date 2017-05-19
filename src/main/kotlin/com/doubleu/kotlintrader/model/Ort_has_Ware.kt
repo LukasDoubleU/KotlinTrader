@@ -19,20 +19,20 @@ class Ort_has_Ware(val ware_id: Long, val ort_id: Long) : RefEntity<Ort_has_Ware
     val ortProperty = property(this::ort)
     val ortName = ort.name
 
-    var kapazitaet: Int by delegate(this::kapazitaet, random(100, 1000).toInt())
+    var kapazitaet: Int by delegate(this::kapazitaet, random(100, 1000))
     val kapazitaetProperty = property(this::kapazitaet)
 
-    var menge: BigDecimal by delegate(this::menge, BigDecimal(random(99, random(100, 1000)).toInt()))
+    var menge: BigDecimal by delegate(this::menge, BigDecimal(random(99, random(100, 1000))))
     val mengeProperty = property(this::menge)
 
     var preis: BigDecimal by delegate(this::preis,
-            BigDecimal(random(ware.basispreis / 3, ware.basispreis * 3).limitDecimals(2)))
+            BigDecimal(random(ware.basispreis / 3, ware.basispreis * 3)))
     val preisProperty = property(this::preis)
 
-    var produktion: Double by delegate(this::produktion, random(0, 1).limitDecimals(2))
+    var produktion: Double by delegate(this::produktion, random(0, 1).toDouble())
     val produktionProperty = property(this::produktion)
 
-    var verbrauch: Double by delegate(this::verbrauch, random(0, 1).limitDecimals(2))
+    var verbrauch: Double by delegate(this::verbrauch, random(0, 1).toDouble())
     val verbrauchProperty = property(this::verbrauch)
 
     override fun model(property: ObjectProperty<Ort_has_Ware?>) = Model(property)

@@ -14,13 +14,13 @@ class Ort(override val id: Long) : Entity<Ort>(id) {
     var name: String by delegate(this::name, "-1")
     val nameProperty = property(this::name)
 
-    var kapazitaet: Double by delegate(this::kapazitaet, random(100, 1000))
+    var kapazitaet: Double by delegate(this::kapazitaet, random(100, 1000).toDouble())
     val kapazitaetProperty = property(this::kapazitaet)
 
-    var x: Int by delegate(this::x, random(1, 2000).toInt())
+    var x: Int by delegate(this::x, random(1, 2000))
     val xProperty = property(this::x)
 
-    var y: Int by delegate(this::y, random(1, 2000).toInt())
+    var y: Int by delegate(this::y, random(1, 2000))
     val yProperty = property(this::y)
 
     /**

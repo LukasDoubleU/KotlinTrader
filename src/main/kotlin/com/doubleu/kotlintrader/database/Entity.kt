@@ -53,7 +53,7 @@ abstract class Entity<T>(open val id: Long,
      * Returns a [Delegate][PropertyDelegate] to the given [property].
      */
     protected fun <V : Any> delegate(property: KProperty<V>, default: V): PropertyDelegate<T, V> {
-        defaultsMap.put(property, default)
+        defaultsMap.putIfAbsent(property, default)
         val delegate = PropertyDelegate(this, property)
         delegateMap[property] = delegate
         return delegate

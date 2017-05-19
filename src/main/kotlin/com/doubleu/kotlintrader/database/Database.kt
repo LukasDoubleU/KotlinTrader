@@ -138,10 +138,14 @@ object Database {
      * Executes the given [sql] as a statement on the database
      */
     fun execute(sql: String): Boolean {
+        if (!connected.get() || connection?.isClosed ?: true) {
+            System.err.println("Ignoring SQL: $sql - no database connection")
+            return false
+        }
         return connection?.let {
             val statement = it.createStatement()
             statement.closeOnCompletion()
             return statement.execute(sql)
-        } ?: throw RuntimeException("No database connection")
+        } ?: return false
     }
 }

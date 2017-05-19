@@ -50,8 +50,9 @@ fun <T> ObservableValue<T>.onChangeWithOld(op: (T, T) -> Unit) = apply { addList
 private val nf = NumberFormat.getInstance(Locale.ENGLISH).apply { isGroupingUsed = false }
 
 fun Number.limitDecimals(places: Number) = nf.apply {
+    // TODO not rounding properly
     minimumFractionDigits = places.toInt()
     maximumFractionDigits = places.toInt()
 }.format(this.toDouble()).toDouble()
 
-fun random(from: Number, to: Number) = ThreadLocalRandom.current().nextDouble(from.toDouble(), to.toDouble()).limitDecimals(2)
+fun random(from: Number, to: Number) = ThreadLocalRandom.current().nextInt(from.toInt(), to.toInt())

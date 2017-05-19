@@ -26,7 +26,7 @@ class Schiff(override val id: Long) : Entity<Schiff>(id) {
     var tonnage: Int by delegate(this::tonnage, 1000)
     val tonnageProperty = property(this::tonnage)
 
-    var wert: Double by delegate(this::wert, random(100, 10000))
+    var wert: Double by delegate(this::wert, random(100, 10000).toDouble())
     val wertProperty = property(this::wert)
 
     var fahrkosten: Float by delegate(this::fahrkosten, random(1, 10).toFloat())

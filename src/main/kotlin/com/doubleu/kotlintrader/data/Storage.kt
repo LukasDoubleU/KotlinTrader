@@ -113,7 +113,13 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
 
         override fun call() {
             loading.set(true)
-            tasks.add(this)
+            // TODO Sometimes this throws weird IOOBs
+            try {
+                tasks.add(this)
+            } catch(e: Exception) {
+                System.err.println("${e::class.simpleName}: " +
+                        "That weird error on Task adding happened again..")
+            }
             items.clear()
             _items.addAll(func.invoke())
             // Retrieve the items eagerly
@@ -129,6 +135,7 @@ sealed class Storage<T : Entity<T>>(val supplier: () -> List<T>) {
                 } finally {
                     loading.set(false)
                     try {
+                        // TODO Sometimes this throws weird IIOBs
                         tasks.remove(this)
                     } catch (e: Exception) {
                         System.err.println("${e::class.simpleName}: " +

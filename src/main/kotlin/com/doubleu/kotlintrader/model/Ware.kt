@@ -13,7 +13,7 @@ class Ware(override val id: Long) : Entity<Ware>(id) {
     var name: String by delegate(this::name, "-1")
     val nameProperty = property(this::name)
 
-    var basispreis: Double by delegate(this::basispreis, random(10, 200).limitDecimals(2))
+    var basispreis: Double by delegate(this::basispreis, random(10, 200).toDouble())
     val basispreisDouble = property(this::basispreis)
 
     /**

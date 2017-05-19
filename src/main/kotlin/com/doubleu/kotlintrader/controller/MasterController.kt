@@ -4,11 +4,12 @@ import com.doubleu.kotlintrader.data.OrtWaren
 import com.doubleu.kotlintrader.data.Schiffe
 import com.doubleu.kotlintrader.data.Storage
 import com.doubleu.kotlintrader.database.Entity
-import com.doubleu.kotlintrader.extensions.limitDecimals
 import com.doubleu.kotlintrader.extensions.random
 import com.doubleu.kotlintrader.model.Schiff
 import com.doubleu.kotlintrader.util.FxDialogs
-import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
+import javafx.scene.control.Dialog
+import javafx.scene.control.ProgressIndicator
 import tornadofx.*
 import java.math.BigDecimal
 import java.util.concurrent.ThreadLocalRandom
@@ -24,7 +25,7 @@ class MasterController : Controller() {
             with(it) {
                 val verbrauchAbs = menge.toDouble() * verbrauch
                 val prodAbs = menge.toDouble() * (produktion + 1)
-                menge = BigDecimal((menge.toDouble() + prodAbs - verbrauchAbs).limitDecimals(2))
+                menge = BigDecimal((menge.toDouble() + prodAbs - verbrauchAbs).toInt())
                 preis = BigDecimal(random(ware.basispreis / 2, ware.basispreis * 2))
             }
         }
@@ -53,14 +54,20 @@ class MasterController : Controller() {
      * Resets all Entities that are currently loaded
      */
     fun resetGame() {
-        val info = Alert(Alert.AlertType.INFORMATION, "Setze Werte auf ihren Standard zurueck")
-        info.show()
-        Storage.all().forEach {
-            it.asSequence()
-                    .filter { it is Entity<out Entity<*>> }
-                    .forEach { (it as Entity<out Entity<*>>).reset() }
+        val infoDialog = Dialog<Any>()
+        infoDialog.dialogPane.content = ProgressIndicator()
+        infoDialog.contentText = "Setze Werte auf ihren Standard zurueck..."
+        infoDialog.show()
+        runAsync {
+            Storage.all().forEach {
+                it.asSequence()
+                        .filter { it is Entity<out Entity<*>> }
+                        .forEach { (it as Entity<out Entity<*>>).reset() }
+            }
+        } ui {
+            infoDialog.dialogPane.buttonTypes.addAll(ButtonType.CANCEL)
+            infoDialog.hide()
+            FxDialogs.showInformation("Die Werte wurden auf ihren Standard zurueckgesetzt")
         }
-        info.hide()
-        FxDialogs.showInformation("Die Werte wurden auf ihren Standard zurueckgesetzt")
     }
 }

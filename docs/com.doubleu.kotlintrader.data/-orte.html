@@ -30,6 +30,16 @@
     </tr>
     <tr>
         <td>
+            <a href="-storage/retrieve-on-load.html">retrieveOnLoad</a></td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">retrieveOnLoad</span><span
+                    class="symbol">: </span><span class="identifier">Boolean</span></code>
+            <p>Whether loaded Entities should be retrieved eagerly after loading.
+                Recommended when Entities are being loaded directly from the database</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="-storage/supplier.html">supplier</a></td>
         <td>
             <code><span class="keyword">val </span><span class="identifier">supplier</span><span
@@ -43,6 +53,18 @@
 <h3>Inherited Functions</h3>
 <table>
     <tbody>
+    <tr>
+        <td>
+            <a href="-storage/as-sequence.html">asSequence</a></td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">asSequence</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">Sequence</span><span class="symbol">&lt;</span><span
+                    class="identifier">T</span><span class="symbol">&gt;</span></code>
+            <p>Creates a <a href="#">Sequence</a> instance that wraps the original collection returning its elements
+                when being iterated.</p>
+        </td>
+    </tr>
     <tr>
         <td>
             <a href="-storage/clear.html">clear</a></td>
@@ -68,9 +90,9 @@
         <td>
             <a href="-storage/load.html">load</a></td>
         <td>
-            <code><span class="keyword">fun </span><span class="identifier">load</span><span
-                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">load</span><span class="symbol">(</span><span class="symbol">)</span><span
+                    class="symbol">: </span><span class="identifier">Unit</span></code>
             <p>Reloads the contained <a href="#">items</a></p>
         </td>
     </tr>

@@ -1,161 +1,96 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>FxDialogs - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>FxDialogs - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.util</a>&nbsp;/&nbsp;<a
-        href=".">FxDialogs</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.util</a>&nbsp;/&nbsp;<a href=".">FxDialogs</a><br/>
 <br/>
 <h1>FxDialogs</h1>
 <code><span class="keyword">object </span><span class="identifier">FxDialogs</span></code>
 <p>Wrapper for JavaFX's OptionPane.
-    Copied from StackOverflow.</p>
+Copied from StackOverflow.</p>
 <h3>Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="-c-a-n-c-e-l.html">CANCEL</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">CANCEL</span><span
-                    class="symbol">: </span><span class="identifier">String</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-n-o.html">NO</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">NO</span><span class="symbol">: </span><span
-                    class="identifier">String</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-o-k.html">OK</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">OK</span><span class="symbol">: </span><span
-                    class="identifier">String</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-y-e-s.html">YES</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">YES</span><span
-                    class="symbol">: </span><span class="identifier">String</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="-c-a-n-c-e-l.html">CANCEL</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">CANCEL</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-n-o.html">NO</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">NO</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-o-k.html">OK</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">OK</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-y-e-s.html">YES</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">YES</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="show-confirm.html">showConfirm</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showConfirm</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier"
-                                                                                      id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/options">options</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="show-error.html">showError</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showError</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showError(kotlin.String, kotlin.String)/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showError(kotlin.String, kotlin.String)/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span
-                    class="symbol">=</span>&nbsp;"Error"<span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="show-exception.html">showException</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showException</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.String, java.lang.Exception)/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.String, java.lang.Exception)/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.String, java.lang.Exception)/exception">exception</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">Exception</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="show-information.html">showInformation</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showInformation</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showInformation(kotlin.String, kotlin.String)/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showInformation(kotlin.String, kotlin.String)/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span
-                    class="symbol">=</span>&nbsp;"Information"<span class="symbol">)</span><span
-                    class="symbol">: </span><span class="identifier">Unit</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="show-text-input.html">showTextInput</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showTextInput</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/defaultValue">defaultValue</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span><span
-                    class="symbol">?</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="show-warning.html">showWarning</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">showWarning</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.util.FxDialogs$showWarning(kotlin.String, kotlin.String)/title">title</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.util.FxDialogs$showWarning(kotlin.String, kotlin.String)/message">message</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">String</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="show-confirm.html">showConfirm</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showConfirm</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showConfirm(kotlin.String, kotlin.String, kotlin.Array((kotlin.String)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="show-error.html">showError</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showError</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showError(kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showError(kotlin.String, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span class="symbol">=</span>&nbsp;"Error"<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="show-exception.html">showException</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showException</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.Throwable, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.Throwable, kotlin.String)/exception">exception</span><span class="symbol">:</span>&nbsp;<span class="identifier">Throwable</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showException(kotlin.String, kotlin.Throwable, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span class="symbol">=</span>&nbsp;"Error"<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="show-information.html">showInformation</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showInformation</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showInformation(kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showInformation(kotlin.String, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span class="symbol">=</span>&nbsp;"Information"<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="show-text-input.html">showTextInput</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showTextInput</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showTextInput(kotlin.String, kotlin.String, kotlin.String)/defaultValue">defaultValue</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="show-warning.html">showWarning</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showWarning</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showWarning(kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.util.FxDialogs$showWarning(kotlin.String, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span class="symbol">=</span>&nbsp;"Warning"<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Extension Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
-                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

@@ -1,149 +1,106 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>ReferenceDelegate - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>ReferenceDelegate - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.delegates</a>&nbsp;/&nbsp;<a
-        href=".">ReferenceDelegate</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.delegates</a>&nbsp;/&nbsp;<a href=".">ReferenceDelegate</a><br/>
 <br/>
 <h1>ReferenceDelegate</h1>
-<code><span class="keyword">class </span><span class="identifier">ReferenceDelegate</span><span
-        class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
-        href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-        class="identifier">Entity</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span
-        class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
-        href="../-database-delegate/index.html"><span class="identifier">DatabaseDelegate</span></a><span
-        class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">ReferenceDelegate</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-database-delegate/index.html"><span class="identifier">DatabaseDelegate</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
 <p>Delegates an immutable Entity-Reference to the database</p>
 <h3>Constructors</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="-init-.html">&lt;init&gt;</a></td>
-        <td>
-            <code><span class="identifier">ReferenceDelegate</span><span class="symbol">(</span><span class="identifier"
-                                                                                                      id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$<init>(kotlin.reflect.KClass((com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)), kotlin.reflect.KProperty((kotlin.Long)))/referencedClazz">referencedClazz</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">KClass</span><span
-                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$<init>(kotlin.reflect.KClass((com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)), kotlin.reflect.KProperty((kotlin.Long)))/field">field</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">Long</span><span class="symbol">&gt;</span><span
-                    class="symbol">)</span></code>
-            <p>Delegates an immutable Entity-Reference to the database</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">ReferenceDelegate</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$<init>(kotlin.reflect.KClass((com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)), kotlin.reflect.KProperty((kotlin.Long)))/referencedClazz">referencedClazz</span><span class="symbol">:</span>&nbsp;<span class="identifier">KClass</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$<init>(kotlin.reflect.KClass((com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)), kotlin.reflect.KProperty((kotlin.Long)))/field">field</span><span class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">Long</span><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>Delegates an immutable Entity-Reference to the database</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="field.html">field</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">field</span><span
-                    class="symbol">: </span><span class="identifier">KProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">Long</span><span
-                    class="symbol">&gt;</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="referenced-clazz.html">referencedClazz</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">referencedClazz</span><span
-                    class="symbol">: </span><span class="identifier">KClass</span><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="field.html">field</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">field</span><span class="symbol">: </span><span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">Long</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="referenced-clazz.html">referencedClazz</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">referencedClazz</span><span class="symbol">: </span><span class="identifier">KClass</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Inherited Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../-database-delegate/_value.html">_value</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">_value</span><span
-                    class="symbol">: </span><span class="identifier">X</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../-database-delegate/retrieve-from-db.html">retrieveFromDb</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">retrieveFromDb</span><span
-                    class="symbol">: </span><span class="identifier">Boolean</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../-database-delegate/value-property.html">valueProperty</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">valueProperty</span><span
-                    class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><span
-                    class="identifier">X</span><span class="symbol">&gt;</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../-database-delegate/_value.html">_value</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_value</span><span class="symbol">: </span><span class="identifier">X</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-database-delegate/retrieve-from-db.html">retrieveFromDb</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">retrieveFromDb</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-database-delegate/value-property.html">valueProperty</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">valueProperty</span><span class="symbol">: </span><span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><span class="identifier">X</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="process.html">process</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">process</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$process(com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)/value">value</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span
-                    class="symbol">: </span><span class="identifier">Nothing</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="retrieve.html">retrieve</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">retrieve</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="process.html">process</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">process</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.delegates.ReferenceDelegate$process(com.doubleu.kotlintrader.delegates.ReferenceDelegate.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Nothing</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="retrieve.html">retrieve</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">retrieve</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Inherited Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../-database-delegate/get-value.html">getValue</a></td>
-        <td>
-            <code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)))/ignore">ignore</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
-                    class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
-                    class="identifier"
-                    id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity(()), kotlin.reflect.KProperty((kotlin.Any)))/ignore2">ignore2</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">X</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../-database-delegate/get-value.html">getValue</a></td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity((kotlin.Any)), kotlin.reflect.KProperty((kotlin.Any)))/ignore">ignore</span><span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.delegates.DatabaseDelegate$getValue(com.doubleu.kotlintrader.database.Entity((kotlin.Any)), kotlin.reflect.KProperty((kotlin.Any)))/ignore2">ignore2</span><span class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">X</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Extension Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
-                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

@@ -1,109 +1,101 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>Angebote - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>Angebote - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.data</a>&nbsp;/&nbsp;<a
-        href=".">Angebote</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.data</a>&nbsp;/&nbsp;<a href=".">Angebote</a><br/>
 <br/>
 <h1>Angebote</h1>
-<code><span class="keyword">object </span><span class="identifier">Angebote</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
-        href="../-storage/index.html"><span class="identifier">Storage</span></a><span class="symbol">&lt;</span><a
-        href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span
-        class="identifier">Ort_has_Ware</span></a><span class="symbol">&gt;</span></code>
-<p>Holding all <a href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html">Ort_has_Ware</a> objects that
-    were loaded from the database</p>
+<code><span class="keyword">object </span><span class="identifier">Angebote</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-storage/index.html"><span class="identifier">Storage</span></a><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span class="symbol">&gt;</span></code>
+<p>Holding all <a href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html">Ort_has_Ware</a> objects that were loaded from the database</p>
 <h3>Inherited Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../-storage/loading.html">loading</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">loading</span><span class="symbol">: </span><span
-                    class="identifier">SimpleBooleanProperty</span></code>
-            <p>Indicates whether the <a href="#">items</a> are currently being <a
-                    href="../-storage/load.html">loaded</a></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../-storage/supplier.html">supplier</a></td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">supplier</span><span
-                    class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span
-                    class="symbol">-&gt;</span>&nbsp;<span class="identifier">List</span><span
-                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../-storage/loading.html">loading</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">loading</span><span class="symbol">: </span><span class="identifier">SimpleBooleanProperty</span></code>
+<p>Indicates whether the <a href="#">items</a> are currently being <a href="../-storage/load.html">loaded</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-storage/retrieve-on-load.html">retrieveOnLoad</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">retrieveOnLoad</span><span class="symbol">: </span><span class="identifier">Boolean</span></code>
+<p>Whether loaded Entities should be retrieved eagerly after loading.
+Recommended when Entities are being loaded directly from the database</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-storage/supplier.html">supplier</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">supplier</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="sorted.html">sorted</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">sorted</span><span
-                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">ObservableList</span><span class="symbol">&lt;</span><a
-                    href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span
-                    class="symbol">&gt;</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="sorted.html">sorted</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sorted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ObservableList</span><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Inherited Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../-storage/clear.html">clear</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">clear</span><span
-                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code>
-            <p>Clears all <a href="#">items</a></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../-storage/get.html">get</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">ObservableList</span><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span></code>
-            <p>Retrieves the stored <a href="#">items</a></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../-storage/load.html">load</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">load</span><span
-                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code>
-            <p>Reloads the contained <a href="#">items</a></p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../-storage/as-sequence.html">asSequence</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">asSequence</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Sequence</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Creates a <a href="#">Sequence</a> instance that wraps the original collection returning its elements when being iterated.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-storage/clear.html">clear</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clear</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Clears all <a href="#">items</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-storage/get.html">get</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ObservableList</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Retrieves the stored <a href="#">items</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-storage/load.html">load</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">load</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Reloads the contained <a href="#">items</a></p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Extension Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
-                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

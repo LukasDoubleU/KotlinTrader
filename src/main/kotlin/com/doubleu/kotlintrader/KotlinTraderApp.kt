@@ -8,11 +8,10 @@ import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import tornadofx.*
 
-// TODO allow for creation of new entity objects
+// TODO allow for creation of new entity objects (User registration)
 // TODO remove files ignored by .gitignore from GitHub
-// TODO Enh: References could be loaded from corresponding Storage (e.g. Ort_has_Ware.ware from within "Orte")
 // TODO implement suiting ControlsFX (e.g. lightweight alerts)
-// TODO ReferenceDelegates can not yet reference RefEntities
+// TODO ReferenceDelegates can not yet reference RefEntities (no need?)
 // TODO use JavaFX-Gradle-Plugin for JAR creation
 
 class KotlinTraderApp : App(MainView::class) {
@@ -21,6 +20,10 @@ class KotlinTraderApp : App(MainView::class) {
         DBHelper.register()
     }
 
+    /**
+     * Overridden to give the background threads a chance to finish properly
+     * when the user attempts to close the application
+     */
     override fun stop() {
         if (!Storage.anyLoading.get()) {
             Database.forceClose()

@@ -1,83 +1,65 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>TradeController - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>TradeController - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.controller</a>&nbsp;/&nbsp;<a
-        href=".">TradeController</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.controller</a>&nbsp;/&nbsp;<a href=".">TradeController</a><br/>
 <br/>
 <h1>TradeController</h1>
-<code><span class="keyword">class </span><span class="identifier">TradeController</span>&nbsp;<span
-        class="symbol">:</span>&nbsp;<span class="identifier">Controller</span></code>
+<code><span class="keyword">class </span><span class="identifier">TradeController</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Controller</span></code>
 <h3>Constructors</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="-init-.html">&lt;init&gt;</a></td>
-        <td>
-            <code><span class="identifier">TradeController</span><span class="symbol">(</span><span
-                    class="symbol">)</span></code></td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">TradeController</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
 </table>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="buy.html">buy</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">buy</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="sell.html">sell</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">sell</span><span
-                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">Unit</span></code></td>
-    </tr>
-    <tr>
-        <td>
-            <a href="travel.html">travel</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">travel</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="com.doubleu.kotlintrader.controller.TradeController$travel(com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.model.Ort)/von">von</span><span
-                    class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
-                    class="identifier">Ort</span></a><span class="symbol">?</span><span class="symbol">, </span><span
-                    class="identifier"
-                    id="com.doubleu.kotlintrader.controller.TradeController$travel(com.doubleu.kotlintrader.model.Ort, com.doubleu.kotlintrader.model.Ort)/nach">nach</span><span
-                    class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
-                    class="identifier">Ort</span></a><span class="symbol">?</span><span class="symbol">)</span><span
-                    class="symbol">: </span><span class="identifier">Unit</span></code>
-            <p>Called whenever the current <a href="../../com.doubleu.kotlintrader.model/-ort/index.html">Ort</a>
-                changes.
-                Changing of the Ort requires the current <a href="../../com.doubleu.kotlintrader.data/-data/user.html">User</a>
-                to pay.
-                If he doesn't want to or can't the change is reverted.</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="buy.html">buy</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">buy</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.controller.TradeController$buy(com.doubleu.kotlintrader.model.Ort_has_Ware, kotlin.Int)/selectedItem">selectedItem</span><span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-ort_has_-ware/index.html"><span class="identifier">Ort_has_Ware</span></a><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.controller.TradeController$buy(com.doubleu.kotlintrader.model.Ort_has_Ware, kotlin.Int)/menge">menge</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Attempts to buy the selected item in the given quantity</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="sell.html">sell</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sell</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.controller.TradeController$sell(com.doubleu.kotlintrader.model.Schiff_has_Ware, kotlin.Int)/selectedItem">selectedItem</span><span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-schiff_has_-ware/index.html"><span class="identifier">Schiff_has_Ware</span></a><span class="symbol">, </span><span class="identifier" id="com.doubleu.kotlintrader.controller.TradeController$sell(com.doubleu.kotlintrader.model.Schiff_has_Ware, kotlin.Int)/menge">menge</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Attempts to sell the selected item in the given quantity</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="travel.html">travel</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">travel</span><span class="symbol">(</span><span class="identifier" id="com.doubleu.kotlintrader.controller.TradeController$travel(com.doubleu.kotlintrader.model.Ort)/nach">nach</span><span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span class="identifier">Ort</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Changing of the Ort requires the current <a href="../../com.doubleu.kotlintrader.data/-data/user.html">User</a> to pay.
+If he doesn't want to or can't the change is reverted.</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Extension Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
-                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

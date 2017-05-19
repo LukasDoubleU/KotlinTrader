@@ -1,136 +1,106 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>Data - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>Data - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.data</a>&nbsp;/&nbsp;<a
-        href=".">Data</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader.data</a>&nbsp;/&nbsp;<a href=".">Data</a><br/>
 <br/>
 <h1>Data</h1>
 <code><span class="keyword">object </span><span class="identifier">Data</span></code>
 <h3>Types</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="-entity-property/index.html">EntityProperty</a></td>
-        <td>
-            <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">EntityProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
-                    href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span
-                    class="identifier">Entity</span></a><span class="symbol">&lt;</span><span
-                    class="identifier">T</span><span class="symbol">&gt;</span><span
-                    class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SimpleObjectProperty</span><span
-                    class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
-            <p>A Property representing an Entity</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-master-user/index.html">MasterUser</a></td>
-        <td>
-            <code><span class="keyword">object </span><span class="identifier">MasterUser</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span
-                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
-                    class="identifier">Trader</span></a><span class="symbol">&gt;</span></code>
-            <p>Represents the current MasterUser, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-ort/index.html">Ort</a></td>
-        <td>
-            <code><span class="keyword">object </span><span class="identifier">Ort</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span
-                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
-                    class="identifier">Ort</span></a><span class="symbol">&gt;</span></code>
-            <p>Represents the current Ort, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-schiff/index.html">Schiff</a></td>
-        <td>
-            <code><span class="keyword">object </span><span class="identifier">Schiff</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span
-                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span
-                    class="identifier">Schiff</span></a><span class="symbol">&gt;</span></code>
-            <p>Represents the current Schiff, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="-user/index.html">User</a></td>
-        <td>
-            <code><span class="keyword">object </span><span class="identifier">User</span>&nbsp;<span
-                    class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span
-                    class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
-                    class="identifier">Trader</span></a><span class="symbol">&gt;</span></code>
-            <p>Represents the current user, may be null</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="-entity-property/index.html">EntityProperty</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">EntityProperty</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.doubleu.kotlintrader.database/-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SimpleObjectProperty</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code>
+<p>A Property representing an Entity</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-master-user/index.html">MasterUser</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">MasterUser</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span class="identifier">Trader</span></a><span class="symbol">&gt;</span></code>
+<p>Represents the current MasterUser, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-ort/index.html">Ort</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">Ort</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span class="identifier">Ort</span></a><span class="symbol">&gt;</span></code>
+<p>Represents the current Ort, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-schiff/index.html">Schiff</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">Schiff</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span class="identifier">Schiff</span></a><span class="symbol">&gt;</span></code>
+<p>Represents the current Schiff, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-user/index.html">User</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">User</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-entity-property/index.html"><span class="identifier">EntityProperty</span></a><span class="symbol">&lt;</span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span class="identifier">Trader</span></a><span class="symbol">&gt;</span></code>
+<p>Represents the current user, may be null</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="master-user.html">masterUser</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">masterUser</span><span
-                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
-                    class="identifier">Trader</span></a><span class="symbol">?</span></code>
-            <p>Represents the current MasterUser, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="ort.html">ort</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">ort</span><span class="symbol">: </span><a
-                    href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span
-                    class="identifier">Ort</span></a><span class="symbol">?</span></code>
-            <p>Represents the current Ort, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="schiff.html">schiff</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">schiff</span><span
-                    class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span
-                    class="identifier">Schiff</span></a><span class="symbol">?</span></code>
-            <p>Represents the current Schiff, may be null</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="user.html">user</a></td>
-        <td>
-            <code><span class="keyword">var </span><span class="identifier">user</span><span class="symbol">: </span><a
-                    href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span
-                    class="identifier">Trader</span></a><span class="symbol">?</span></code>
-            <p>Represents the current user, may be null</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="master-user.html">masterUser</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">masterUser</span><span class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span class="identifier">Trader</span></a><span class="symbol">?</span></code>
+<p>Represents the current MasterUser, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="ort.html">ort</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">ort</span><span class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-ort/index.html"><span class="identifier">Ort</span></a><span class="symbol">?</span></code>
+<p>Represents the current Ort, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="schiff.html">schiff</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">schiff</span><span class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-schiff/index.html"><span class="identifier">Schiff</span></a><span class="symbol">?</span></code>
+<p>Represents the current Schiff, may be null</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="user.html">user</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">user</span><span class="symbol">: </span><a href="../../com.doubleu.kotlintrader.model/-trader/index.html"><span class="identifier">Trader</span></a><span class="symbol">?</span></code>
+<p>Represents the current user, may be null</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Extension Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span
-                    class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span
-                    class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../../com.doubleu.kotlintrader.extensions/kotlin.-any/value-of.html">valueOf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">.</span><span class="identifier">valueOf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

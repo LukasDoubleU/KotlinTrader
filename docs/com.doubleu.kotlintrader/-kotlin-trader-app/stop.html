@@ -1,17 +1,16 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>KotlinTraderApp.stop - KotlinTrader</title>
-    <link rel="stylesheet" href="..\..\..\style.css">
+<meta charset="UTF-8">
+<title>KotlinTraderApp.stop - KotlinTrader</title>
+<link rel="stylesheet" href="..\..\..\style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader</a>&nbsp;/&nbsp;<a
-        href="index.html">KotlinTraderApp</a>&nbsp;/&nbsp;<a href=".">stop</a><br/>
+<a href="../../index.html">KotlinTrader</a>&nbsp;/&nbsp;<a href="../index.html">com.doubleu.kotlintrader</a>&nbsp;/&nbsp;<a href="index.html">KotlinTraderApp</a>&nbsp;/&nbsp;<a href=".">stop</a><br/>
 <br/>
 <h1>stop</h1>
 <a name="com.doubleu.kotlintrader.KotlinTraderApp$stop()"></a>
-<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span
-        class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
-<p>Overridden to close the database connection when the application exists.</p>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Overridden to give the background threads a chance to finish properly
+when the user attempts to close the application</p>
 </BODY>
 </HTML>
